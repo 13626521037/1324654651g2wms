@@ -1,0 +1,37 @@
+﻿
+@model WMS.ViewModel.ProductionManagement.ProductionRcvRptVMs.ProductionRcvRptVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/ProductionManagement/ProductionRcvRpt/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.ErpID"/>
+      <wt:combobox field="Entity.OrganizationId"  item-url="/ProductionManagement/ProductionRcvRpt/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g9d4155b752f2465d9624e9d9b3c9507d" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.BusinessDate"/>
+      <wt:textbox field="Entity.DocNo"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.WhId"  item-url="/ProductionManagement/ProductionRcvRpt/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g51c2793c48714f8aa72124df170dfb54" multi-select="false"/>
+      <wt:combobox field="Entity.OrderWhId"  item-url="/ProductionManagement/ProductionRcvRpt/GetBaseWareHouses" label-text="@Localizer["Page.订单存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gddaf6541771a4a2b906e0528f221936c" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="gb68af0ca26c3413ca926ed1578c812e6" multi-select="false"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

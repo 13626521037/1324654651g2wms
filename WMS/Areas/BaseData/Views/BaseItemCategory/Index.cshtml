@@ -1,0 +1,25 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseItemCategoryVMs.BaseItemCategoryListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Ga3a7a51da1454b26b62d551963ff01be" id="gridGa3a7a51da1454b26b62d551963ff01be">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.OrganizationId"  item-url="/BaseData/BaseItemCategory/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g3a7aa45ef7554d0b8409fa824e19089d"/>
+    <wt:textbox field="Searcher.Code"/>
+    <wt:textbox field="Searcher.Name"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.AnalysisTypeId"  item-url="/BaseData/BaseItemCategory/GetBaseAnalysisTypes" label-text="@Localizer["Page.分析类别"].Value" empty-text="@Localizer["Sys.All"]" id="g2a87ea5f8bd741279ddc9727a40cd577"/>
+    <wt:combobox field="Searcher.DepartmentId"  item-url="/BaseData/BaseItemCategory/GetBaseDepartments" label-text="@Localizer["Page.生产部门"].Value" empty-text="@Localizer["Sys.All"]" id="g7d4bd351793b4742aedf54b321fd8666"/>
+    <wt:textbox field="Searcher.SourceSystemId"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.LastUpdateTime" range="true"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseItemCategory/SearchBaseItemCategory"  id="Ga3a7a51da1454b26b62d551963ff01be" search-panel-id="gridGa3a7a51da1454b26b62d551963ff01be"/>
+
+

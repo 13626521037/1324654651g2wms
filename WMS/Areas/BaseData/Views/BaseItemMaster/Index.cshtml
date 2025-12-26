@@ -1,0 +1,22 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseItemMasterVMs.BaseItemMasterListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G181adba2dcc74d1cb4926b3c14ac0c79" id="gridG181adba2dcc74d1cb4926b3c14ac0c79">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.OrganizationId"  item-url="/BaseData/BaseItemMaster/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g5d0349450e98430c963a160d7f8e29e8"/>
+    <wt:textbox field="Searcher.Code"/>
+    <wt:textbox field="Searcher.Name"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g1ff761dc022f499aa973d75d16feec11"/>
+    <wt:textbox field="Searcher.SourceSystemId"/>
+    <wt:datetime field="Searcher.LastUpdateTime" range="true"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseItemMaster/SearchBaseItemMaster"  id="G181adba2dcc74d1cb4926b3c14ac0c79" search-panel-id="gridG181adba2dcc74d1cb4926b3c14ac0c79"/>
+
+

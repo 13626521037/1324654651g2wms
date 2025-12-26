@@ -1,0 +1,38 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseInventoryLogVMs.BaseInventoryLogVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.OperationType" disabled="true"/>
+      <wt:display field="Entity.DocNo" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.SourceInventory.BatchNumber" disabled="true" label-text="@Localizer["Page.来源库存信息"].Value"/>
+      <wt:display field="Entity.TargetInventory.BatchNumber" disabled="true" label-text="@Localizer["Page.目标库存信息"].Value"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.SourceDiffQty" disabled="true" />
+            <wt:display field="Entity.TargetDiffQty" disabled="true" />
+      <wt:display field="Entity.Memo" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateTime" disabled="true"/>
+      <wt:display field="Entity.UpdateTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateBy" disabled="true"/>
+      <wt:display field="Entity.UpdateBy" disabled="true"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

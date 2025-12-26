@@ -1,0 +1,20 @@
+﻿<script src="/qrcode.min.js"></script>
+<div style="display: flex;align-items: center;justify-content: center;height:100%;">
+    <div style="text-align: center;">
+        <canvas id="qrcode"></canvas>
+        <br/>
+        <span id="qrcode-text">@ViewBag.code</span>
+    </div>
+</div>
+<script>
+    const text = "@ViewBag.code";  // 要编码的内容
+    const canvas = document.getElementById('qrcode');  // 获取 canvas 元素
+
+    QRCode.toCanvas(canvas, text, function(error) {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log("QR Code successfully generated!");
+        }
+    });
+</script>

@@ -1,0 +1,37 @@
+﻿@model WMS.ViewModel.SalesManagement.SalesRMAVMs.SalesRMAVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+            <wt:display field="Entity.Customer.Name" label-text="@Localizer["Page.客户"].Value" />
+            <wt:display field="Entity.Operators" />
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.BusinessDate" />
+            <wt:display field="Entity.ApproveDate" label-text="审核时间" />
+            <wt:display field="Entity.CreatePerson" label-text="ERP审核人" />
+            @*       <wt:display field="Entity.SourceSystemId"/>
+      <wt:display field="Entity.LastUpdateTime"/> *@
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container id="g2040556399">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="SalesRMALineRMAIdList" disabled="true" label-text="@Localizer["Page.退回处理单"].Value" hide-label="true" />
+        </wt:container>
+        <wt:hidden field="Entity.ID" />
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton theme=" ButtonThemeEnum.Warm" text="@Localizer["Sys.Delete"]" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

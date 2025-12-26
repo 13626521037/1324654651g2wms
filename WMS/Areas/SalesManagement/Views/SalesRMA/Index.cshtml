@@ -1,0 +1,29 @@
+﻿@model WMS.ViewModel.SalesManagement.SalesRMAVMs.SalesRMAListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G718c5ff7918141be9cece766bab96a0f" id="gridG718c5ff7918141be9cece766bab96a0f">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/SalesManagement/SalesRMA/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="gbbfc8bf7006643ac976d4185f9699f47" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:textbox field="Searcher.CreatePerson" label-text="ERP创建人" />
+        <wt:textbox field="Searcher.Operators" />
+        <wt:textbox field="Searcher.Customer" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g1ac776305982452998cb692653890ed1" />
+@*         <wt:combobox field="Searcher.CustomerId" item-url="/SalesManagement/SalesRMA/GetBaseCustomers" label-text="@Localizer["Page.客户"].Value" empty-text="@Localizer["Sys.All"]" id="g9609736ed24447f5aaf79890b305bb60" />
+        <wt:datetime field="Searcher.ApproveDate" range="true" />
+        <wt:textbox field="Searcher.DocType" />
+        <wt:textbox field="Searcher.SourceSystemId" />
+        <wt:datetime field="Searcher.LastUpdateTime" range="true" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:datetime field="Searcher.UpdateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+        <wt:textbox field="Searcher.UpdateBy" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/SalesManagement/SalesRMA/SearchSalesRMA" id="G718c5ff7918141be9cece766bab96a0f" search-panel-id="gridG718c5ff7918141be9cece766bab96a0f" />
+
+

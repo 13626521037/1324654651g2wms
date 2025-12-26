@@ -1,0 +1,38 @@
+﻿@model WMS.ViewModel.PrintManagement.PrintDocumentVMs.PrintDocumentVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/PrintManagement/PrintDocument/DoPrint">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.DocNo" readonly style="border:none;" />
+            <wt:textbox field="Entity.DocLineNo" readonly style="border:none;" />
+            <wt:textbox field="Entity.ItemCode" readonly style="border:none;" />
+            <wt:textbox field="Entity.ItemName" readonly style="border:none;" />
+            <wt:textbox field="Entity.SPECS" readonly style="border:none;" />
+            <wt:textbox field="Entity.UnitName" readonly style="border:none;" />
+            <wt:textbox field="Entity.ValidQty" readonly style="border:none;" />
+            <wt:textbox field="Entity.Seiban" readonly style="border:none;" />
+            <wt:textbox field="Entity.SeibanRandom" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Description" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:textbox field="Entity.PrintQty" />
+            <wt:textbox field="Entity.PackingQty" />
+            <wt:combobox field="SelectedPrintModule" items="PrintModules" />
+        </wt:row>
+        <wt:hidden field="Entity.ID" />
+        <wt:hidden field="Entity.ItemID" />
+        <wt:hidden field="Entity.OrgCode" />
+        <wt:hidden field="Entity.Qty" />
+        <wt:hidden field="Entity.ReceivedQty" />
+        <wt:container align="AlignEnum.Right" style="margin-top:50px">
+            <wt:submitbutton text="打印" />
+            @* <wt:closebutton text="@Localizer["Sys.Close"].Value" /> *@
+        </wt:container>
+    </wt:form>
+</wt:container>
+
+

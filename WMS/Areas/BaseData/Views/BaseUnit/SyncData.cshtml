@@ -1,0 +1,21 @@
+﻿@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<blockquote class="layui-elem-quote">
+    将从ERP同步计量单位数据，如果输入计量单位编码，则只同步指定编码的计量单位信息
+</blockquote>
+<wt:form vm="@Model" url="/BaseData/BaseUnit/SyncData">
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <label for="BaseUnitVM_Entity_Code" class="layui-form-label" style="min-height:21px;">
+            计量单位编码:
+        </label>
+        <div class="layui-input-block" style="">
+            <input class="layui-input" name="Code" placeholder="非必填项。不填则同步全部；填写则同步指定项" />
+        </div>
+    </wt:row>
+    <wt:container align="AlignEnum.Right" style="padding-top: 30px;">
+        <wt:submitbutton text="同步" />
+        <wt:closebutton text="关闭" />
+    </wt:container>
+</wt:form>
+

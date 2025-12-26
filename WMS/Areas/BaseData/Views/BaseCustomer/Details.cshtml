@@ -1,0 +1,45 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseCustomerVMs.BaseCustomerVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.ShortName" disabled="true"/>
+      <wt:display field="Entity.EnglishShortName" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Organization.SourceSystemId" disabled="true" label-text="@Localizer["Page.组织"].Value"/>
+      <wt:display field="Entity.IsEffective" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Memo" disabled="true"/>
+      <wt:display field="Entity.SourceSystemId" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.LastUpdateTime" disabled="true"/>
+      <wt:display field="Entity.Code" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Name" disabled="true"/>
+      <wt:display field="Entity.CreateTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.UpdateTime" disabled="true"/>
+      <wt:display field="Entity.CreateBy" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.UpdateBy" disabled="true"/>
+      <wt:display field="Entity.IsValid" disabled="true"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

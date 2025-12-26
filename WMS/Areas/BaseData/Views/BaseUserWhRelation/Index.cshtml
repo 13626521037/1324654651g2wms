@@ -1,0 +1,16 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseUserWhRelationVMs.BaseUserWhRelationListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G692410b2ca3c4622a29ad9841fe5a7f9" id="gridG692410b2ca3c4622a29ad9841fe5a7f9">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.UserId"  item-url="/BaseData/BaseUserWhRelation/GetFrameworkUsers" label-text="@Localizer["_Admin.User"].Value" empty-text="@Localizer["Sys.All"]" id="g7837b41797d9424ca4b78ee15d5bd707"/>
+    <wt:combobox field="Searcher.WhId"  item-url="/BaseData/BaseUserWhRelation/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="g63ec4b9818d44a2a8f19ab08edbbafd0"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseUserWhRelation/SearchBaseUserWhRelation"  id="G692410b2ca3c4622a29ad9841fe5a7f9" search-panel-id="gridG692410b2ca3c4622a29ad9841fe5a7f9"/>
+
+

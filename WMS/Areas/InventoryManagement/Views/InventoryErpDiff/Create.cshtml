@@ -1,0 +1,29 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryErpDiffVMs.InventoryErpDiffVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryErpDiff/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.WhId"  item-url="/InventoryManagement/InventoryErpDiff/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g7ce415ee68d04ca1a8343c8942bdb40d" multi-select="false"/>
+      <wt:combobox field="Entity.ItemId"  item-url="/InventoryManagement/InventoryErpDiff/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g0ea3b665c0634e67a2c307f6c9d88d15" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Seiban"/>
+      <wt:textbox field="Entity.WmsQty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.ErpQty"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

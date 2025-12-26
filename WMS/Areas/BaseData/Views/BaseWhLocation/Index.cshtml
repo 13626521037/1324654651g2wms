@@ -1,0 +1,20 @@
+﻿@model WMS.ViewModel.BaseData.BaseWhLocationVMs.BaseWhLocationListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G2e615f7368e4402390030030d65eae9b" id="gridG2e615f7368e4402390030030d65eae9b">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.Code" />
+        <wt:textbox field="Searcher.Name" />
+        <wt:combobox field="Searcher.WareHouseId" item-url="/BaseData/BaseWhLocation/GetBaseWh" trigger-url="/BaseData/BaseWhLocation/GetBaseWhAreas" link-id="g74d9667dba544b08be5999014fe9a7f7" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.All"]" />
+        <wt:combobox field="Searcher.WhAreaId" item-url="/BaseData/BaseWhLocation/GetBaseWhAreas" label-text="@Localizer["Page.库区"].Value" empty-text="@Localizer["Sys.All"]" id="g74d9667dba544b08be5999014fe9a7f7" />
+        <wt:combobox field="Searcher.AreaType" empty-text="@Localizer["Sys.All"]" id="g67861cfe60c64c6cb3ae2258cbffe3b6" />
+        <wt:combobox field="Searcher.Locked" empty-text="@Localizer["Sys.All"]" id="g2b2929c2515a4c43842fa9f2d09041e8" />
+        <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g7a217b480ed544a5a0a925615fa9c7ce" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseWhLocation/SearchBaseWhLocation" id="G2e615f7368e4402390030030d65eae9b" search-panel-id="gridG2e615f7368e4402390030030d65eae9b" />
+
+

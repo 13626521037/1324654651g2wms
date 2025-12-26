@@ -1,0 +1,22 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseShortcutVMs.BaseShortcutListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Gaf3af6a2b093400b8c5decfe083799d1" id="gridGaf3af6a2b093400b8c5decfe083799d1">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:tree field="Searcher.MenuId"  item-url="/BaseData/BaseShortcut/GetFrameworkMenus?istree=true" label-text="@Localizer["Sys.Menu"].Value"/>
+    <wt:combobox field="Searcher.UserId"  item-url="/BaseData/BaseShortcut/GetFrameworkUsers" label-text="@Localizer["_Admin.User"].Value" empty-text="@Localizer["Sys.All"]" id="gffddefc4c16d4047879826b6e4afe4dc"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+    <wt:textbox field="Searcher.UpdateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseShortcut/SearchBaseShortcut"  id="Gaf3af6a2b093400b8c5decfe083799d1" search-panel-id="gridGaf3af6a2b093400b8c5decfe083799d1"/>
+
+

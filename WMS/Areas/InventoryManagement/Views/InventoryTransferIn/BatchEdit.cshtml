@@ -1,0 +1,38 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryTransferInVMs.InventoryTransferInBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/InventoryManagement/InventoryTransferIn/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.ErpID"/>
+    <wt:datetime field="LinkedVM.BusinessDate"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocType"/>
+    <wt:textbox field="LinkedVM.DocNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.TransInOrganizationId"  item-url="/InventoryManagement/InventoryTransferIn/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" id="g8d7a5e06144a4f20bfbf043a2e050738"/>
+    <wt:combobox field="LinkedVM.TransInWhId"  item-url="/InventoryManagement/InventoryTransferIn/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" id="gd41a10edacfb492fa59aa22043fadebe"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.TransferOut"/>
+    <wt:combobox field="LinkedVM.TransferOutType" id="g38652ba1e3274c9ba223b59d5bf5763e"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.Status" id="g19e8d2ae2d9a4498abcf08680a565e12"/>
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

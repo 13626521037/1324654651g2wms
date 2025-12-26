@@ -1,0 +1,46 @@
+﻿
+@model WMS.ViewModel.PrintManagement.PrintMOVMs.PrintMOBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/PrintManagement/PrintMO/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CustomerCode"/>
+    <wt:textbox field="LinkedVM.OrderWhName"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CustomerSPECS"/>
+    <wt:combobox field="LinkedVM.ItemId"  item-url="/PrintManagement/PrintMO/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" id="ge743c1b133624751981ed36414e9f0d1"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Seiban"/>
+    <wt:textbox field="LinkedVM.SeibanRandom"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.BatchNumber"/>
+    <wt:textbox field="LinkedVM.Qty"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocNo"/>
+    <wt:textbox field="LinkedVM.DocNoChange"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.LocationName"/>
+    <wt:combobox field="LinkedVM.OrgId"  item-url="/PrintManagement/PrintMO/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" id="gf4a29b121ce94fa0aa31595ace0401d7"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.SyncItem"/>
+    <wt:textbox field="LinkedVM.SyncOrg"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

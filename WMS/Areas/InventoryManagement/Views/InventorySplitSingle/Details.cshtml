@@ -1,0 +1,33 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventorySplitSingleVMs.InventorySplitSingleVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.DocNo" disabled="true"/>
+      <wt:display field="Entity.OriginalInv.BatchNumber" disabled="true" label-text="@Localizer["Page.原库存信息"].Value"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.OriginalQty" disabled="true"/>
+      <wt:display field="Entity.Memo" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateTime" disabled="true"/>
+      <wt:display field="Entity.CreateBy" disabled="true"/>
+    </wt:row>
+
+    <wt:container id="g5908289759">
+      <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400"  vm="InventorySplitSingleLineSplitSingleList" disabled="true" label-text="@Localizer["Page.库存拆零单"].Value" hide-label="true"/>
+    </wt:container>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

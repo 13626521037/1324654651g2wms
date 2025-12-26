@@ -1,0 +1,23 @@
+﻿@model WMS.ViewModel.BaseData.BaseUserWhRelationVMs.BaseUserWhRelationVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseUserWhRelation/Edit">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:combobox field="Entity.UserId" item-url="/BaseData/BaseUserWhRelation/GetFrameworkUsers" label-text="@Localizer["_Admin.User"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="ge235d0b762ee43ee8610727d87e2c41c" multi-select="false" />
+            <wt:combobox field="Entity.WhId" item-url="/BaseData/BaseUserWhRelation/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g3658848d3e244cdcb355ff748d587f05" multi-select="false" />
+            <wt:textarea field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+        <wt:hidden field="Entity.ID" />
+    </wt:form>
+
+</wt:container>
+
+

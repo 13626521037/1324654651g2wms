@@ -1,0 +1,41 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryTransferOutManualVMs.InventoryTransferOutManualBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/InventoryManagement/InventoryTransferOutManual/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CreatePerson"/>
+    <wt:combobox field="LinkedVM.OrganizationId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" id="g5cfaa4f3c64a46fc866661eebcdb8e65"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:datetime field="LinkedVM.BusinessDate"/>
+    <wt:datetime field="LinkedVM.SubmitDate"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocType"/>
+    <wt:combobox field="LinkedVM.TransInOrganizationId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" id="g0330345da5d54de381f6e5db332ba8c1"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.TransInWhId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" id="g8871df40a4c042418ed9927e5533b29b"/>
+    <wt:combobox field="LinkedVM.TransOutOrganizationId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.调出组织"].Value" id="g4669fe27cea74a0090994d68c42a55c9"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.TransOutWhId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseWareHouses" label-text="@Localizer["Page.调出存储地点"].Value" id="g7cebed89e37d4810a631067ee91d79af"/>
+    <wt:combobox field="LinkedVM.Status" id="g5d0392522d4447eb8750bb3da5c5c217"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

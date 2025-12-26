@@ -1,0 +1,16 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryStockTakingLocationsVMs.InventoryStockTakingLocationsSelectListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Ge3af4494df6a4123b2aeef1b8fba5d42" id="gridGe3af4494df6a4123b2aeef1b8fba5d42">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:hidden field="Searcher.StockTakingId" />
+        <wt:textbox field="Searcher.LocationCode" />
+        <wt:textbox field="Searcher.AreaCode" />
+    </wt:row>
+</wt:searchpanel>
+
+<!-- 最大只能5000，可能是框架限制 错误信息：Failed to read the request form. Form value count limit 5000 exceeded. -->
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryStockTaking/SearchSelectLocation" limits="new int[] { 20, 100, 200, 1000, 5000 }" id="Ge3af4494df6a4123b2aeef1b8fba5d42" search-panel-id="gridGe3af4494df6a4123b2aeef1b8fba5d42" />
+
+

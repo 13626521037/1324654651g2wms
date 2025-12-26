@@ -1,0 +1,22 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseShortcutVMs.BaseShortcutVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseShortcut/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:tree field="Entity.MenuId"  item-url="/BaseData/BaseShortcut/GetFrameworkMenus?istree=true" label-text="@Localizer["Sys.Menu"].Value"/>
+      <wt:combobox field="Entity.UserId"  item-url="/BaseData/BaseShortcut/GetFrameworkUsers" label-text="@Localizer["_Admin.User"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g58a1cbe12a0b481a97da6d7653170d19" multi-select="false"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

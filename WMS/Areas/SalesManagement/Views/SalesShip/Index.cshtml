@@ -1,0 +1,24 @@
+﻿@model WMS.ViewModel.SalesManagement.SalesShipVMs.SalesShipListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G81e47ce04b3b4ec7b081537b4717b073" id="gridG81e47ce04b3b4ec7b081537b4717b073">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/SalesManagement/SalesShip/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="gae31ae04799a47b2b5b31a474db2d176" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:textbox field="Searcher.CreatePerson" label-text="ERP提交人" />
+        <wt:textbox field="Searcher.Customer" />
+        @* <wt:combobox field="Searcher.CustomerId" item-url="/SalesManagement/SalesShip/GetBaseCustomers" label-text="@Localizer["Page.客户"].Value" empty-text="@Localizer["Sys.All"]" id="gf97e68ea5d7a4b25a9bbf5788b86e572" /> *@
+        <wt:textbox field="Searcher.Operators" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="ge802cb54707144b7ba59ca078b6d6ca5" />
+        @* <wt:textbox field="Searcher.DocType" /> *@
+        @* <wt:datetime field="Searcher.SubmitDate" range="true" /> *@
+        @* <wt:datetime field="Searcher.LastUpdateTime" range="true" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/SalesManagement/SalesShip/SearchSalesShip" id="G81e47ce04b3b4ec7b081537b4717b073" search-panel-id="gridG81e47ce04b3b4ec7b081537b4717b073" />
+
+

@@ -1,0 +1,30 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryTransferOutManualVMs.InventoryTransferOutManualListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G2297fd5c821342c0b0cd187824ba23eb" id="gridG2297fd5c821342c0b0cd187824ba23eb">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:textbox field="Searcher.DocType" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g0e6052e3b71e4fe9a439d51d38f6552f" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        @* <wt:datetime field="Searcher.SubmitDate" range="true" /> *@
+        <wt:textbox field="Searcher.CreatePerson" label-text="ERP提交人" />
+        <wt:combobox field="Searcher.TransInOrganizationId" item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" empty-text="@Localizer["Sys.All"]" id="g8fe02ddac00b40898cd1c09e29dca15d" />
+        <wt:combobox field="Searcher.TransInWhId" item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="g1bf8127554964e95a176f8d66997d1fd" />
+        <wt:combobox field="Searcher.TransOutOrganizationId" item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.调出组织"].Value" empty-text="@Localizer["Sys.All"]" id="g298eb937b55c4a94a72b6da155b14f06" />
+        <wt:combobox field="Searcher.TransOutWhId" item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseWareHouses" label-text="@Localizer["Page.调出存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="g68d809c5dce64aa997186b23fee134dc" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g04485638e8f045dd8730aab99baca726" />
+        @* <wt:textbox field="Searcher.SourceSystemId" /> *@
+        @* <wt:datetime field="Searcher.LastUpdateTime" range="true" /> *@
+        @* <wt:datetime field="Searcher.CreateTime" range="true" /> *@
+        @* <wt:textbox field="Searcher.CreateBy" /> *@
+        @* <wt:datetime field="Searcher.UpdateTime" range="true" /> *@
+        @* <wt:textbox field="Searcher.UpdateBy" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryTransferOutManual/SearchInventoryTransferOutManual" id="G2297fd5c821342c0b0cd187824ba23eb" search-panel-id="gridG2297fd5c821342c0b0cd187824ba23eb" />
+
+

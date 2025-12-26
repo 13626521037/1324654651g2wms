@@ -1,0 +1,45 @@
+﻿
+@model WMS.ViewModel.PrintManagement.PrintDocumentVMs.PrintDocumentBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/PrintManagement/PrintDocument/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocNo"/>
+    <wt:textbox field="LinkedVM.DocLineNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.ItemID"/>
+    <wt:textbox field="LinkedVM.ItemCode"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ItemName"/>
+    <wt:textarea field="LinkedVM.SPECS"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Description"/>
+    <wt:textbox field="LinkedVM.UnitName"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Qty"/>
+    <wt:textbox field="LinkedVM.ReceivedQty"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.ValidQty"/>
+    <wt:textbox field="LinkedVM.Seiban"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.SeibanRandom"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

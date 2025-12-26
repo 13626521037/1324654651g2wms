@@ -1,0 +1,36 @@
+﻿@model WMS.ViewModel.BaseData.BaseInventoryVMs.BaseInventoryBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseInventory/DoBatchEdit?1=1">
+    <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+    @* <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:combobox field="LinkedVM.ItemMasterId" item-url="/BaseData/BaseInventory/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" id="g4031433eecda4584b36c2e32816fef47" />
+        <wt:combobox field="LinkedVM.WhLocationId" item-url="/BaseData/BaseInventory/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" id="ga7a2f5f640b14ea69f41be42744353de" />
+    </wt:row> *@
+   @*  <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox field="LinkedVM.BatchNumber" />
+        <wt:textbox field="LinkedVM.SerialNumber" />
+    </wt:row> *@
+    @* <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox field="LinkedVM.Seiban" />
+        <wt:textbox field="LinkedVM.Qty" />
+    </wt:row> *@
+    @* <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:switch field="LinkedVM.IsAbandoned" />
+        <wt:textbox field="LinkedVM.ItemSourceType" />
+    </wt:row> *@
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:combobox field="LinkedVM.FrozenStatus" id="gc59cd4b4ecc84275911f3feaccb054c0" />
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+        <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+        <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+    </wt:container>
+
+    <wt:hidden field="Ids" />
+    <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

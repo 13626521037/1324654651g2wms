@@ -1,0 +1,35 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseInventoryLogVMs.BaseInventoryLogVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseInventoryLog/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.OperationType" empty-text="@Localizer["Sys.PleaseSelect"]" id="g41f27f778a334a3f87e90314a84c4613" multi-select="false"/>
+      <wt:textbox field="Entity.DocNo"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.SourceInventoryId"  item-url="/BaseData/BaseInventoryLog/GetBaseInventorys" label-text="@Localizer["Page.来源库存信息"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gacef2cf778a14f75ad5551a78bfd3c02" multi-select="false"/>
+      <wt:combobox field="Entity.TargetInventoryId"  item-url="/BaseData/BaseInventoryLog/GetBaseInventorys" label-text="@Localizer["Page.目标库存信息"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gd9c48c0e96fa4491b125833f2f72273b" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.SourceDiffQty" />
+            <wt:textbox field="Entity.TargetDiffQty" />
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

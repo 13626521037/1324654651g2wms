@@ -1,0 +1,38 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseInventoryVMs.BaseInventoryVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseInventory/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.ItemMasterId"  item-url="/BaseData/BaseInventory/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gcdd90b784d224f25a15ac9b697764c5e" multi-select="false"/>
+      <wt:combobox field="Entity.WhLocationId"  item-url="/BaseData/BaseInventory/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g29a8e61f9cfe438b9903f16ab3f373c5" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.BatchNumber"/>
+      <wt:textbox field="Entity.SerialNumber"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Seiban"/>
+      <wt:textbox field="Entity.Qty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:switch field="Entity.IsAbandoned"/>
+      <wt:textbox field="Entity.ItemSourceType"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.FrozenStatus" empty-text="@Localizer["Sys.PleaseSelect"]" id="g0c93ff5052e644929b97461eab9da31a" multi-select="false"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

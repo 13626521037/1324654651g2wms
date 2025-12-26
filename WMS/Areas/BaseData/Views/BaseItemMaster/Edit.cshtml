@@ -1,0 +1,69 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseItemMasterVMs.BaseItemMasterVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseItemMaster/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.OrganizationId"  item-url="/BaseData/BaseItemMaster/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g9af999f981c844ef9d8683a66e6ed528" multi-select="false"/>
+      <wt:combobox field="Entity.ItemCategoryId"  item-url="/BaseData/BaseItemMaster/GetBaseItemCategorys" label-text="@Localizer["Page.分类"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gae3325c8333f46c4b4725238cb140d88" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Code"/>
+      <wt:textbox field="Entity.Name"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.StockUnitId"  item-url="/BaseData/BaseItemMaster/GetBaseUnits" label-text="@Localizer["Page.库存单位"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g2e1a9594389f4f14849e404303cc9e87" multi-select="false"/>
+      <wt:combobox field="Entity.ProductionOrgId"  item-url="/BaseData/BaseItemMaster/GetBaseOrganizations" label-text="@Localizer["Page.默认生产组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g7376bcf2252f4f039b5fd974e2c64333" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.ProductionDeptId"  item-url="/BaseData/BaseItemMaster/GetBaseDepartments" label-text="@Localizer["Page.默认生产部门"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g610a262fb7364945a39c19f8b7f138ce" multi-select="false"/>
+      <wt:combobox field="Entity.WhId"  item-url="/BaseData/BaseItemMaster/GetBaseWareHouses" label-text="@Localizer["Page.默认存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g50b3c825c1094f5fa6dc20e2fb90bcf1" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.FormAttribute" empty-text="@Localizer["Sys.PleaseSelect"]" id="g2791a4e5fc9c454eb82ceb25bc807452" multi-select="false"/>
+      <wt:textbox field="Entity.MateriaAttribute"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.GearRatio"/>
+      <wt:textbox field="Entity.Power"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SafetyStockQty"/>
+      <wt:textbox field="Entity.FixedLT"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.BuildBatch"/>
+      <wt:textbox field="Entity.NotAnalysisQty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.AnalysisTypeId"  item-url="/BaseData/BaseItemMaster/GetBaseAnalysisTypes" label-text="@Localizer["Page.分析类别"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g3400b4f3cde046ccac4d354e340e92cc" multi-select="false"/>
+      <wt:combobox field="Entity.IsEffective" empty-text="@Localizer["Sys.PleaseSelect"]" id="g317a9b5d59154e1fa5c3b3e544360b8d" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SourceSystemId"/>
+      <wt:datetime field="Entity.LastUpdateTime"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.SPECS"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.MateriaModel"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Description"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,42 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryOtherShipVMs.InventoryOtherShipVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryOtherShip/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.ErpID"/>
+      <wt:datetime field="Entity.BusinessDate"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:combobox field="Entity.DocTypeId"  item-url="/InventoryManagement/InventoryOtherShip/GetInventoryOtherShipDocTypes" label-text="@Localizer["Page.单据类型"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g470b5bfb6ac7453bbd6fe637dfc12db0" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.BenefitOrganizationId"  item-url="/InventoryManagement/InventoryOtherShip/GetBaseOrganizations" label-text="@Localizer["Page.受益组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gb6b511a7676d43e1b39bf3ae04712a8f" multi-select="false"/>
+      <wt:combobox field="Entity.BenefitDepartmentId"  item-url="/InventoryManagement/InventoryOtherShip/GetBaseDepartments" label-text="@Localizer["Page.受益部门"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gf1f4b724f8b34e3aa75a3c6826c193e9" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.BenefitPersonId"  item-url="/InventoryManagement/InventoryOtherShip/GetBaseOperators" label-text="@Localizer["Page.受益人"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5294b04486cd40c2bd0fcb12b54ae043" multi-select="false"/>
+      <wt:combobox field="Entity.WhId"  item-url="/InventoryManagement/InventoryOtherShip/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g47a81c2eb4f341c3bb1990472ce5fb53" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.OwnerOrganizationId"  item-url="/InventoryManagement/InventoryOtherShip/GetBaseOrganizations" label-text="@Localizer["Page.货主组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5509afdab63d4f4f9a8fa1c0baa4b283" multi-select="false"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

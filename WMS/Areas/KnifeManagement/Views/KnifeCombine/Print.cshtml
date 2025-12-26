@@ -1,0 +1,25 @@
+﻿@model WMS.ViewModel.KnifeManagement.KnifeCombineVMs.KnifeCombineVM;
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/KnifeManagement/KnifeCombine/DoPrint">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.DocNo" disabled="true" />
+
+            <wt:textbox field="Entity.CombineKnifeNo" disabled="true" />
+
+        </wt:row>
+
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:combobox field="SelectedPrintModule" items="PrintModules" />
+        </wt:row>
+        <wt:hidden field="Entity.ID" />
+        <wt:container align="AlignEnum.Right" style="margin-top:50px">
+            <wt:submitbutton text="打印" />
+            @* <wt:closebutton text="@Localizer["Sys.Close"].Value" /> *@
+        </wt:container>
+    </wt:form>
+</wt:container>
+
+

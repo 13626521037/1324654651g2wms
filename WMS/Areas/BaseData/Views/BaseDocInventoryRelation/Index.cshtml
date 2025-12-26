@@ -1,0 +1,26 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseDocInventoryRelationVMs.BaseDocInventoryRelationListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G9448088a4f9b48ddbba96affc6458a0f" id="gridG9448088a4f9b48ddbba96affc6458a0f">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.DocType" empty-text="@Localizer["Sys.All"]" id="ga199275f37164dfc90a6586277c857ce"/>
+    <wt:combobox field="Searcher.InventoryId"  item-url="/BaseData/BaseDocInventoryRelation/GetBaseInventorys" label-text="@Localizer["Page.库存信息"].Value" empty-text="@Localizer["Sys.All"]" id="g50cf7991f78f4761a5871ec032c41ff7"/>
+    <wt:textbox field="Searcher.BusinessId"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Qty"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.CreateBy"/>
+    <wt:textbox field="Searcher.UpdateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseDocInventoryRelation/SearchBaseDocInventoryRelation"  id="G9448088a4f9b48ddbba96affc6458a0f" search-panel-id="gridG9448088a4f9b48ddbba96affc6458a0f"/>
+
+

@@ -1,0 +1,50 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryTransferOutManualVMs.InventoryTransferOutManualVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryTransferOutManual/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.CreatePerson"/>
+      <wt:combobox field="Entity.OrganizationId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g6ae3a5d5d9cd47f1807a60c79d78f356" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.BusinessDate"/>
+      <wt:datetime field="Entity.SubmitDate"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:textbox field="Entity.DocType"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.TransInOrganizationId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g81a39af9b07443618b44f8cd680f403f" multi-select="false"/>
+      <wt:combobox field="Entity.TransInWhId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g184d2271935442869002609da2653d53" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.TransOutOrganizationId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseOrganizations" label-text="@Localizer["Page.调出组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="ge6f459ba0c844b1294ed91fff92b982e" multi-select="false"/>
+      <wt:combobox field="Entity.TransOutWhId"  item-url="/InventoryManagement/InventoryTransferOutManual/GetBaseWareHouses" label-text="@Localizer["Page.调出存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gcbc1a3456f9545ad9985f5c3e14f2504" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="g1550b050b9bb4385b12cbfd24624f768" multi-select="false"/>
+      <wt:textbox field="Entity.SourceSystemId"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.LastUpdateTime"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

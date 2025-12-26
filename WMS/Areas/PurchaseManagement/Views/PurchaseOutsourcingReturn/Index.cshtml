@@ -1,0 +1,23 @@
+﻿@model WMS.ViewModel.PurchaseManagement.PurchaseOutsourcingReturnVMs.PurchaseOutsourcingReturnListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G48f5f746a87243968c06a803ec3aa8ab" id="gridG48f5f746a87243968c06a803ec3aa8ab">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.CreatePerson" label-text="@Localizer["Page.ERP提交人"].Value" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/PurchaseManagement/PurchaseOutsourcingReturn/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g83b1e753477e4a67abdab89178f521f4" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:datetime field="Searcher.SubmitDate" range="true" />
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:textbox field="Searcher.DocType" />
+        <wt:textbox field="Searcher.Supplier" />
+        @* <wt:combobox field="Searcher.SupplierId"  item-url="/PurchaseManagement/PurchaseOutsourcingReturn/GetBaseSuppliers" label-text="@Localizer["Page.供应商"].Value" empty-text="@Localizer["Sys.All"]" id="g6a01d023bdae4c80b2cc5f7677ee8e06"/> *@
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="gfc72a569f8854acdb60fa6ba8a1218ea" />
+        @* <wt:textbox field="Searcher.SourceSystemId" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/PurchaseManagement/PurchaseOutsourcingReturn/SearchPurchaseOutsourcingReturn" id="G48f5f746a87243968c06a803ec3aa8ab" search-panel-id="gridG48f5f746a87243968c06a803ec3aa8ab" />
+
+

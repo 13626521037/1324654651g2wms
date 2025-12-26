@@ -1,0 +1,68 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseItemMasterVMs.BaseItemMasterVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseItemMaster/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.OrganizationId"  item-url="/BaseData/BaseItemMaster/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5a27cc800c904b01bea379c69ba0239d" multi-select="false"/>
+      <wt:combobox field="Entity.ItemCategoryId"  item-url="/BaseData/BaseItemMaster/GetBaseItemCategorys" label-text="@Localizer["Page.分类"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g7006a19532e5428d9a03bfcaa33390f4" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Code"/>
+      <wt:textbox field="Entity.Name"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.StockUnitId"  item-url="/BaseData/BaseItemMaster/GetBaseUnits" label-text="@Localizer["Page.库存单位"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g1afc9648b73f41eba9585e7d495fd8c5" multi-select="false"/>
+      <wt:combobox field="Entity.ProductionOrgId"  item-url="/BaseData/BaseItemMaster/GetBaseOrganizations" label-text="@Localizer["Page.默认生产组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gd491d7b6325344809984386897e91207" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.ProductionDeptId"  item-url="/BaseData/BaseItemMaster/GetBaseDepartments" label-text="@Localizer["Page.默认生产部门"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="geb9017c671cb49a19895afbe338afd9b" multi-select="false"/>
+      <wt:combobox field="Entity.WhId"  item-url="/BaseData/BaseItemMaster/GetBaseWareHouses" label-text="@Localizer["Page.默认存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g83a75cc290844acb87a405ffcd4e1c4b" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.FormAttribute" empty-text="@Localizer["Sys.PleaseSelect"]" id="g4c954a5a5bdb4a1eb8c88e47e774c928" multi-select="false"/>
+      <wt:textbox field="Entity.MateriaAttribute"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.GearRatio"/>
+      <wt:textbox field="Entity.Power"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SafetyStockQty"/>
+      <wt:textbox field="Entity.FixedLT"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.BuildBatch"/>
+      <wt:textbox field="Entity.NotAnalysisQty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.AnalysisTypeId"  item-url="/BaseData/BaseItemMaster/GetBaseAnalysisTypes" label-text="@Localizer["Page.分析类别"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="ga42347c7f01247039a02574bb3f5486c" multi-select="false"/>
+      <wt:combobox field="Entity.IsEffective" empty-text="@Localizer["Sys.PleaseSelect"]" id="ga662fbc74d774458a2794f0e44da6aa8" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SourceSystemId"/>
+      <wt:datetime field="Entity.LastUpdateTime"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.SPECS"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.MateriaModel"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Description"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

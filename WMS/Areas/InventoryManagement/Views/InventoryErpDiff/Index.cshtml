@@ -1,0 +1,23 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryErpDiffVMs.InventoryErpDiffListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Gf7be5d58c8a242f1b6587c65dd85a86a" id="gridGf7be5d58c8a242f1b6587c65dd85a86a">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.WhId" item-url="/InventoryManagement/InventoryErpDiff/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="g4a727b44197f4916bdce532c7aaea4f9" />
+        @* <wt:combobox field="Searcher.ItemId" item-url="/InventoryManagement/InventoryErpDiff/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.All"]" id="ge28a79a33c81492a995160a699f986c0" /> *@
+        <wt:textbox field="Searcher.ItemCode" />
+        <wt:textbox field="Searcher.Seiban" />
+        <wt:textbox field="Searcher.WmsQty" />
+        <wt:textbox field="Searcher.ErpQty" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        @* <wt:textbox field="Searcher.CreateBy" /> *@
+        @* <wt:datetime field="Searcher.UpdateTime" range="true" /> *@
+        @* <wt:textbox field="Searcher.UpdateBy" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryErpDiff/SearchInventoryErpDiff" id="Gf7be5d58c8a242f1b6587c65dd85a86a" search-panel-id="gridGf7be5d58c8a242f1b6587c65dd85a86a" />
+
+

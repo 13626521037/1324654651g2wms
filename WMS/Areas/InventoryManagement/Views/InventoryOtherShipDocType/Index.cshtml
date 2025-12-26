@@ -1,0 +1,31 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryOtherShipDocTypeVMs.InventoryOtherShipDocTypeListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G086fb7304c324494ae2d67750d09a0e7" id="gridG086fb7304c324494ae2d67750d09a0e7">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.CreatePerson"/>
+    <wt:combobox field="Searcher.OrganizationId"  item-url="/InventoryManagement/InventoryOtherShipDocType/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="gec3205096c47421da3b5d65c4077ac62"/>
+    <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g69cdd3fa70144968a43d1675a9f00fec"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.SourceSystemId"/>
+    <wt:datetime field="Searcher.LastUpdateTime" range="true"/>
+    <wt:textbox field="Searcher.Code"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Name"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.CreateBy"/>
+    <wt:textbox field="Searcher.UpdateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryOtherShipDocType/SearchInventoryOtherShipDocType"  id="G086fb7304c324494ae2d67750d09a0e7" search-panel-id="gridG086fb7304c324494ae2d67750d09a0e7"/>
+
+

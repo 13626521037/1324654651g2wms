@@ -1,0 +1,30 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryOtherReceivementVMs.InventoryOtherReceivementVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            @* <wt:display field="Entity.ErpID" disabled="true" /> *@
+            <wt:display field="Entity.DocNo" disabled="true" />
+            <wt:display field="Entity.BusinessDate" disabled="true" />
+            <wt:display field="Entity.IsScrap" disabled="true" />
+            <wt:display field="Entity.Memo" disabled="true" />
+            <wt:display field="Entity.CreateTime" disabled="true" />
+            <wt:display field="Entity.UpdateTime" disabled="true" />
+            <wt:display field="Entity.CreateBy" disabled="true" />
+        </wt:row>
+
+        <wt:container id="g4821285214">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryOtherReceivementLineInventoryOtherReceivementList" disabled="true" label-text="@Localizer["Page.其它入库单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

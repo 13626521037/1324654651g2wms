@@ -1,0 +1,20 @@
+﻿@model WMS.ViewModel.BaseData.BaseDepartmentVMs.BaseDepartmentListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Ge6781165a6ec4443bb4481d861fb3cd9" id="gridGe6781165a6ec4443bb4481d861fb3cd9">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.Code" />
+        <wt:textbox field="Searcher.Name" />
+        <wt:textbox field="Searcher.Organization" />
+        <wt:combobox field="Searcher.IsMFG" />
+        <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g8a7308818fc844cc88c50f46ef6094c5" />
+        <wt:textbox field="Searcher.SourceSystemId" />
+        <wt:datetime field="Searcher.LastUpdateTime" range="true" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseDepartment/SearchBaseDepartment" id="Ge6781165a6ec4443bb4481d861fb3cd9" search-panel-id="gridGe6781165a6ec4443bb4481d861fb3cd9" />
+
+

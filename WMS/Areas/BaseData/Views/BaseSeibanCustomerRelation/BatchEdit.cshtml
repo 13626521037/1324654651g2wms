@@ -1,0 +1,25 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseSeibanCustomerRelationVMs.BaseSeibanCustomerRelationBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseSeibanCustomerRelation/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.CustomerId"  item-url="/BaseData/BaseSeibanCustomerRelation/GetBaseCustomers" label-text="@Localizer["Page.客户"].Value" id="gb38bc6ac38a24d40931ec9abb24f638a"/>
+    <wt:textbox field="LinkedVM.RandomCode"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

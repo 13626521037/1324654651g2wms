@@ -1,0 +1,20 @@
+@using WMS.ViewModel
+@model WalkingTec.Mvvm.Mvc.Admin.ViewModels.FrameworkRoleVMs.FrameworkRoleMDVM
+
+<wt:form vm="@Model">
+    <wt:display field="Entity.RoleCode" />
+    <wt:display field="Entity.RoleName" />
+    <wt:textarea field="Entity.RoleRemark" disabled="true" />
+    <div style="margin: 20px;">分配的用户：</div>
+    <wt:row items-per-row="ItemsPerRowEnum.Two" style="margin-left:30px;">
+        @foreach (var item in Model.Users)
+        {
+            <div class="layui-col-md6" style="margin-bottom: 10px;">@item.ITCode.CodeCombinName(item.Name)</div>
+        }
+    </wt:row>
+    <wt:row align=" AlignEnum.Right">
+        <wt:closebutton />
+    </wt:row>
+</wt:form>
+
+<!-- WTM默认页面 Wtm buidin page-->

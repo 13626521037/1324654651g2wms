@@ -1,0 +1,38 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryTransferOutDirectVMs.InventoryTransferOutDirectVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryTransferOutDirect/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.ErpID"/>
+      <wt:datetime field="Entity.BusinessDate"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.DocTypeId"  item-url="/InventoryManagement/InventoryTransferOutDirect/GetInventoryTransferOutDirectDocTypes" label-text="@Localizer["Page.单据类型"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g58e703d7251846fd93180cb18e55e8db" multi-select="false"/>
+      <wt:textbox field="Entity.DocNo"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.TransInOrganizationId"  item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5fb56a8e8ac44216b27dc93bc34552b3" multi-select="false"/>
+      <wt:combobox field="Entity.TransInWhId"  item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g581c291983db47979005f435f2c01e82" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.TransOutWhId"  item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseWareHouses" label-text="@Localizer["Page.调出存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g460e6b6926504ccfb6a806cfc872c733" multi-select="false"/>
+      <wt:combobox field="Entity.TransOutOrganizationId"  item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseOrganizations" label-text="@Localizer["Page.调出组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gda9a03a63317443e8491528a5ebe18ad" multi-select="false"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

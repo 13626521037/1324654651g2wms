@@ -1,0 +1,22 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryMoveLocationVMs.InventoryMoveLocationListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Ge1d9cdadb5a14f0bbcc9f8ec6681bd42" id="gridGe1d9cdadb5a14f0bbcc9f8ec6681bd42">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:combobox field="Searcher.InWhLocationId"  item-url="/InventoryManagement/InventoryMoveLocation/GetBaseWhLocations" label-text="@Localizer["Page.入库库位"].Value" empty-text="@Localizer["Sys.All"]" id="g11da00d169df47ddbc591cb0b44055a9"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+    <wt:textbox field="Searcher.UpdateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryMoveLocation/SearchInventoryMoveLocation"  id="Ge1d9cdadb5a14f0bbcc9f8ec6681bd42" search-panel-id="gridGe1d9cdadb5a14f0bbcc9f8ec6681bd42"/>
+
+

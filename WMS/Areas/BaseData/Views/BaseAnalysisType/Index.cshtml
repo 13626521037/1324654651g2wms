@@ -1,0 +1,20 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseAnalysisTypeVMs.BaseAnalysisTypeListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G6dea0868a666465d822be8466b4be5f7" id="gridG6dea0868a666465d822be8466b4be5f7">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Code"/>
+    <wt:textbox field="Searcher.Name"/>
+    <wt:textbox field="Searcher.SourceSystemId"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.LastUpdateTime" range="true"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseAnalysisType/SearchBaseAnalysisType"  id="G6dea0868a666465d822be8466b4be5f7" search-panel-id="gridG6dea0868a666465d822be8466b4be5f7"/>
+
+

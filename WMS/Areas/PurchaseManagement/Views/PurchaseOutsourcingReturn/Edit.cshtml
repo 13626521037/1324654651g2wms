@@ -1,0 +1,43 @@
+﻿
+@model WMS.ViewModel.PurchaseManagement.PurchaseOutsourcingReturnVMs.PurchaseOutsourcingReturnVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/PurchaseManagement/PurchaseOutsourcingReturn/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.CreatePerson"/>
+      <wt:combobox field="Entity.OrganizationId"  item-url="/PurchaseManagement/PurchaseOutsourcingReturn/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g6568e0c8ecfb46848e05fc24fb2ddba8" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.BusinessDate"/>
+      <wt:datetime field="Entity.SubmitDate"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:textbox field="Entity.DocType"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.SupplierId"  item-url="/PurchaseManagement/PurchaseOutsourcingReturn/GetBaseSuppliers" label-text="@Localizer["Page.供应商"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5bee7777ee7043c5a9aad06df2a74d41" multi-select="false"/>
+      <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="g1a40b32872a44b70b77bb0f4d546cf8f" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SourceSystemId"/>
+      <wt:datetime field="Entity.LastUpdateTime"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

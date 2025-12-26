@@ -1,0 +1,40 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseCustomerVMs.BaseCustomerVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseCustomer/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.EnglishShortName"/>
+      <wt:combobox field="Entity.OrganizationId"  item-url="/BaseData/BaseCustomer/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g7f2d820ee3c14d288393f21933876423" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.IsEffective" empty-text="@Localizer["Sys.PleaseSelect"]" id="g2a6fe36098c343b7ae2792b5b617ffc9" multi-select="false"/>
+      <wt:textbox field="Entity.SourceSystemId"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.LastUpdateTime"/>
+      <wt:textbox field="Entity.Code"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Name"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.ShortName"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,22 @@
+﻿@model WMS.ViewModel.ProductionManagement.ProductionIssueVMs.ProductionIssueListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G2d76f7775684439db4e3cce938b7ec08" id="gridG2d76f7775684439db4e3cce938b7ec08">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/ProductionManagement/ProductionIssue/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g464f903289674f87aaaa87978d11696a" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:textbox field="Searcher.CreatePerson" label-text="ERP提交人" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g2864517900f24b1a99e819793e93b263" />
+        @* <wt:textbox field="Searcher.DocType" /> *@
+        @* <wt:datetime field="Searcher.SubmitDate" range="true" /> *@
+@*         <wt:textbox field="Searcher.SourceSystemId" />
+        <wt:datetime field="Searcher.LastUpdateTime" range="true" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/ProductionManagement/ProductionIssue/SearchProductionIssue" id="G2d76f7775684439db4e3cce938b7ec08" search-panel-id="gridG2d76f7775684439db4e3cce938b7ec08" />
+
+

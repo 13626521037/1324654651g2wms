@@ -1,0 +1,18 @@
+﻿@model WMS.ViewModel.BaseData.BaseSeibanCustomerRelationVMs.BaseSeibanCustomerRelationListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G8e2f50a268964be9adf9e8c4d2e609e3" id="gridG8e2f50a268964be9adf9e8c4d2e609e3">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.Code" label-text="@Localizer["Page.番号"].Value" />
+        <wt:textbox field="Searcher.Name" label-text="@Localizer["Page.客户编码"].Value" />
+        <wt:textbox field="Searcher.RandomCode" />
+        @*     <wt:textbox field="Searcher.SourceSystemId"/>
+    <wt:datetime field="Searcher.LastUpdateTime" range="true"/> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseSeibanCustomerRelation/SearchBaseSeibanCustomerRelation" id="G8e2f50a268964be9adf9e8c4d2e609e3" search-panel-id="gridG8e2f50a268964be9adf9e8c4d2e609e3" />
+
+

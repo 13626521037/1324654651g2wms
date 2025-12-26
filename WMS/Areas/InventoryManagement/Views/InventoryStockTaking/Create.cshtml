@@ -1,0 +1,101 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryStockTakingVMs.InventoryStockTakingVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<style>
+    .unclickable-div {
+    pointer-events: none;
+    opacity: 0.6; /* 可选：降低透明度，表示不可点击状态 */
+    }
+</style>
+<wt:container>
+    <wt:form vm="@Model" url="/InventoryManagement/InventoryStockTaking/Create">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:hidden field="Entity.ID" />
+            
+            <wt:hidden field="Entity.Status" />
+            <wt:textbox field="Entity.DocNo" disabled="true" empty-text="保存后自动生成" />
+            <wt:combobox field="Entity.WhId" item-url="/InventoryManagement/InventoryStockTaking/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gd81ea5d208b24e39888ba2ecdeae828a" multi-select="false" />
+            <wt:textbox field="Entity.Memo" />
+            <wt:submitbutton class="layui-btn layui-btn-sm" text="保存" style="height:30px;width:100px;line-height:30px;" />
+            @* <input id="add_location_btn" value="添加盘点库位" class="layui-btn layui-btn-sm" style="height:30px;width:100px;line-height:30px;" /> *@
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:hidden field="Entity.Dimension" />
+            @if (Model.LoginUserInfo.Roles.Any(x => x.RoleName == "超级管理员" || x.RoleName == "信息部管理员"))
+            {
+                <wt:combobox field="Entity.Mode" />
+            }
+            else
+            {
+                <wt:hidden field="Entity.Mode" />
+            }
+        </wt:row>
+        <div>（说明：盘点单保存后，存储地点不可修改。盘点单创建后，可添加盘点库位。添加盘点库位无需再点保存）</div>
+        <wt:container id="InventoryStockTaking_Create_Locations">
+            <!-- 此ID不能随便改，后台刷新列表会用到 -->
+            @* <wt:grid vm="@Model" url="/InventoryManagement/InventoryStockTaking/SearchSelectLocation" limit="10000" id="Ge3af4494df6a4123b2aeef1b8fba5d42" search-panel-id="gridGe3af4494df6a4123b2aeef1b8fba5d42" /> *@
+            <wt:grid height="-400" vm="InventoryStockTakingLocationsStockTakingList" limits="new int[] { 20, 100, 200, 1000, 5000 }" url="/InventoryManagement/InventoryStockTaking/GetStockTakingLocations" id="Ge3af4494df6a4123b2a12f1b8fba5d42" />
+        </wt:container>
+        @*     <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container> *@
+    </wt:form>
+    <script>
+        ff.RefreshGrid('LAY_app_body',0);   // 刷新父页面
+        if($('#InventoryStockTakingVM_Entity_DocNo').val() != '') {
+            $('div[name="Entity.WhId"]').addClass("unclickable-div");
+        }
+        // $("#save_btn").on('click', function () {
+        //     var data = {
+        //         ID: $('#InventoryStockTakingVM_Entity_ID').val(),
+        //         DocNo: $('#InventoryStockTakingVM_Entity_DocNo').val(),
+        //         WhId: $('div[name="Entity.WhId"] div.selected').attr('value'),
+        //         Memo: $('#InventoryStockTakingVM_Entity_Memo').val(),
+        //         Dimension: $('#InventoryStockTakingVM_Entity_Dimension').val(),
+        //         Status: $('#InventoryStockTakingVM_Entity_Status').val(),
+        //     };
+        //     console.log(data);
+        //     var loadIndex = layer.load(2);
+        //     $.post('/InventoryManagement/InventoryStockTaking/Create', { Entity: data }, function (res) {
+        //         console.log(res);
+        //         layer.close(loadIndex);
+        //         if (res.Success) {
+        //             $("#InventoryStockTakingVM_Entity_DocNo").val(res.Entity.DocNo);
+        //             $('#InventoryStockTakingVM_Entity_ID').val(res.Entity.ID);
+        //             layer.msg('保存成功', { icon: 1 });
+        //             ff.RefreshGrid('LAY_app_body',0);   // 刷新父页面
+        //             $('div[name="Entity.WhId"]').addClass("unclickable-div");   // 禁用“存储地点”选择
+        //             // parent.layer.closeAll();    // 关闭本页面
+        //             // ff.OpenDialog('/InventoryManagement/InventoryStockTaking/Edit?id=' + res.Entity.ID,'9d3d2612eb024a93bf785112e4165d4b','修改',1400,null, undefined,false);  // 重新打开修改页面。新增的情况下，无法修改子表关联的主表ID。所以重新打开
+        //         }
+        //         else{
+        //             layer.msg(res.Msg, { icon: 2 });
+        //         }
+        //     });
+        // });
+        // $("#add_location_btn").on('click', function () {
+        //     var url = "/InventoryManagement/InventoryStockTaking/SelectLocation";
+        //     var id = $('#InventoryStockTakingVM_Entity_ID').val();
+        //     if (id == '00000000-0000-0000-0000-000000000000' || id == '') {
+        //         layer.msg('请先保存盘点单', { icon: 2 });
+        //         return;
+        //     }
+        //     // var index = layer.open({
+        //     //   type: 2, // page 层类型
+        //     //   area: ['1000px', '700px'],
+        //     //   title: '选择盘点库位',
+        //     //   shade: 0.6, // 遮罩透明度
+        //     //   shadeClose: true, // 点击遮罩区域，关闭弹层
+        //     //   maxmin: true, // 允许全屏最小化
+        //     //   anim: 0, // 0-6 的动画形式，-1 不开启
+        //     //   content: url
+        //     // });
+        //     // layer.iframeSrc(index, url);
+        //     ff.OpenDialog(url,'b39877dc99fd4c76a789811a5ea60738','选择盘点库位',1200,600,{id: id},false);    // 必须使用框架内的方法。否则子页面的控件风格会显示不正常
+        // });
+    </script>
+</wt:container>
+
+

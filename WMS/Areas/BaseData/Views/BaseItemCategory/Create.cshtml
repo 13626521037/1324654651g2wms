@@ -1,0 +1,33 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseItemCategoryVMs.BaseItemCategoryVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseItemCategory/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.OrganizationId"  item-url="/BaseData/BaseItemCategory/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g8a5ba716ba9d45eab49e8713df90e5b2" multi-select="false"/>
+      <wt:textbox field="Entity.Code"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Name"/>
+      <wt:combobox field="Entity.AnalysisTypeId"  item-url="/BaseData/BaseItemCategory/GetBaseAnalysisTypes" label-text="@Localizer["Page.分析类别"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gdefba9f9e20e42ba87ad685710094314" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.DepartmentId"  item-url="/BaseData/BaseItemCategory/GetBaseDepartments" label-text="@Localizer["Page.生产部门"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g81b38e2ff92a468b8df864047c6fe043" multi-select="false"/>
+      <wt:textbox field="Entity.SourceSystemId"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.LastUpdateTime"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

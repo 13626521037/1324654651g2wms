@@ -1,0 +1,34 @@
+﻿
+@model WMS.ViewModel.ProductionManagement.ProductionRcvRptVMs.ProductionRcvRptBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/ProductionManagement/ProductionRcvRpt/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.ErpID"/>
+    <wt:combobox field="LinkedVM.OrganizationId"  item-url="/ProductionManagement/ProductionRcvRpt/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" id="g76d32324106f4b5798fead33d33c3da7"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:datetime field="LinkedVM.BusinessDate"/>
+    <wt:textbox field="LinkedVM.DocNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.WhId"  item-url="/ProductionManagement/ProductionRcvRpt/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" id="g78e35c7baae749c8a7f87a847e8f298f"/>
+    <wt:combobox field="LinkedVM.OrderWhId"  item-url="/ProductionManagement/ProductionRcvRpt/GetBaseWareHouses" label-text="@Localizer["Page.订单存储地点"].Value" id="gcf9025323a844e63bdd304a70990a9df"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.Status" id="g192c91016cc245e191fc13e7caf5738a"/>
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

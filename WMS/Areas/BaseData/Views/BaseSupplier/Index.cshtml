@@ -1,0 +1,31 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseSupplierVMs.BaseSupplierListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Gde1dbdb970d34e50afafc8c15a34de20" id="gridGde1dbdb970d34e50afafc8c15a34de20">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Code"/>
+    <wt:textbox field="Searcher.Name"/>
+    <wt:textbox field="Searcher.ShortName"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.OrganizationId"  item-url="/BaseData/BaseSupplier/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g86f989ba3b1543bebec68576ccaa9308"/>
+    <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g7754fa7e7ada4c6c9fec4af47e39a746"/>
+    <wt:textbox field="Searcher.SourceSystemId"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.LastUpdateTime" range="true"/>
+@*     <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:datetime field="Searcher.UpdateTime" range="true"/> *@
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+@*     <wt:textbox field="Searcher.CreateBy"/>
+    <wt:textbox field="Searcher.UpdateBy"/> *@
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseSupplier/SearchBaseSupplier"  id="Gde1dbdb970d34e50afafc8c15a34de20" search-panel-id="gridGde1dbdb970d34e50afafc8c15a34de20"/>
+
+

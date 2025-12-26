@@ -1,0 +1,60 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeVMs.KnifeVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.CreatedDate" disabled="false" />
+            <wt:display field="Entity.SerialNumber" disabled="false" />
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.Status" disabled="false" />
+            <wt:display field="Entity.CurrentCheckOutBy.Name"  disabled="false" label-text="@Localizer["Page.当前领用人"].Value" />
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.HandledBy.Name" disabled="false" label-text="@Localizer["Page.经办人"].Value"/>
+      <wt:display field="Entity.LastOperationDate" disabled="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.WhLocation.Code" disabled="false" label-text="@Localizer["Page.库位"].Value"/>
+      <wt:display field="Entity.GrindCount" disabled="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.InitialLife" disabled="false"/>
+      <wt:display field="Entity.CurrentLife" disabled="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.TotalUsedDays" disabled="false"/>
+      <wt:display field="Entity.RemainingUsedDays" disabled="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.ItemMaster.Code" disabled="false" label-text="@Localizer["Page.料品"].Value"/>
+      <wt:display field="Entity.MiscShipLineID" disabled="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateTime" disabled="false"/>
+      <wt:display field="Entity.UpdateTime" disabled="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateBy" disabled="false"/>
+      <wt:display field="Entity.UpdateBy" disabled="false"/>
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:display field="Entity.InStockStatus" disabled="false" />
+        <wt:display field="Entity.ActualItemCode" disabled="false" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:display field="Entity.GrindKnifeNO" disabled="false" />
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

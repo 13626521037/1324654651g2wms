@@ -1,0 +1,27 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeGrindRequestVMs.KnifeGrindRequestVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/KnifeManagement/KnifeGrindRequest/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="gffcbf64e8d094e62b833b47e4029d121" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.HandledById"  item-url="/KnifeManagement/KnifeGrindRequest/GetFrameworkUsers" label-text="@Localizer["Page.经办人"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g176b3ef5fa1243ecb58d52015934d0eb" multi-select="false"/>
+      <wt:datetime field="Entity.ApprovedTime"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400"  vm="KnifeGrindRequestLineKnifeGrindRequestList" label-text="@Localizer["Page.刀具修磨申请单"].Value" hide-label="true"/>
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

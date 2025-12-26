@@ -1,0 +1,27 @@
+﻿@model WMS.ViewModel.BaseData.BaseWhAreaVMs.BaseWhAreaVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseWhArea/Create">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:combobox field="Entity.WareHouseId" item-url="/BaseData/BaseWhArea/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g1b0c095569a9422da222b77177cbbada" multi-select="false" />
+            <wt:combobox field="Entity.AreaType" empty-text="@Localizer["Sys.PleaseSelect"]" id="g688a3ce595354d1f9c643169b4a0f562" multi-select="false" />
+            <wt:textbox field="Entity.Code" />
+            <wt:textbox field="Entity.Name" />
+            <wt:combobox field="Entity.IsEffective" empty-text="@Localizer["Sys.PleaseSelect"]" default-value="Effective" id="g76467871b0644de28f335eb46bc3553c" multi-select="false" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

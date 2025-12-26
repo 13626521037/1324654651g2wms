@@ -1,0 +1,34 @@
+﻿@model WMS.ViewModel.PurchaseManagement.PurchaseOutsourcingIssueVMs.PurchaseOutsourcingIssueVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+            <wt:display field="Entity.Supplier.Name" label-text="@Localizer["Page.供应商"].Value" />
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.BusinessDate" />
+            <wt:display field="Entity.SubmitDate" />
+            <wt:display field="Entity.CreatePerson" label-text="@Localizer["Page.ERP提交人"].Value" />
+@*             <wt:display field="Entity.SourceSystemId" disabled="true" />
+            <wt:display field="Entity.LastUpdateTime" disabled="true" /> *@
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+        <wt:container id="g9660382784">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="PurchaseOutsourcingIssueLineOutsourcingIssueList" disabled="true" label-text="@Localizer["Page.委外发料单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

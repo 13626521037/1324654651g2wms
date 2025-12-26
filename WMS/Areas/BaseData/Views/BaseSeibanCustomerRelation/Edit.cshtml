@@ -1,0 +1,35 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseSeibanCustomerRelationVMs.BaseSeibanCustomerRelationVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseSeibanCustomerRelation/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.CustomerId"  item-url="/BaseData/BaseSeibanCustomerRelation/GetBaseCustomers" label-text="@Localizer["Page.客户"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gdb762e47cc4b4ceb9c9be7bfb5d0c742" multi-select="false"/>
+      <wt:textbox field="Entity.RandomCode"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SourceSystemId"/>
+      <wt:datetime field="Entity.LastUpdateTime"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Code"/>
+      <wt:textbox field="Entity.Name"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

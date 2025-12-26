@@ -1,0 +1,37 @@
+﻿
+@model WMS.ViewModel.SalesManagement.SalesShipVMs.SalesShipBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/SalesManagement/SalesShip/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CreatePerson"/>
+    <wt:combobox field="LinkedVM.OrganizationId"  item-url="/SalesManagement/SalesShip/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" id="g880778bff67044f8a26ace38cc66bf74"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:datetime field="LinkedVM.BusinessDate"/>
+    <wt:datetime field="LinkedVM.SubmitDate"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocType"/>
+    <wt:textbox field="LinkedVM.Operators"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.CustomerId"  item-url="/SalesManagement/SalesShip/GetBaseCustomers" label-text="@Localizer["Page.客户"].Value" id="g577eef73e40e489faae970a33cd9c0da"/>
+    <wt:combobox field="LinkedVM.Status" id="gd733ee4196f74b14b24f528a3a274866"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

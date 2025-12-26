@@ -1,0 +1,32 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeTransferInVMs.KnifeTransferInVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/KnifeManagement/KnifeTransferIn/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="g740dfa438705448a8ee9c5bacbaf8b0f" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.ApprovedTime"/>
+      <wt:combobox field="Entity.HandledById"  item-url="/KnifeManagement/KnifeTransferIn/GetFrameworkUsers" label-text="@Localizer["Page.经办人"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g1d7b5dd5918349368ce135a478410c47" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Memo"/>
+      <wt:textbox field="Entity.TransferOutDocNo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400"  vm="KnifeTransferInLineKnifeTransferInList1" label-text="@Localizer["Page.刀具调入单"].Value" hide-label="true"/>
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

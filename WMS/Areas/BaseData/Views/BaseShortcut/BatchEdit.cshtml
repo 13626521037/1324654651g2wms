@@ -1,0 +1,22 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseShortcutVMs.BaseShortcutBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseShortcut/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:tree field="LinkedVM.MenuId"  item-url="/BaseData/BaseShortcut/GetFrameworkMenus?istree=true" label-text="@Localizer["Sys.Menu"].Value"/>
+    <wt:combobox field="LinkedVM.UserId"  item-url="/BaseData/BaseShortcut/GetFrameworkUsers" label-text="@Localizer["_Admin.User"].Value" id="gb7ed0898e5364938891a50ba967e3305"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

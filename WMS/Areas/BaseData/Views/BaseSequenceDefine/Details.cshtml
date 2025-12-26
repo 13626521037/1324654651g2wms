@@ -1,0 +1,36 @@
+﻿@model WMS.ViewModel.BaseData.BaseSequenceDefineVMs.BaseSequenceDefineVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.Code" />
+            <wt:display field="Entity.Name" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.IsEffective" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.CreateTime" />
+            <wt:display field="Entity.CreateBy" />
+            <wt:display field="Entity.UpdateTime" />
+            <wt:display field="Entity.UpdateBy" />
+        </wt:row>
+
+        <wt:row items-per-row="ItemsPerRowEnum.One" id="g1027774055">
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container id="g2157941519">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="BaseSequenceDefineLineSequenceDefineList2" disabled="true" label-text="@Localizer["Page.批次规则定义主表"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

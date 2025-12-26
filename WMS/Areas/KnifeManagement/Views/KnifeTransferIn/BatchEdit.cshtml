@@ -1,0 +1,29 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeTransferInVMs.KnifeTransferInBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/KnifeManagement/KnifeTransferIn/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.Status" id="g1f261fddee0b4b0799860d200c0925b4"/>
+    <wt:datetime field="LinkedVM.ApprovedTime"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.HandledById"  item-url="/KnifeManagement/KnifeTransferIn/GetFrameworkUsers" label-text="@Localizer["Page.经办人"].Value" id="g5bbb03c4f3da429d9da5838c473ad5cf"/>
+    <wt:textbox field="LinkedVM.Memo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.TransferOutDocNo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

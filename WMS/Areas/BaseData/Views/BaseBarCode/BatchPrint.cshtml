@@ -1,0 +1,20 @@
+﻿@model WMS.ViewModel.BaseData.BaseBarCodeVMs.BaseBarCodeBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseBarCode/DoBatchPrint?1=1">
+    <div style="margin-bottom:10px;"> 批量打印 </div>
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:combobox field="SelectedPrintModule" items="PrintModules" />
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+        <wt:submitbutton text="打印" />
+        @* <wt:closebutton text="@Localizer["Sys.Close"].Value" /> *@
+    </wt:container>
+
+    <wt:hidden field="Ids" />
+    <wt:grid vm="ListVM" use-local-data="true" height="-400" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

@@ -1,0 +1,41 @@
+﻿@using WMS.Model
+@model List<Help>
+<style>
+    .help_p{
+        line-height: 30px;
+    }
+    .help_li{
+        margin-top: 0;
+    }
+
+    .help_ul {
+        padding: 0 0 0 15px;
+    }
+</style>
+<div class="layui-timeline" style="padding: 20px;padding-left:30px;">
+    @foreach (var item in Model)
+    {
+        <div class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis"></i>
+            <div class="layui-timeline-content layui-text help_p">
+                <h3 class="layui-timeline-title">@item.Title</h3>
+                @for(int i = 0; i < item.Contents.Count; i++)
+                {
+                    @* <p class="help_p">@Html.Raw(@item.Contents[i])</p> *@
+                    @Html.Raw(@item.Contents[i].Text)
+                    <br/>
+                    if (item.Contents[i].Contents != null && item.Contents[i].Contents.Count > 0)
+                    {
+                        <ul class="help_ul">
+                            @for (int j = 0; j < item.Contents[i].Contents.Count; j++)  // 当前只支持两级嵌套。可以再写for循环，实现多级嵌套。
+                            {
+                                <li class="help_li">@Html.Raw(item.Contents[i].Contents[j].Text)</li>
+                            }
+                        </ul>
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>
+

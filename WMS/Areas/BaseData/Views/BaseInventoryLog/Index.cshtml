@@ -1,0 +1,23 @@
+﻿@model WMS.ViewModel.BaseData.BaseInventoryLogVMs.BaseInventoryLogListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G4d5712715fe343f6a5b970a9b51b6007" id="gridG4d5712715fe343f6a5b970a9b51b6007">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:combobox field="Searcher.OperationType" empty-text="@Localizer["Sys.All"]" id="g77e1d0ee024a4e8687e7f76d8f5736fd" />
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:textbox field="Searcher.Sn" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+    </wt:row>
+    @* <wt:textbox field="Searcher.Qty" /> *@
+    @* <wt:combobox field="Searcher.SourceInventoryId" item-url="/BaseData/BaseInventoryLog/GetBaseInventorys" label-text="@Localizer["Page.来源库存信息"].Value" empty-text="@Localizer["Sys.All"]" id="g28be2b429b874b6d860298db713a3308" /> *@
+    @* <wt:combobox field="Searcher.TargetInventoryId" item-url="/BaseData/BaseInventoryLog/GetBaseInventorys" label-text="@Localizer["Page.目标库存信息"].Value" empty-text="@Localizer["Sys.All"]" id="g60a18bf634f1422da3a6a7e98e3e54a0" /> *@
+    @* <wt:datetime field="Searcher.UpdateTime" range="true" /> *@
+    @* <wt:textbox field="Searcher.UpdateBy" /> *@
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseInventoryLog/SearchBaseInventoryLog" id="G4d5712715fe343f6a5b970a9b51b6007" search-panel-id="gridG4d5712715fe343f6a5b970a9b51b6007" />
+
+

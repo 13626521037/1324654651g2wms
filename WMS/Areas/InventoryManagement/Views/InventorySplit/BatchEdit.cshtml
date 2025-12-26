@@ -1,0 +1,30 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventorySplitVMs.InventorySplitBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/InventoryManagement/InventorySplit/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocNo"/>
+    <wt:combobox field="LinkedVM.OldInvId"  item-url="/InventoryManagement/InventorySplit/GetBaseInventorys" label-text="@Localizer["Page.原库存信息"].Value" id="gcdaf2405666e4f9d84f5bbf5c1b0ac7e"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.NewInvId"  item-url="/InventoryManagement/InventorySplit/GetBaseInventorys" label-text="@Localizer["Page.新库存信息"].Value" id="gc553e9897f024b8c8d58cbcf408acefd"/>
+    <wt:textbox field="LinkedVM.OrigQty"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.SplitQty"/>
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

@@ -1,0 +1,29 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryPalletVirtualVMs.InventoryPalletVirtualBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/InventoryManagement/InventoryPalletVirtual/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Code"/>
+    <wt:combobox field="LinkedVM.Status" id="g131e1c38aefa4768b720bdeab3b38a84"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.LocationId"  item-url="/InventoryManagement/InventoryPalletVirtual/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" id="g8ddb5095eccb496d81112d7f1139a414"/>
+    <wt:textbox field="LinkedVM.SysVersion"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

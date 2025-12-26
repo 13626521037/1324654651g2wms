@@ -1,0 +1,37 @@
+﻿@model WMS.ViewModel.BaseData.BaseSupplierVMs.BaseSupplierVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseSupplier/Edit">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.Code" disabled="true" />
+            <wt:textbox field="Entity.Name" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.ShortName" disabled="true" />
+            <wt:combobox field="Entity.OrganizationId" disabled="true" item-url="/BaseData/BaseSupplier/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="ge395bf36e41c492ca648f7a11685ecac" multi-select="false" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:combobox field="Entity.IsEffective" disabled="true" empty-text="@Localizer["Sys.PleaseSelect"]" id="g35c07e0875f0460685b57befee791dd0" multi-select="false" />
+            <wt:textbox field="Entity.SourceSystemId" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:datetime field="Entity.LastUpdateTime" disabled="true" type="DateTime" />
+        </wt:row>
+
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+        <wt:hidden field="Entity.ID" />
+    </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,34 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryOtherShipVMs.InventoryOtherShipVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            @* <wt:display field="Entity.ErpID" /> *@
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType.Name" label-text="@Localizer["Page.单据类型"].Value" />
+            <wt:display field="Entity.BusinessDate" />
+            <wt:display field="Entity.BenefitOrganization.Name" label-text="@Localizer["Page.受益组织"].Value" />
+            <wt:display field="Entity.BenefitDepartment.Name" label-text="@Localizer["Page.受益部门"].Value" />
+            <wt:display field="Entity.BenefitPerson.Name" label-text="@Localizer["Page.受益人"].Value" />
+            <wt:display field="Entity.Wh.Name" label-text="@Localizer["Page.存储地点"].Value" />
+            <wt:display field="Entity.OwnerOrganization.Name" label-text="@Localizer["Page.货主组织"].Value" />
+            <wt:display field="Entity.CreateTime" />
+            <wt:display field="Entity.CreateBy" />
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container id="g2772087002">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryOtherShipLineInventoryOtherShipList" disabled="true" label-text="@Localizer["Page.其它出库单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

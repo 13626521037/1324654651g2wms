@@ -1,0 +1,29 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryFreezeVMs.InventoryFreezeVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.Reason" />
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:display field="Entity.CreateTime" />
+            <wt:display field="Entity.CreateBy" />
+        </wt:row>
+
+        <wt:container id="g3665095237">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryFreezeLineInventoryFreezeList2" disabled="true" label-text="@Localizer["Page.库存冻结单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

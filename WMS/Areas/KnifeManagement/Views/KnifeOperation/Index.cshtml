@@ -1,0 +1,33 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeOperationVMs.KnifeOperationListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G55d30a2ec0254940bcd84ad3a5cdc302" id="gridG55d30a2ec0254940bcd84ad3a5cdc302">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.KnifeId" item-url="/KnifeManagement/KnifeOperation/GetKnifes" label-text="刀具" empty-text="@Localizer["Sys.All"]" id="gc9184778e68740bcb4242f9c47c1a2d1" />
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:combobox field="Searcher.OperationType" empty-text="@Localizer["Sys.All"]" id="ge06fe446582843d793da5623a10322ce"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.OperationTime" range="true"/>
+        <wt:combobox field="Searcher.OperationById" item-url="/KnifeManagement/KnifeOperation/GetBaseOperators" label-text="操作人" empty-text="@Localizer["Sys.All"]" id="gfbf7d2b0bad244aab8a13f5df9c6a5f2" />
+        <wt:combobox field="Searcher.HandledById" item-url="/KnifeManagement/KnifeOperation/GetFrameworkUsers" label-text="经办人" empty-text="@Localizer["Sys.All"]" id="g13f55d5e9b9246779596eadc8f32b8cb" />
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.UsedDays"/>
+    <wt:textbox field="Searcher.RemainingDays"/>
+    <wt:combobox field="Searcher.WhLocationId"  item-url="/KnifeManagement/KnifeOperation/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" empty-text="@Localizer["Sys.All"]" id="gc85136f8feca47ff9309eb819b8ff80b"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.GrindNum"/>
+        <wt:combobox field="Searcher.WareHouseId" item-url="/KnifeManagement/KnifeOperation/GetBaseWareHouses" label-text="存储地点" empty-text="@Localizer["Sys.All"]"  />
+
+  </wt:row>
+
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/KnifeManagement/KnifeOperation/SearchKnifeOperation"  id="G55d30a2ec0254940bcd84ad3a5cdc302" search-panel-id="gridG55d30a2ec0254940bcd84ad3a5cdc302"/>
+
+

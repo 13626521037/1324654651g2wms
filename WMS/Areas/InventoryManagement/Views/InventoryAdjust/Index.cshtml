@@ -1,0 +1,18 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryAdjustVMs.InventoryAdjustListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Ga29e02fbfd3f4cf8b0e92adaea3203d7" id="gridGa29e02fbfd3f4cf8b0e92adaea3203d7">
+  <wt:row  items-per-row="ItemsPerRowEnum.Four">
+    <wt:combobox field="Searcher.StockTakingId"  item-url="/InventoryManagement/InventoryAdjust/GetInventoryStockTakings" label-text="@Localizer["Page.盘点单"].Value" empty-text="@Localizer["Sys.All"]" id="g4baacf29030e4fb1bd356bc7fb5a2a19"/>
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryAdjust/SearchInventoryAdjust"  id="Ga29e02fbfd3f4cf8b0e92adaea3203d7" search-panel-id="gridGa29e02fbfd3f4cf8b0e92adaea3203d7"/>
+
+

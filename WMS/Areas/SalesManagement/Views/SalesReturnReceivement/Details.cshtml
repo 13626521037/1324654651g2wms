@@ -1,0 +1,39 @@
+﻿@model WMS.ViewModel.SalesManagement.SalesReturnReceivementVMs.SalesReturnReceivementVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+            <wt:display field="Entity.Customer.Name" label-text="@Localizer["Page.客户"].Value" />
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.BusinessDate" />
+            <wt:display field="Entity.SubmitDate" />
+            <wt:display field="Entity.CreatePerson" label-text="ERP提交人" />
+@*             <wt:display field="Entity.SourceSystemId" disabled="true" />
+            <wt:display field="Entity.LastUpdateTime" disabled="true" />
+            <wt:display field="Entity.CreateTime" disabled="true" />
+            <wt:display field="Entity.UpdateTime" disabled="true" />
+            <wt:display field="Entity.CreateBy" disabled="true" />
+            <wt:display field="Entity.UpdateBy" disabled="true" /> *@
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container id="g6459145386">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="SalesReturnReceivementLineReturnReceivementList" disabled="true" label-text="@Localizer["Page.退回收货单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

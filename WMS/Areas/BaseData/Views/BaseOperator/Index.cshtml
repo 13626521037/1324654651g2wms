@@ -1,0 +1,26 @@
+﻿@model WMS.ViewModel.BaseData.BaseOperatorVMs.BaseOperatorListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Ge4b29962ddcd495c87c406bad0b74c44" id="gridGe4b29962ddcd495c87c406bad0b74c44">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.Code" />
+        <wt:textbox field="Searcher.Name" />
+        <wt:textbox field="Searcher.JobID" />
+        <wt:textbox field="Searcher.Department" />
+        <wt:textbox field="Searcher.OAAccount" />
+        <wt:textbox field="Searcher.IDCard" />
+        <wt:textbox field="Searcher.TempAuthCode" />
+        <wt:datetime field="Searcher.TACExpired" range="true" label-text="授权失效时间" />
+        @* <wt:combobox field="Searcher.DepartmentId" item-url="/BaseData/BaseOperator/GetBaseDepartments" label-text="@Localizer["Page.部门"].Value" empty-text="@Localizer["Sys.All"]" id="gf1c36a39eb9f48d68c96a8eca0f60882" /> *@
+        <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="gb2966f35c92047bea7f5ccfb0d657376" />
+        <wt:textbox field="Searcher.Phone" />
+        <wt:textbox field="Searcher.SourceSystemId" />
+        <wt:datetime field="Searcher.LastUpdateTime" range="true" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseOperator/SearchBaseOperator" id="Ge4b29962ddcd495c87c406bad0b74c44" search-panel-id="gridGe4b29962ddcd495c87c406bad0b74c44" />
+
+

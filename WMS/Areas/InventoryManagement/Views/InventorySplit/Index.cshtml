@@ -1,0 +1,17 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventorySplitVMs.InventorySplitListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G291edfdc67ac49ffaff1fa9141532bb2" id="gridG291edfdc67ac49ffaff1fa9141532bb2">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventorySplit/SearchInventorySplit"  id="G291edfdc67ac49ffaff1fa9141532bb2" search-panel-id="gridG291edfdc67ac49ffaff1fa9141532bb2"/>
+
+

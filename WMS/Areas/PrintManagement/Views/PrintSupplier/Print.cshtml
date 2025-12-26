@@ -1,0 +1,42 @@
+﻿@model WMS.ViewModel.PrintManagement.PrintSupplierVMs.PrintSupplierVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/PrintManagement/PrintSupplier/DoPrint">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.DocNo" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.DocLineNo" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.Code" label-text="料号" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.Name" label-text="品名" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.SPECS" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.StockUnit.Name" label-text="单位" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.ValidQty" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Weight" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.BatchNumber" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Seiban" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.SeibanRandom" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Supplier.Name" required="false" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Item.Description" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:textbox field="Entity.PrintQty" />
+            <wt:textbox field="Entity.PackingQty" />
+            <wt:combobox field="SelectedPrintModule" items="PrintModules" />
+        </wt:row>
+        <wt:hidden field="Entity.ID" />
+        <wt:hidden field="Entity.ItemId" />
+        <wt:hidden field="Entity.SupplierId" />
+        <wt:hidden field="Entity.Qty" />
+        <wt:hidden field="Entity.ReceivedQty" />
+        <wt:container align="AlignEnum.Right" style="margin-top:50px">
+            <wt:submitbutton text="打印" submit-url="/PrintManagement/PrintSupplier/DoPrint?type=1" />
+            <wt:submitbutton text="PDF自适应打印" submit-url="/PrintManagement/PrintSupplier/DoPrint?type=2" />
+            @* <wt:closebutton text="@Localizer["Sys.Close"].Value" /> *@
+        </wt:container>
+    </wt:form>
+</wt:container>
+
+

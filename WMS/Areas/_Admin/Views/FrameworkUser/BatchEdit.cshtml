@@ -1,0 +1,34 @@
+﻿
+@model WMS.ViewModel._Admin.FrameworkUserVMs.FrameworkUserBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/_Admin/FrameworkUser/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Email"/>
+    <wt:combobox field="LinkedVM.Gender" id="g8a455239b1604a2297f5f7421d05c9a6"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CellPhone"/>
+    <wt:textbox field="LinkedVM.HomePhone"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Address"/>
+    <wt:textbox field="LinkedVM.ZipCode"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.SelectedFrameworkUserRolesIDs"  item-url="/_Admin/FrameworkUser/GetFrameworkRoles" id="gba8b9cef4f2147dfb96b6bb7866df049" multi-select="true"/>
+    <wt:combobox field="LinkedVM.SelectedFrameworkUserGroupsIDs"  item-url="/_Admin/FrameworkUser/GetFrameworkGroups" id="gc7de15eec4f649369b90f61f99379805" multi-select="true"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

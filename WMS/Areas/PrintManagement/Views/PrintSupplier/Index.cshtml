@@ -1,0 +1,28 @@
+﻿@model WMS.ViewModel.PrintManagement.PrintSupplierVMs.PrintSupplierListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G4cf761832ed64e24845e2d4fb3982914" id="gridG4cf761832ed64e24845e2d4fb3982914">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.DocNo" empty-text="右模糊匹配" />
+        <wt:textbox field="Searcher.ItemCode" empty-text="精准匹配，请输入完整料号" />
+        @* <wt:combobox field="Searcher.SupplierId" item-url="/PrintManagement/PrintSupplier/GetBaseSuppliers" label-text="@Localizer["Page.供应商"].Value" empty-text="@Localizer["Sys.All"]" id="g75f6a2f5a37d47238206b8f124023cd0" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/PrintManagement/PrintSupplier/SearchPrintSupplier" id="G4cf761832ed64e24845e2d4fb3982914" search-panel-id="gridG4cf761832ed64e24845e2d4fb3982914" />
+
+
+<script>
+    $("a[issearchbutton]").on('click', function () {
+        //alert();
+        var searchbtn = $(this);
+        searchbtn.css("pointer-events", "none");
+        searchbtn.css("background-color", "gray");
+        setTimeout(function () {
+            searchbtn.css("pointer-events", "");
+            searchbtn.css("background-color", "");
+        }, 2000);
+    });
+</script>

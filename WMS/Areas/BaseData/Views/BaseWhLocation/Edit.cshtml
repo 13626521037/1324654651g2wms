@@ -1,0 +1,28 @@
+﻿@model WMS.ViewModel.BaseData.BaseWhLocationVMs.BaseWhLocationVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseWhLocation/Edit">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:combobox field="WareHouseId" disabled="true" item-url="/BaseData/BaseWhLocation/GetBaseWh" trigger-url="/BaseData/BaseWhLocation/GetBaseWhAreas" link-id="gd60b73f1d3b54211a538b6de5c74fe8a" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" multi-select="false" />
+            <wt:combobox field="Entity.WhAreaId" disabled="true" item-url="/BaseData/BaseWhLocation/GetBaseWhAreas" label-text="@Localizer["Page.库区"].Value" empty-text="请先选择存储地点" id="gd60b73f1d3b54211a538b6de5c74fe8a" multi-select="false" />
+            <wt:combobox field="Entity.AreaType" disabled="true" empty-text="@Localizer["Sys.PleaseSelect"]" id="gec18359a6b0742e2a30e1a0868ab5a75" multi-select="false" />
+            <wt:textbox field="Entity.Code" disabled="true" />
+            <wt:textbox field="Entity.Name" />
+            <wt:combobox field="Entity.Locked" disabled="true" />
+            <wt:combobox field="Entity.IsEffective" empty-text="@Localizer["Sys.PleaseSelect"]" id="g2a2b7e6b2eee4ccf8736e480584b81ce" multi-select="false" />
+            <wt:textarea field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+        <wt:hidden field="Entity.ID" />
+    </wt:form>
+
+</wt:container>
+
+

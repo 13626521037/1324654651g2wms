@@ -1,0 +1,24 @@
+﻿@model WMS.ViewModel.BaseData.BaseSequenceRecordsVMs.BaseSequenceRecordsListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G2cbaebf01f7145628649cebe7d55139b" id="gridG2cbaebf01f7145628649cebe7d55139b">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.SequenceDefineId" item-url="/BaseData/BaseSequenceRecords/GetBaseSequenceDefines" label-text="批次规则定义" empty-text="@Localizer["Sys.All"]" id="gad0ec2e0ebf0451ea020e9bdedbcf191" />
+        <wt:textbox field="Searcher.SegmentFlag" />
+        @* <wt:textbox field="Searcher.SerialValue" /> *@
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+@*         <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:datetime field="Searcher.UpdateTime" range="true" /> *@
+        @* <wt:textbox field="Searcher.CreateBy" /> *@
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        @* <wt:textbox field="Searcher.UpdateBy" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseSequenceRecords/SearchBaseSequenceRecords" id="G2cbaebf01f7145628649cebe7d55139b" search-panel-id="gridG2cbaebf01f7145628649cebe7d55139b" />
+
+

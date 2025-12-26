@@ -1,0 +1,49 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeOperationVMs.KnifeOperationVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Knife.SerialNumber" disabled="true" label-text="@Localizer["Page.刀具"].Value"/>
+      <wt:display field="Entity.DocNo" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.OperationType" disabled="true"/>
+      <wt:display field="Entity.OperationTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.OperationBy.Name" disabled="true" label-text="@Localizer["Page.操作人"].Value"/>
+      <wt:display field="Entity.HandledBy.Name" disabled="true" label-text="@Localizer["Page.经办人"].Value"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.UsedDays" disabled="true"/>
+      <wt:display field="Entity.RemainingDays" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.WhLocation.Code" disabled="true" label-text="@Localizer["Page.库位"].Value"/>
+      <wt:display field="Entity.GrindNum" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.U9SourceLineID" disabled="true"/>
+      <wt:display field="Entity.CreateTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.UpdateTime" disabled="true"/>
+      <wt:display field="Entity.CreateBy" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.UpdateBy" disabled="true"/>
+      <wt:display field="Entity.WhLocation.WhArea.WareHouse.Name" label-text="存储地点"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

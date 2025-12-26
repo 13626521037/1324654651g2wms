@@ -1,0 +1,52 @@
+﻿
+@model WMS.ViewModel.PrintManagement.PrintSupplierVMs.PrintSupplierVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.DocNo" disabled="true"/>
+      <wt:display field="Entity.DocLineNo" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Item.SourceSystemId" disabled="true" label-text="@Localizer["Page.料品"].Value"/>
+      <wt:display field="Entity.Qty" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.ReceivedQty" disabled="true"/>
+      <wt:display field="Entity.ValidQty" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.BatchNumber" disabled="true"/>
+      <wt:display field="Entity.Seiban" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.SeibanRandom" disabled="true"/>
+      <wt:display field="Entity.Weight" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Supplier.SourceSystemId" disabled="true" label-text="@Localizer["Page.供应商"].Value"/>
+      <wt:display field="Entity.SyncSupplier" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.SyncItem" disabled="true"/>
+      <wt:display field="Entity.CreateTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.UpdateTime" disabled="true"/>
+      <wt:display field="Entity.CreateBy" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.UpdateBy" disabled="true"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,41 @@
+﻿@model WMS.ViewModel.BaseData.BaseWareHouseVMs.BaseWareHouseVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseWareHouse/Edit">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.Code" disabled="true" />
+            <wt:textbox field="Entity.Name" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:combobox field="Entity.OrganizationId" disabled="true" item-url="/BaseData/BaseWareHouse/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g4a1cd40a99f84331ab383e388ffcfd56" multi-select="false" />
+            <wt:combobox field="Entity.IsProduct" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:combobox field="Entity.ShipType" disabled="true" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5e4e0d0a9da84f898dc9a0a094b216f8" multi-select="false" />
+            <wt:switch field="Entity.IsStacking" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:combobox field="Entity.IsEffective" disabled="true" empty-text="@Localizer["Sys.PleaseSelect"]" id="g9db615679a7348b0ad1c66fb9f5f6fc8" multi-select="false" />
+            <wt:textbox field="Entity.SourceSystemId" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:datetime field="Entity.LastUpdateTime" disabled="true" type="DateTime" />
+        </wt:row>
+
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+        <wt:hidden field="Entity.ID" />
+    </wt:form>
+
+</wt:container>
+
+

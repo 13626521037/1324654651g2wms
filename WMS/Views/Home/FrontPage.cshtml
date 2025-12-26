@@ -1,0 +1,449 @@
+﻿@model WalkingTec.Mvvm.Core.BaseVM
+@using System.Text.Json
+<link href="~/sitecss/frontpage.min.css" rel="stylesheet" />
+<style>
+    :root {
+        --primary: #3498db;
+        --secondary: #2c3e50;
+        --success: #2ecc71;
+        --warning: #f39c12;
+        --danger: #e74c3c;
+        --light: #ecf0f1;
+        --dark: #34495e;
+        --gray: #95a5a6;
+    }
+
+    .layui-card-body {
+        /* padding: 0px; */
+    }
+
+    .frontpage-icon {
+        font-size: 24px;
+    }
+
+    /* 主内容区域样式 */
+    .main-content {
+        padding: 20px;
+        overflow-y: auto;
+        background-color: #f5f7fa;
+        height: 100%;
+        margin: -10px -15px;
+        color: #333;
+        font-size: 16px;
+    }
+
+    /* 数据概览卡片样式 */
+    .stats-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        margin-bottom: 24px;
+    }
+
+    .stat-info h3 {
+        font-size: 24px;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    .stat-info p {
+        color: var(--gray);
+        font-size: 14px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .section-title {
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .action-edit-btn {
+        margin-left: auto;
+        cursor: pointer;
+        color: var(--primary);
+    }
+
+        .action-edit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    .action-btn {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    .action-icon {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: var(--primary);
+    }
+
+    .stat-card {
+        display: flex;
+        align-items: center;
+    }
+
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-right: 15px;
+    }
+
+    .icon-blue {
+        background-color: rgba(52, 152, 219, 0.2);
+        color: var(--primary);
+    }
+
+    .icon-green {
+        background-color: rgba(46, 204, 113, 0.2);
+        color: var(--success);
+    }
+
+    .icon-orange {
+        background-color: rgba(243, 156, 18, 0.2);
+        color: var(--warning);
+    }
+
+    .icon-red {
+        background-color: rgba(231, 76, 60, 0.2);
+        color: var(--danger);
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 20px;
+    }
+</style>
+<!-- 主内容区域 -->
+<div class="main-content">
+    <!-- 数据概览卡片 -->
+    <div class="stats-cards">
+        <div class="card stat-card">
+            <div class="stat-icon icon-blue">
+                <i class="fas fa-arrow-down"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="num1">-</h3>
+                <p>今日下架数量</p>
+            </div>
+        </div>
+
+        <div class="card stat-card">
+            <div class="stat-icon icon-green">
+                <i class="fas fa-arrow-up"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="num2">-</h3>
+                <p>今日上架数量</p>
+            </div>
+        </div>
+
+        <div class="card stat-card">
+            <div class="stat-icon icon-orange">
+                <i class="fas fa-warehouse"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="num3">-</h3>
+                <p>库存数量</p>
+            </div>
+        </div>
+
+        <div class="card stat-card">
+            <div class="stat-icon icon-red">
+                <i class="fas fa-utensils"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="num4">-</h3>
+                <p>刀具台账在库数量</p>
+            </div>
+        </div>
+    </div>
+    <!-- 快捷操作 -->
+    <div class="card" style="margin-bottom: 24px;">
+        <div class="section-title">
+            <div>
+                <i class="fas fa-bolt"></i> 快捷操作
+            </div>
+            <div class="action-edit-btn">
+                <i class="fas fa-edit" id="edit-btn"></i>
+            </div>
+        </div>
+        <div class="quick-actions"></div>
+    </div>
+    <div class="dashboard-grid">
+        <!-- 左侧内容 -->
+        <div>
+            <!-- 系统公告 -->
+            <div class="card" style="min-height: 322px;">
+                <div class="section-title">
+                    <i class="fas fa-bullhorn"></i> 系统公告
+                </div>
+                <div id="notice" style="overflow-y: auto; height: 283px;">
+                    <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                        <div style="font-weight: 500;">系统升级通知</div>
+                        <div style="font-size: 13px; color: var(--gray);">2023-07-15</div>
+                        <div style="font-size: 14px; margin-top: 5px;">系统将于本周六晚上10点进行升级维护，预计耗时2小时...</div>
+                    </div>
+                    <div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                        <div style="font-weight: 500;">库存盘点计划</div>
+                        <div style="font-size: 13px; color: var(--gray);">2023-07-10</div>
+                        <div style="font-size: 14px; margin-top: 5px;">本月库存盘点将于下周一开始，请各仓管员提前做好准备...</div>
+                    </div>
+                    <div>
+                        <div style="font-weight: 500;">新功能上线</div>
+                        <div style="font-size: 13px; color: var(--gray);">2023-07-05</div>
+                        <div style="font-size: 14px; margin-top: 5px;">刀具管理模块已升级，新增修模出库、修模入库功能...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧内容 -->
+        <div>
+            <!-- 图表 -->
+            <div class="card">
+                <div class="section-title">
+                    <i class="fas fa-chart-line"></i> 系统运行数据
+                </div>
+                <div style="height: 283px;display:flex;justify-content:space-between">
+                    <div id="chart1" style="height:100%;flex:1">
+                        数据加载中...
+                    </div>
+                    <div id="chart2" style="flex:1">
+                        数据加载中...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 数据载入脚本 -->
+<script>
+    var index;
+    $(function(){
+        load_nums();
+
+        load_shortcuts();
+
+        load_notice();
+
+        load_chart1();
+
+        load_chart2();
+
+        $("#edit-btn").on("click", function () {
+            //ff.OpenDialog('/Home/ShortcutEdit','9d3d2612eb024a93bf785112e4165d4b','编辑快捷操作',1400,null, undefined,false);
+            index = layer.open({
+                type: 2,
+                title: "编辑快捷操作",
+                area: ['800px', '500px'],
+                content: '/Home/ShortcutEdit'
+            });
+        });
+    });
+
+    // 加载数字
+    function load_nums() {
+        $.post("/Home/GetNums", function (res) {
+            console.log(res);
+            if (!!res && res.Success == true) {
+                $("#num1").html(Number(res.Entity[0]).toLocaleString('en-US'));
+                $("#num2").html(Number(res.Entity[1]).toLocaleString('en-US'));
+                $("#num3").html(Number(res.Entity[2]).toLocaleString('en-US'));
+                $("#num4").html(Number(res.Entity[3]).toLocaleString('en-US'));
+            }
+        });
+    }
+
+    // 加载快捷操作
+    function load_shortcuts() {
+        $.post("/Home/GetShortcuts", function (res) {
+            console.log(res);
+            if (!!res && res.Success == true) {
+                var shortcuts = res.Entity;
+                var html = "";
+                for (var i = 0; i < shortcuts.length; i++) {
+                    var shortcut = shortcuts[i];
+                    html += '<a lay-href="' + shortcut.Url +'"><div class="action-btn">';
+                    html += '<div class="action-icon">';
+                    html += '<i class="' + (!!shortcut.Icon.trim() ? shortcut.Icon : 'layui-icon layui-icon-star') + ' frontpage-icon"></i>';
+                    html += '</div>';
+                    html += '<div>' + shortcut.Name + '</div>';
+                    html += '</div></a>';
+                }
+                $(".quick-actions").html(html);
+            }
+        });
+    }
+
+    // 加载公告
+    function load_notice() {
+        $.post("/Home/GetNotice", function (res) {
+            console.log(res);
+            if (!!res && res.Success == true) {
+                var notice = res.Entity;
+                var html = "";
+                for (var i = 0; i < notice.length; i++) {
+                    var n = notice[i];
+                    if (i == notice.length - 1) {
+                        html += '<div>';
+                    }
+                    else {
+                        html += '<div style="margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee;">';
+                    }
+                    html += '<div style="font-weight: 500;">' + n.Title + '</div>';
+                    html += '<div style="font-size: 13px; color: var(--gray);">' + n.CreateTime + '</div>';
+                    html += '<div style="font-size: 14px; margin-top: 5px;">' + n.Content + '</div>';
+                    html += '</div>';
+                }
+                $("#notice").html(html);
+            }
+        });
+    }
+
+    // 加载图表1（按日统计上下架数量）
+    function load_chart1() {
+        $.post("/Home/GetChartData1", function (res) {
+            console.log(res);
+            if (!!res && res.Success == true) {
+                var myChart1 = echarts.init(document.getElementById('chart1'));
+                var option = {
+                    title: {
+                        //text: '库存流动日看板',
+                        //subtext: 'Fake Data'
+                    },
+                    legend: {
+                        data: ['上架', '下架']
+                    },
+                    xAxis: {
+                        type: 'category',
+                        name: '月份',
+                        data: res.Entity.XAxis
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: '数量'
+                    },
+                    series: [
+                        {
+                            data: res.Entity.Values1,
+                            name: '上架',
+                            type: 'bar',
+                            // 显示标签
+                            label: {
+                                show: true,          // 显示标签
+                                position: 'top',     // 标签位置
+                                color: '#333',       // 标签颜色
+                                fontSize: 12         // 字体大小
+                            }
+                        },
+                        {
+                            data: res.Entity.Values2,
+                            name: '下架',
+                            type: 'bar',
+                            // 显示标签
+                            label: {
+                                show: true,          // 显示标签
+                                position: 'top',     // 标签位置
+                                color: '#333',       // 标签颜色
+                                fontSize: 12         // 字体大小
+                            }
+                        }
+                    ]
+                };
+
+                option && myChart1.setOption(option);
+            }
+        });
+    }
+
+    // 加载图表2（按月统计上下架数量）
+    function load_chart2() {
+        $.post("/Home/GetChartData2", function (res) {
+            console.log(res);
+            if (!!res && res.Success == true) {
+                var myChart2 = echarts.init(document.getElementById('chart2'));
+                var option = {
+                    title: {
+                        //text: '库存流动日看板',
+                        //subtext: 'Fake Data'
+                    },
+                    legend: {
+                        data: ['上架', '下架']
+                    },
+                    xAxis: {
+                        type: 'category',
+                        name: '日期',
+                        data: res.Entity.XAxis
+                    },
+                    yAxis: {
+                        type: 'value',
+                        name: '数量(万)'
+                    },
+                    series: [
+                        {
+                            data: res.Entity.Values1,
+                            name: '上架',
+                            type: 'bar',
+                            // 显示标签
+                            label: {
+                                show: true,          // 显示标签
+                                position: 'top',     // 标签位置
+                                color: '#333',       // 标签颜色
+                                fontSize: 12         // 字体大小
+                            }
+                        },
+                        {
+                            data: res.Entity.Values2,
+                            name: '下架',
+                            type: 'bar',
+                            // 显示标签
+                            label: {
+                                show: true,          // 显示标签
+                                position: 'top',     // 标签位置
+                                color: '#333',       // 标签颜色
+                                fontSize: 12         // 字体大小
+                            }
+                        }
+                    ]
+                };
+
+                option && myChart2.setOption(option);
+            }
+        });
+    }
+</script>

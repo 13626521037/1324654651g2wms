@@ -1,0 +1,33 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryErpDiffVMs.InventoryErpDiffVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.Wh.Code" label-text="@Localizer["Page.存储地点"].Value" />
+            <wt:display field="Entity.Item.Code" label-text="@Localizer["Page.料品"].Value" />
+            <wt:display field="Entity.Seiban" />
+            <wt:display field="Entity.WmsQty" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.ErpQty" />
+            <wt:display field="Entity.CreateTime" />
+            <wt:display field="Entity.CreateBy" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <font color="red">注意：库存账务实时变动，结果为截止统计时刻的库存数据。匹配过程中可能会产生库存业务单据，导致数据匹配出现异常，尽量选择无库存变动的时间进行对账操作。</font>
+        </wt:row>
+        <wt:container id="g3359667456">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryErpDiffLineErpDiffList" disabled="true" label-text="@Localizer["Page.ERP对账头"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

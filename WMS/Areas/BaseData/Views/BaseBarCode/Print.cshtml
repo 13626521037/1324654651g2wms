@@ -1,0 +1,29 @@
+﻿@model WMS.ViewModel.BaseData.BaseBarCodeVMs.BaseBarCodeVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseBarCode/DoPrint">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.Item.Code" label-text="料号" />
+            <wt:display field="Entity.Qty" />
+            <wt:display field="Entity.Sn" />
+            <wt:display field="Entity.BatchNumber" />
+            <wt:display field="Entity.Seiban" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Item.Description" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:combobox field="SelectedPrintModule" items="PrintModules" />
+        </wt:row>
+        <wt:hidden field="Entity.ID" />
+        <wt:container align="AlignEnum.Right" style="margin-top:50px">
+            <wt:submitbutton text="打印" />
+            @* <wt:closebutton text="@Localizer["Sys.Close"].Value" /> *@
+        </wt:container>
+    </wt:form>
+</wt:container>
+
+

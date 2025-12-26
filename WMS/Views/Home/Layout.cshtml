@@ -1,0 +1,370 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.Extensions.Options
+@using WalkingTec.Mvvm.Core
+@using WalkingTec.Mvvm.Core.Extensions
+@model WalkingTec.Mvvm.Core.BaseVM
+@inject IOptionsMonitor<RequestLocalizationOptions> LocOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocOptions.CurrentValue.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.NativeName })
+        .ToList();
+    List<ComboSelectListItem> tenants = new List<ComboSelectListItem>();
+    if (Model?.LoginUserInfo != null)
+    {
+        tenants = Model.Wtm.GlobaInfo.AllTenant.Where(x => x.TenantCode == Model.LoginUserInfo.TenantCode).AsQueryable().GetSelectListItems(Model.Wtm, x => x.TName, x => x.TCode);
+    }
+
+    var addr = Context.Request.Host.Host;
+    bool isTestEnv = addr.Contains("250.75") ? false : true;    // 是否为测试库
+}
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+
+        <!-- 头部区域 -->
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item layadmin-flexible" lay-unselect>
+                <a href="javascript:;" layadmin-event="flexible" title="@Model.Localizer["Sys.HideShow"]">
+                    <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+                </a>
+            </li>
+    @*         <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <a href="https://wtmdoc.walkingtec.cn" target="_blank" title="@Model.Localizer["Sys.WtmDoc"]">
+                    <i class="layui-icon layui-icon-website"></i>
+                </a>
+            </li> *@
+            <li class="layui-nav-item" lay-unselect>
+                <a href="javascript:;" layadmin-event="refresh" title="@Model.Localizer["Sys.Refresh"]">
+                    <i class="layui-icon layui-icon-refresh-3"></i>
+                </a>
+            </li>
+            @if(isTestEnv)
+            {
+                <li class="layui-nav-item" style="color: red;font-size: 16px;" lay-unselect>
+                    当&nbsp;前&nbsp;为&nbsp;G&nbsp;2&nbsp;测&nbsp;试&nbsp;环&nbsp;境
+                </li>
+            }
+        </ul>
+        <ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <input type="text" id="nav_qrcode_input" class="layui-input" style="margin-top:11px;width:300px;" placeholder="二维码内容" />
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <input type="button" id="nav_qrcode_btn" class="layui-btn layui-btn-sm" style="margin-left: 10px;height: 28px;margin-bottom: 2px;" value="生成二维码" />
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <a href="javascript:;" id="nav_history_btn">
+                    <i class="layui-icon layui-icon-time" />
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <a href="javascript:;" layadmin-event="theme">
+                    <i class="layui-icon layui-icon-theme"></i>
+                </a>
+            </li>
+            <li class="layui-nav-item layui-hide-xs" lay-unselect>
+                <a href="javascript:;" layadmin-event="fullscreen">
+                    <i class="layui-icon layui-icon-screen-full"></i>
+                </a>
+            </li>
+            <li class="layui-nav-item" lay-unselect>
+                <a href="javascript:;">
+                    <cite>@requestCulture.RequestCulture.UICulture.NativeName</cite>
+                </a>
+                <dl class="layui-nav-child">
+                    @foreach (var item in cultureItems)
+                    {
+                        <dd>
+                            <wt:linkbutton url="/_Framework/SetLanguage?culture=@item.Value" target=" ButtonTargetEnum.self" window-width="400" text="@item.Text" is-link="true" />
+                        </dd>
+                    }
+                </dl>
+            </li>
+            @if (tenants.Count() > 0)
+            {
+                var current = Model?.Wtm?.LoginUserInfo?.CurrentTenant == Model?.Wtm?.LoginUserInfo?.TenantCode ? Model.Localizer["_Admin.TenantHost"] : tenants.Where(x => x.Value.ToString() == Model?.Wtm?.LoginUserInfo?.CurrentTenant).Select(x => x.Text).SingleOrDefault();
+                <li class="layui-nav-item" lay-unselect>
+                    <a href="javascript:;">
+                        <cite>@current</cite>
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <wt:linkbutton url="/_Framework/SetTenant?tenant=@Model?.Wtm?.LoginUserInfo?.TenantCode" target=" ButtonTargetEnum.self" window-width="400" text="@Model.Localizer["_Admin.TenantHost"]" is-link="true" />
+                        </dd>
+                        @foreach (var item in tenants)
+                        {
+                            <dd>
+                                <wt:linkbutton url="/_Framework/SetTenant?tenant=@item.Value" target=" ButtonTargetEnum.self" window-width="400" text="@item.Text" is-link="true" />
+                            </dd>
+                        }
+                    </dl>
+                </li>
+
+            }
+            <li class="layui-nav-item" lay-unselect>
+                <a href="javascript:;">
+                    @if (Model.LoginUserInfo?.PhotoId != null)
+                    {
+                        <img class="layui-nav-img" src="api/_file/getuserphoto/@Model.LoginUserInfo.PhotoId" />
+                    }
+                    <cite>@Model.LoginUserInfo.Name</cite>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <wt:linkbutton url="/Login/ChangePassword" window-width="400" text="@Model.Localizer["Login.ChangePassword"]" is-link="true" />
+                    </dd>
+                    <dd><a href="javascript:;" lay-href="/">@Model.Localizer["Sys.BackHome"]</a></dd>
+                    @{
+                        if (ViewData["debug"] is bool debug && debug)
+                        {
+                            <dd>
+                                <wt:linkbutton url="~/_CodeGen/Index" target="ButtonTargetEnum.newwindow" is-link="true" text="@Model.Localizer["Sys.CodeGen"]"
+                                               window-title="@Model.Localizer["Sys.CodeGen"]" />
+                            </dd>
+                            <dd>
+                                <wt:linkbutton url="~/swagger" target="ButtonTargetEnum.newwindow" is-link="true" text="@Model.Localizer["Sys.ApiDoc"]"
+                                               window-title="@Model.Localizer["Sys.ApiDoc"]" />
+                            </dd>
+                        }
+                    }
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="/Login/Logout">@Model.Localizer["Login.LogOut"]</a></li>
+        </ul>
+    </div>
+
+    <!-- 侧边菜单 -->
+    <div class="layui-side layui-side-menu">
+        <div class="layui-side-scroll">
+            <!-- <script type="text/html" template lay-url="./json/menu.js?v={{ layui.admin.v }}" -->
+            <script type="text/html" template lay-url="/_Framework/Menu?t=@DateTime.Now.Ticks"
+                    lay-done="layui.element.render('nav', 'layadmin-system-side-menu');layui.event.call(this, layui.setter.MOD_NAME, 'hash({*})', layui.router());" id="TPL_layout">
+
+                <div class="layui-logo" lay-href="">
+                  <span style="font-weight:bold; @(isTestEnv ? "color:red;" : "")">
+                        @* <img src="~/layuiadmin/style/res/logo.png" style="margin-right:5px" /> *@
+                      @(isTestEnv ? "G2 测试环境" : "台邦集团  G2WMS")
+                  </span>
+                </div>
+
+                <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu" lay-filter="layadmin-system-side-menu">
+                  {{#
+                      var path =  layui.router().path
+                      ,pathURL = layui.admin.correctRouter(path.join('/'))
+                      ,dataName = layui.setter.response.dataName;
+
+                      layui.each(d[dataName], function(index, item){
+                        var hasChildren = typeof item.list === 'object' && item.list.length > 0
+                        ,url = (item.jump && typeof item.jump === 'string') ? item.jump : item.name;
+                  }}
+                  <li data-name="{{ item.name || '' }}" data-jump="{{ item.jump || '' }}" class="layui-nav-item ">
+                    <a href="javascript:;" {{ hasChildren ? '' : 'lay-href="'+ url +'"' }} lay-tips="{{ item.title }}" lay-direction="2">
+                      <i class="{{ item.icon }}"></i>
+                      <cite>{{ item.title }}</cite>
+                    </a>
+                    {{# if(hasChildren){ }}
+                    <dl class="layui-nav-child">
+                      {{# layui.each(item.list, function(index2, item2){
+                            var hasChildren2 = typeof item2.list == 'object' && item2.list.length > 0
+                            ,url2 = (item2.jump && typeof item2.jump === 'string')
+                              ? item2.jump
+                            : [item.name, item2.name, ''].join('/');
+                      }}
+                      <dd data-name="{{ item2.name || '' }}" data-jump="{{ item2.jump || '' }}">
+                        <a href="javascript:;" {{ hasChildren2 ? '' : 'lay-href="'+ url2 +'"' }}>
+                          <i class="{{ item2.icon }}"></i>
+                          <cite>{{ item2.title }}</cite>
+                        </a>
+                        {{# if(hasChildren2){ }}
+                        <dl class="layui-nav-child">
+                          {{# layui.each(item2.list, function(index3, item3){
+                                    var url3 = (item3.jump && typeof item3.jump === 'string')
+                                      ? item3.jump
+                                    : [item.name, item2.name, item3.name].join('/')
+                          }}
+                          <dd data-name="{{ item3.name || '' }}" data-jump="{{ item3.jump || '' }}">
+                            <a href="javascript:;" lay-href="{{ url3 }}" {{ item3.iframe ? 'lay-iframe="true"' : '' }}>
+                              <i class="{{ item3.icon }}"></i>
+                              <cite>{{ item3.title }}</cite>
+                            </a>
+                          </dd>
+                          {{# }); }}
+                        </dl>
+                        {{# } }}
+                      </dd>
+                      {{# }); }}
+                    </dl>
+                    {{# } }}
+                  </li>
+                  {{# }); }}
+                </ul>
+            </script>
+        </div>
+    </div>
+
+    <!-- 页面标签 -->
+    <script type="text/html" template lay-done="layui.element.render('nav', 'layadmin-pagetabs-nav')">
+        {{# if(layui.setter.pageTabs){ }}
+        <div class="layadmin-pagetabs" id="LAY_app_tabs">
+          <div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
+          <div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
+          <div class="layui-icon layadmin-tabs-control layui-icon-down">
+            <ul class="layui-nav layadmin-tabs-select" lay-filter="layadmin-pagetabs-nav">
+              <li class="layui-nav-item" lay-unselect>
+                <a href="javascript:;"></a>
+                <dl class="layui-nav-child layui-anim-fadein">
+                  <dd layadmin-event="closeThisTabs"><a href="javascript:;">@Model.Localizer["Sys.CloseThisTag"]</a></dd>
+                  <dd layadmin-event="closeOtherTabs"><a href="javascript:;">@Model.Localizer["Sys.CloseOtherTags"]</a></dd>
+                  <dd layadmin-event="closeAllTabs"><a href="javascript:;">@Model.Localizer["Sys.CloseAllTags"]</a></dd>
+                </dl>
+              </li>
+            </ul>
+          </div>
+          <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
+            <ul class="layui-tab-title" id="LAY_app_tabsheader">
+              <li lay-id="/"><i class="layui-icon layui-icon-home"></i></li>
+            </ul>
+          </div>
+        </div>
+        {{# } }}
+    </script>
+
+    <!-- 主体内容 -->
+    <div class="layui-body" id="LAY_app_body">
+        <div class="layadmin-tabsbody-item layui-show"></div>
+    </div>
+
+    <!-- 辅助元素，一般用于移动设备下遮罩 -->
+    <div class="layadmin-body-shade" layadmin-event="shade"></div>
+    <script src="qrcode.min.js"></script>
+    <script>
+        // 二维码内容框自动选中内容
+        $('#nav_qrcode_input').on('focus', function(){
+            this.select();
+        });
+        var is_qrcode_valid = true; // 当二维码已展示时，禁止再次生成
+        // 二维码生成按钮
+        $('#nav_qrcode_btn').click(function (e) {
+            if (!is_qrcode_valid) {
+                return;
+            }
+            var input = $('#nav_qrcode_input').val();
+            if (input == '') {
+                layer.msg('请输入二维码内容');
+                return;
+            }
+            var content =
+                `<div style="text-align: center;">
+                    <canvas id="qrcode"></canvas>
+                    <br />
+                    <span style="font-size: 14px;">${input}</span>
+                    <br />
+                    <span style="font-size: 12px;color: #999;">默认显示1分钟，点击关闭</span>
+                </div>`;
+
+            var tipInstance = layer.tips(content, '#nav_qrcode_input', {
+                tips: 3,
+                time: 60 * 1000,    // 一分钟自动关闭
+                maxWidth: 300,
+                success: function() {
+                    const text = input;  // 要编码的内容
+                    const canvas = document.getElementById('qrcode');  // 获取 canvas 元素
+                    is_qrcode_valid = false;
+                    // $('nav_qrcode_btn').attr('disabled', 'disabled');
+
+                    QRCode.toCanvas(canvas, text, function(error) {
+                        if (error) {
+                            console.error(error);
+                        } else {
+                            console.log("QR Code successfully generated!");
+                        }
+                    });
+                },
+                end: function() {
+                    $(document).off('click');
+                    is_qrcode_valid = true;
+                    // $('nav_qrcode_btn').removeAttr('disabled');
+                }
+            });
+
+            $(document).on('click', function(e) {
+                // 排除触发元素本身，防止刚显示就关闭
+                console.log('全局监听事件，关闭二维码');
+                layer.close(tipInstance);
+                $(document).off('click');
+            });
+            e.stopPropagation();    // 防止事件冒泡。否则会进入上面的document的click事件中，造成二维码刚显示就关闭
+            saveQrcode(input);   // 保存二维码
+        });
+
+        // 将二维码保存到本地存储
+        function saveQrcode(code) {
+            if (code) {
+                // 获取现有历史记录或创建新数组
+                const history = JSON.parse(localStorage.getItem('qrCodeHistory')) || [];
+
+                // 添加时间戳
+                const record = {
+                    code: code,
+                    timestamp: new Date().toLocaleString()
+                };
+
+                // 添加到历史记录数组开头
+                history.unshift(record);
+
+                // 保存回本地存储（限制最多保存50条记录）
+                localStorage.setItem('qrCodeHistory', JSON.stringify(history.slice(0, 50)));
+            }
+        }
+
+        // 显示历史记录
+        function showQrcodeHistory() {
+            const history = JSON.parse(localStorage.getItem('qrCodeHistory')) || [];
+
+            if (history.length > 0) {
+                return history.map(item =>  // 都加 class="history-qrcode-item" 为了点击事件能正确判定来源是历史记录
+                    `<li class="history-qrcode-item" style="cursor: pointer;background-color: #f2f2f2;padding: 5px;border-radius: 7px;margin-bottom: 10px;" onclick="historyQrcodeClick(event, '${item.code}')">
+                        <div class="history-qrcode-item" style="padding-top: 5px;">
+                            <span class="history-qrcode-item" style="font-size: 12px;color: #333;">${item.code}</span>
+                        </div>
+                        <div class="history-qrcode-item" style="text-align: right;padding-bottom: 5px;">
+                            <span class="history-qrcode-item" style="font-size: 12px;color: #333;">${item.timestamp}</span>
+                        </div>
+                    </li>`
+                ).join('');
+            } else {
+                return '<div class="history-item">暂无历史记录</div>';
+            }
+        }
+
+        // 显示历史记录
+        $("#nav_history_btn").on('click', function() {
+            var qrHistory = '<div style="padding: 16px;">'
+                + '<ul id="history_qrcode_list">'
+                + showQrcodeHistory()
+                + '</ul>'
+                + '</div>';
+            layer.open({
+                type: 1,
+                offset: 'r',
+                title: "二维码历史记录",
+                anim: '0', // 从右往左
+                area: ['320px', '100%'],
+                shade: 0.1,
+                shadeClose: true,
+                id: 'ID-demo-layer-direction-r',
+                content: qrHistory
+            });
+        });
+
+        // 历史记录点击事件
+        function historyQrcodeClick(event, code) {
+            event.stopPropagation();
+            layer.closeAll();
+            $('#nav_qrcode_input').val(code);
+            $('#nav_qrcode_btn').click();
+        }
+    </script>
+</div>

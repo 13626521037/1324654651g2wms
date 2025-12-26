@@ -1,0 +1,33 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseSequenceDefineVMs.BaseSequenceDefineVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseSequenceDefine/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Four">
+      <wt:textbox field="Entity.Code"/>
+      <wt:textbox field="Entity.Name"/>
+      <wt:combobox field="Entity.DocType" empty-text="@Localizer["Sys.PleaseSelect"]" id="gca406ea0c92947129bc626ca44e8e9bf" multi-select="false"/>
+      <wt:combobox field="Entity.IsEffective" empty-text="@Localizer["Sys.PleaseSelect"]" id="g929e2325c7e748e2add0b82b03834682" multi-select="false"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container id="g5095189727">
+      <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400"  vm="BaseSequenceDefineLineSequenceDefineList1" label-text="@Localizer["Page.批次规则定义主表"].Value" hide-label="true"/>
+    </wt:container>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

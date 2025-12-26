@@ -1,0 +1,38 @@
+﻿@model WMS.ViewModel.KnifeManagement.KnifeVMs.KnifeListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Gdddb22bce38d4e0a936bfa48268735e6" id="gridGdddb22bce38d4e0a936bfa48268735e6">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.CreatedDate" range="true"/>
+    <wt:textbox field="Searcher.SerialNumber"/>
+    <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g710b9d6255d14eb898cec70b05b8e6aa"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.CurrentCheckOutById" item-url="/KnifeManagement/Knife/GetBaseOperators" label-text="当前领用人" empty-text="@Localizer["Sys.All"]" id="g69fbbaf1447347ac8d93b83d2c917a48" />
+        <wt:combobox field="Searcher.HandledById" item-url="/KnifeManagement/Knife/GetFrameworkUsers" label-text="经办人" empty-text="@Localizer["Sys.All"]" id="g404d980d702e436e9fd0bf9b17e22ddb" />
+    <wt:datetime field="Searcher.LastOperationDate" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.WhLocationId"  item-url="/KnifeManagement/Knife/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" empty-text="@Localizer["Sys.All"]" id="gc7caffd0089847b4bec4c12706111866"/>
+    <wt:textbox field="Searcher.GrindCount"/>
+    <wt:textbox field="Searcher.InitialLife"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.CurrentLife"/>
+    <wt:textbox field="Searcher.ItemMasterCode" item-url="/KnifeManagement/Knife/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.All"]" id="g68bd60f667fe461a9c008003e6bd834d" />
+    <wt:combobox field="Searcher.WareHouseId" item-url="/KnifeManagement/Knife/GetBaseWareHouses"  />
+   </wt:row>
+
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.InStockStatus" />
+        <wt:textbox field="Searcher.ActualItemCode" />
+        <wt:textbox field="Searcher.GrindKnifeNO" />
+    </wt:row>
+
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/KnifeManagement/Knife/SearchKnife"  id="Gdddb22bce38d4e0a936bfa48268735e6" search-panel-id="gridGdddb22bce38d4e0a936bfa48268735e6"/>
+
+

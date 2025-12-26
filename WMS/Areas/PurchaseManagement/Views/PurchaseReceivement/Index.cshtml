@@ -1,0 +1,30 @@
+﻿@model WMS.ViewModel.PurchaseManagement.PurchaseReceivementVMs.PurchaseReceivementListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Gea93b029a8294cdea64393cd062793d9" id="gridGea93b029a8294cdea64393cd062793d9">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/PurchaseManagement/PurchaseReceivement/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="ga286cc5b6b244b9f860979ee957d997a" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:textbox field="Searcher.CreatePerson" />
+        <wt:textbox field="Searcher.Supplier" />
+        <wt:combobox field="Searcher.InspectStatus" empty-text="@Localizer["Sys.All"]" id="g43fb4bcea09d4cd39ca8deabfeeacc3c" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="ge409f6364dd24232a7ed27fecb51f077" />
+        @* <wt:datetime field="Searcher.SubmitDate" range="true" /> *@
+        @* <wt:textbox field="Searcher.DocType" /> *@
+        @* <wt:combobox field="Searcher.SupplierId" item-url="/PurchaseManagement/PurchaseReceivement/GetBaseSuppliers" label-text="@Localizer["Page.供应商"].Value" empty-text="@Localizer["Sys.All"]" id="g2c878c40b26648ad92a0fa528c43adb2" /> *@
+        @* <wt:combobox field="Searcher.BizType" empty-text="@Localizer["Sys.All"]" id="gf02e199646544d919b140c0ba0fb0b9e" /> *@
+        @* <wt:textbox field="Searcher.SourceSystemId" />
+        <wt:datetime field="Searcher.LastUpdateTime" range="true" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+        <wt:datetime field="Searcher.UpdateTime" range="true" />
+        <wt:textbox field="Searcher.UpdateBy" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/PurchaseManagement/PurchaseReceivement/SearchPurchaseReceivement" id="Gea93b029a8294cdea64393cd062793d9" search-panel-id="gridGea93b029a8294cdea64393cd062793d9" />
+
+

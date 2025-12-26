@@ -1,0 +1,39 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryTransferInVMs.InventoryTransferInVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.BusinessDate" />
+            @* <wt:display field="Entity.ErpID" /> *@
+            <wt:display field="Entity.TransInOrganization.Name" label-text="@Localizer["Page.调入组织"].Value" />
+            <wt:display field="Entity.TransInWh.Name" label-text="@Localizer["Page.调入存储地点"].Value" />
+            @* <wt:display field="Entity.TransferOut" /> *@
+            @* <wt:display field="Entity.TransferOutType" /> *@
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.CreateTime" />
+            <wt:display field="Entity.CreateBy" />
+            <wt:display field="Entity.UpdateTime" />
+            <wt:display field="Entity.UpdateBy" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Memo" />
+            
+        </wt:row>
+
+        <wt:container id="g8837106233">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryTransferInLineInventoryTransferInList" disabled="true" label-text="@Localizer["Page.调入单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

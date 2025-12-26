@@ -1,0 +1,47 @@
+﻿
+@model WMS.ViewModel.PrintManagement.PrintMOVMs.PrintMOVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/PrintManagement/PrintMO/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.CustomerCode"/>
+      <wt:textbox field="Entity.OrderWhName"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.CustomerSPECS"/>
+      <wt:combobox field="Entity.ItemId"  item-url="/PrintManagement/PrintMO/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g34968630ba1c4eb2863cc349117f5438" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.Seiban"/>
+      <wt:textbox field="Entity.SeibanRandom"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.BatchNumber"/>
+      <wt:textbox field="Entity.Qty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:textbox field="Entity.DocNoChange"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.LocationName"/>
+      <wt:combobox field="Entity.OrgId"  item-url="/PrintManagement/PrintMO/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gcde846bba1a949c388a84d05301cab2c" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SyncItem"/>
+      <wt:textbox field="Entity.SyncOrg"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

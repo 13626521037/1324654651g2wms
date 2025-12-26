@@ -1,0 +1,29 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeCombineVMs.KnifeCombineListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G42fd728035e2432d9f8ca8e8f498feeb" id="gridG42fd728035e2432d9f8ca8e8f498feeb">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.DocNo"/>
+        <wt:combobox field="Searcher.HandledById" item-url="/KnifeManagement/KnifeCombine/GetFrameworkUsers" label-text="经办人" empty-text="@Localizer["Sys.All"]" id="g613a59ae1d8b48ea9692b1f23935e918" />
+    <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g90363b48e2e748c3b8a2c815aac5a205"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.ApprovedTime" range="true"/>
+    <wt:datetime field="Searcher.CloseTime" range="true"/>
+    <wt:textbox field="Searcher.CombineKnifeNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.CheckOutById" item-url="/KnifeManagement/KnifeCombine/GetBaseOperators" label-text="@Localizer["Page.领用人"].Value" empty-text="@Localizer["Sys.All"]" />
+
+        <wt:combobox field="Searcher.WareHouseId" item-url="/KnifeManagement/KnifeCombine/GetBaseWareHouses" label-text="存储地点" empty-text="@Localizer["Sys.All"]" />
+        <wt:textbox field="Searcher.MemberKnifeNo" />
+
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/KnifeManagement/KnifeCombine/SearchKnifeCombine"  id="G42fd728035e2432d9f8ca8e8f498feeb" search-panel-id="gridG42fd728035e2432d9f8ca8e8f498feeb"/>
+
+

@@ -1,0 +1,21 @@
+﻿@model WMS.ViewModel.ProductionManagement.ProductionRcvRptVMs.ProductionRcvRptListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G76034d8fe6a8463d9fc18e5fada3eb8d" id="gridG76034d8fe6a8463d9fc18e5fada3eb8d">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/ProductionManagement/ProductionRcvRpt/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g2cdf5d732daa4c67ba9721bf47019efb" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g5826b855e5b44c15b7e90065abdb8f57" />
+        <wt:combobox field="Searcher.WhId" item-url="/ProductionManagement/ProductionRcvRpt/GetBaseWareHouses" label-text="完工存储地点" empty-text="@Localizer["Sys.All"]" id="g0f4d6aec317e429ab82bebe0d1251c5e" />
+        <wt:combobox field="Searcher.OrderWhId" item-url="/ProductionManagement/ProductionRcvRpt/GetBaseWareHouses" label-text="@Localizer["Page.订单存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="gc20aef12337d4b5298284b0e304fec1f" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/ProductionManagement/ProductionRcvRpt/SearchProductionRcvRpt" id="G76034d8fe6a8463d9fc18e5fada3eb8d" search-panel-id="gridG76034d8fe6a8463d9fc18e5fada3eb8d" />
+
+

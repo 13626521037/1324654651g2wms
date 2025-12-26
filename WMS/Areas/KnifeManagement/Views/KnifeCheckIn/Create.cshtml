@@ -1,0 +1,34 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeCheckInVMs.KnifeCheckInVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/KnifeManagement/KnifeCheckIn/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.DocType" empty-text="@Localizer["Sys.PleaseSelect"]" id="gc89a0d85e903436c9f64fd83b66d93d7" multi-select="false"/>
+      <wt:textbox field="Entity.DocNo"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.CheckInById"  item-url="/KnifeManagement/KnifeCheckIn/GetBaseOperators" label-text="@Localizer["Page.归还人"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g1edc57e707b0429488653826e8dd125a" multi-select="false"/>
+      <wt:combobox field="Entity.HandledById"  item-url="/KnifeManagement/KnifeCheckIn/GetFrameworkUsers" label-text="@Localizer["Page.经办人"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g81b3530015db473895ef3da045a76e97" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="gec18e494ae5a42dcb0357d0b76b8dc7b" multi-select="false"/>
+      <wt:datetime field="Entity.ApprovedTime"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.CombineKnifeNo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400"  vm="KnifeCheckInLineKnifeCheckInList" label-text="@Localizer["Page.刀具归还单"].Value" hide-label="true"/>
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

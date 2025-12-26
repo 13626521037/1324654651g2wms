@@ -1,0 +1,28 @@
+﻿@model WMS.ViewModel.BaseData.BaseBarCodeVMs.BaseBarCodeListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G02e95a41fa16483ebf37f32b04b93e87" id="gridG02e95a41fa16483ebf37f32b04b93e87">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:textbox field="Searcher.ItemCode" empty-text="不支持模糊查询" />
+        <wt:textbox field="Searcher.DocNo" empty-text="不支持模糊查询" />
+        <wt:textbox field="Searcher.Code" empty-text="不支持模糊查询" />
+        <wt:textbox field="Searcher.Sn" empty-text="不支持模糊查询" />
+        <wt:textbox field="Searcher.Seiban" empty-text="不支持模糊查询" />
+        <wt:textbox field="Searcher.SeibanRandom" empty-text="不支持模糊查询" />
+        <wt:textbox field="Searcher.BatchNumber" empty-text="不支持模糊查询" />
+        <wt:textbox field="Searcher.Qty" />
+        <wt:textbox field="Searcher.CustomerCode" />
+        <wt:textbox field="Searcher.CustomerName" />
+        <wt:textbox field="Searcher.CustomerNameFirstLetter" label-text="客户首字符" />
+        <wt:textbox field="Searcher.CreateBy" />
+@*         <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:datetime field="Searcher.UpdateTime" range="true" />
+        <wt:textbox field="Searcher.UpdateBy" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseBarCode/SearchBaseBarCode" id="G02e95a41fa16483ebf37f32b04b93e87" search-panel-id="gridG02e95a41fa16483ebf37f32b04b93e87" />
+
+

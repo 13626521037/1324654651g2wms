@@ -1,0 +1,45 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryStockTakingVMs.InventoryStockTakingBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/InventoryManagement/InventoryStockTaking/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.ErpID"/>
+    <wt:textbox field="LinkedVM.ErpDocNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocNo"/>
+    <wt:combobox field="LinkedVM.Dimension" id="gab02b1c7929f40d58e44387b7cd4bd2b"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.WhId"  item-url="/InventoryManagement/InventoryStockTaking/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" id="g40eb8f6a45ba42e4a4da202ded1d12ec"/>
+    <wt:datetime field="LinkedVM.SubmitTime"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.SubmitUser"/>
+    <wt:datetime field="LinkedVM.ApproveTime"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.ApproveUser"/>
+    <wt:datetime field="LinkedVM.CloseTime"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CloseUser"/>
+    <wt:combobox field="LinkedVM.Status" id="g209e1edba7d2465dac06b67bfd427a96"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

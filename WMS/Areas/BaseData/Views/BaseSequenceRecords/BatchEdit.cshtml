@@ -1,0 +1,22 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseSequenceRecordsVMs.BaseSequenceRecordsBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseSequenceRecords/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.SequenceDefineId"  item-url="/BaseData/BaseSequenceRecords/GetBaseSequenceDefines" label-text="@Localizer["Page.批次规则定义主表"].Value" id="g667aa6d5e122488494437f2eb75aeb3c"/>
+    <wt:textbox field="LinkedVM.SerialValue"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

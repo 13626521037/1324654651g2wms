@@ -1,0 +1,33 @@
+﻿
+@model WMS.ViewModel.ProductionManagement.ProductionReturnIssueVMs.ProductionReturnIssueBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/ProductionManagement/ProductionReturnIssue/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CreatePerson"/>
+    <wt:combobox field="LinkedVM.OrganizationId"  item-url="/ProductionManagement/ProductionReturnIssue/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" id="g032140ab2b914453b5d938bb8e6e311c"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:datetime field="LinkedVM.BusinessDate"/>
+    <wt:datetime field="LinkedVM.SubmitDate"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocType"/>
+    <wt:combobox field="LinkedVM.Status" id="g0bc11838689543a2b688fbde9cef9c98"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

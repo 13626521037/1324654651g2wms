@@ -1,0 +1,26 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseSequenceRecordsVMs.BaseSequenceRecordsVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseSequenceRecords/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.SequenceDefineId"  item-url="/BaseData/BaseSequenceRecords/GetBaseSequenceDefines" label-text="@Localizer["Page.批次规则定义主表"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g17cca70b7d154bf0a39f8951e394fbb4" multi-select="false"/>
+      <wt:textbox field="Entity.SegmentFlag"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SerialValue"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

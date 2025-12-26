@@ -1,0 +1,34 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventorySplitVMs.InventorySplitVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventorySplit/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:combobox field="Entity.OldInvId"  item-url="/InventoryManagement/InventorySplit/GetBaseInventorys" label-text="@Localizer["Page.原库存信息"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g4f849f2da0424719b4f213f3cb6a4d2b" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.NewInvId"  item-url="/InventoryManagement/InventorySplit/GetBaseInventorys" label-text="@Localizer["Page.新库存信息"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g996cab395776475db047c77fd424c8b7" multi-select="false"/>
+      <wt:textbox field="Entity.OrigQty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SplitQty"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,53 @@
+﻿
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+using WalkingTec.Mvvm.Core;
+using WalkingTec.Mvvm.Core.Extensions;
+using Microsoft.EntityFrameworkCore;
+using WMS.Model.BaseData;
+using WMS.Model;
+
+namespace WMS.ViewModel.BaseData.BaseSupplierVMs
+{
+    public partial class BaseSupplierBatchVM : BaseBatchVM<BaseSupplier, BaseSupplier_BatchEdit>
+    {
+        public BaseSupplierBatchVM()
+        {
+            ListVM = new BaseSupplierListVM();
+            LinkedVM = new BaseSupplier_BatchEdit();
+        }
+
+        public override bool DoBatchEdit()
+        {
+            
+            return base.DoBatchEdit();
+        }
+    }
+
+	/// <summary>
+    /// Class to define batch edit fields
+    /// </summary>
+    public class BaseSupplier_BatchEdit : BaseVM
+    {
+
+        
+        public List<string> BaseDataBaseSupplierBTempSelected { get; set; }
+        [Display(Name = "_Model._BaseSupplier._Name")]
+        public string Name { get; set; }
+        [Display(Name = "_Model._BaseSupplier._ShortName")]
+        public string ShortName { get; set; }
+        [Display(Name = "_Model._BaseSupplier._IsEffective")]
+        public EffectiveEnum? IsEffective { get; set; }
+        [Display(Name = "_Model._BaseSupplier._Memo")]
+        public string Memo { get; set; }
+
+        protected override void InitVM()
+        {
+           
+        }
+    }
+
+}

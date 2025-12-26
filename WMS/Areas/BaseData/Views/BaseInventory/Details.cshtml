@@ -1,0 +1,56 @@
+﻿@model WMS.ViewModel.BaseData.BaseInventoryVMs.BaseInventoryVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.ItemMaster.Code" label-text="料号" />
+            <wt:display field="Entity.Qty" />
+            <wt:display field="Entity.WhLocation.WhArea.WareHouse.Code" label-text="仓库编码" />
+            <wt:display field="Entity.WhLocation.WhArea.WareHouse.Name" label-text="仓库名称" />
+            <wt:display field="Entity.WhLocation.WhArea.Code" label-text="库区编码" />
+            <wt:display field="Entity.WhLocation.WhArea.Name" label-text="库区名称" />
+            <wt:display field="Entity.WhLocation.Code" label-text="库位编码" />
+            <wt:display field="Entity.WhLocation.Name" label-text="库位名称" />
+            <wt:display field="Entity.IsAbandoned" />
+            <wt:display field="Entity.ItemSourceType" />
+            <wt:display field="Entity.FrozenStatus" />
+            <wt:display field="Entity.SerialNumber" />
+            <wt:display field="Entity.BatchNumber" />
+            <wt:display field="Entity.Seiban" />
+            <wt:display field="Entity.CreateTime" />
+            <wt:display field="Entity.CreateBy" />
+            <wt:display field="Entity.UpdateTime" />
+            <wt:display field="Entity.UpdateBy" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <script src="qrcode.min.js"></script>
+            <div style="text-align: center;">
+                <canvas id="qrcode"></canvas>
+                <br />
+                <span id="qrcode-text">@ViewBag.code</span>
+            </div>
+            <script>
+                const text = "@ViewBag.code";  // 要编码的内容
+                const canvas = document.getElementById('qrcode');  // 获取 canvas 元素
+
+                QRCode.toCanvas(canvas, text, function(error) {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        console.log("QR Code successfully generated!");
+                    }
+                });
+            </script>
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

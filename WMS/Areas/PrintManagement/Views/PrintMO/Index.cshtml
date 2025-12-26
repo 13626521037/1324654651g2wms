@@ -1,0 +1,25 @@
+﻿@model WMS.ViewModel.PrintManagement.PrintMOVMs.PrintMOListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G11a32d506f194863a6a7a5c514ba74ff" id="gridG11a32d506f194863a6a7a5c514ba74ff">
+    <wt:row items-per-row="ItemsPerRowEnum.Two">
+        <wt:textbox field="Searcher.DocNo" empty-text="右模糊匹配" />
+        <wt:textbox field="Searcher.ItemCode" empty-text="精准匹配，请输入完整料号" />
+    </wt:row>
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/PrintManagement/PrintMO/SearchPrintMO" id="G11a32d506f194863a6a7a5c514ba74ff" search-panel-id="gridG11a32d506f194863a6a7a5c514ba74ff" />
+
+<script>
+    $("a[issearchbutton]").on('click', function () {
+        //alert();
+        var searchbtn = $(this);
+        searchbtn.css("pointer-events", "none");
+        searchbtn.css("background-color", "gray");
+        setTimeout(function () {
+            searchbtn.css("pointer-events", "");
+            searchbtn.css("background-color", "");
+        }, 2000);
+    });
+</script>

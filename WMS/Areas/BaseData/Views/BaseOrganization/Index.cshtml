@@ -1,0 +1,24 @@
+﻿@model WMS.ViewModel.BaseData.BaseOrganizationVMs.BaseOrganizationListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Ged339bf2d4a74eadb1baa3ffe97d8bfd" id="gridGed339bf2d4a74eadb1baa3ffe97d8bfd">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.Code" />
+        <wt:textbox field="Searcher.Name" />
+        <wt:combobox field="Searcher.IsProduction" empty-text="@Localizer["Sys.All"]" id="gd1871dc24b18483297be241e57a1ff59" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.IsSale" empty-text="@Localizer["Sys.All"]" id="g3dcdf8b8c03b4baa832f9f838139f466" />
+        <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="ge574dfd670e64eef8793c78a7ab66f8d" />
+        <wt:textbox field="Searcher.SourceSystemId" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:datetime field="Searcher.LastUpdateTime" range="true" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseOrganization/SearchBaseOrganization" id="Ged339bf2d4a74eadb1baa3ffe97d8bfd" search-panel-id="gridGed339bf2d4a74eadb1baa3ffe97d8bfd" />
+
+

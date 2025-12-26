@@ -1,0 +1,34 @@
+﻿@model WMS.ViewModel.ProductionManagement.ProductionIssueVMs.ProductionIssueVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.BusinessDate" />
+            <wt:display field="Entity.SubmitDate" />
+            <wt:display field="Entity.CreatePerson" label-text="ERP提交人" />
+@*             <wt:display field="Entity.SourceSystemId" />
+            <wt:display field="Entity.LastUpdateTime" /> *@
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+        <wt:container id="g4603608279">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="ProductionIssueLineProductionIssueList" disabled="true" label-text="@Localizer["Page.生产领料单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton theme=" ButtonThemeEnum.Warm" text="@Localizer["Sys.Delete"]" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,19 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryTransferOutDirectDocTypeVMs.InventoryTransferOutDirectDocTypeListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Gc7ed5c3db2fc48d38614d65771c4762e" id="gridGc7ed5c3db2fc48d38614d65771c4762e">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.Code" />
+        <wt:textbox field="Searcher.Name" />
+        <wt:textbox field="Searcher.CreatePerson" label-text="ERP修改人" />
+        <wt:combobox field="Searcher.OrganizationId" item-url="/InventoryManagement/InventoryTransferOutDirectDocType/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="gbc27f30d9b6e42b1a9dfebc72d3ce550" />
+        <wt:textbox field="Searcher.SourceSystemId" />
+        <wt:datetime field="Searcher.LastUpdateTime" range="true" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryTransferOutDirectDocType/SearchInventoryTransferOutDirectDocType" id="Gc7ed5c3db2fc48d38614d65771c4762e" search-panel-id="gridGc7ed5c3db2fc48d38614d65771c4762e" />
+
+

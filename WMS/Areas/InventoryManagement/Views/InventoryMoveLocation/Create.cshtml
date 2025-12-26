@@ -1,0 +1,26 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryMoveLocationVMs.InventoryMoveLocationVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryMoveLocation/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:combobox field="Entity.InWhLocationId"  item-url="/InventoryManagement/InventoryMoveLocation/GetBaseWhLocations" label-text="@Localizer["Page.入库库位"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g17d1bbe9186344df9a44bff627153f47" multi-select="false"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

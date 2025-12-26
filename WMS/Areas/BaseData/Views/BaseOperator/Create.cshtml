@@ -1,0 +1,42 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseOperatorVMs.BaseOperatorVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseOperator/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.JobID"/>
+      <wt:textbox field="Entity.OAAccount"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.IDCard"/>
+      <wt:textbox field="Entity.TempAuthCode"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:datetime field="Entity.TACExpired"/>
+      <wt:combobox field="Entity.DepartmentId"  item-url="/BaseData/BaseOperator/GetBaseDepartments" label-text="@Localizer["Page.部门"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g29a1576b3aa148d78f6c8c130bbc4079" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.IsEffective" empty-text="@Localizer["Sys.PleaseSelect"]" id="gf8663b8a42994965b9c068cd0b754213" multi-select="false"/>
+      <wt:textbox field="Entity.Phone"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SourceSystemId"/>
+      <wt:datetime field="Entity.LastUpdateTime"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

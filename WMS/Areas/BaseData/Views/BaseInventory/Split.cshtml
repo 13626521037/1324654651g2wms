@@ -1,0 +1,21 @@
+﻿@model WMS.ViewModel.BaseData.BaseInventoryVMs.BaseInventoryVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseInventory/DoSplit">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="SplitQty" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+        <wt:hidden field="Entity.ID" />
+    </wt:form>
+
+</wt:container>
+
+

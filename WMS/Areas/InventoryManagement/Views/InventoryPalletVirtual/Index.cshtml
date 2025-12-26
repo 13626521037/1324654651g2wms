@@ -1,0 +1,26 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryPalletVirtualVMs.InventoryPalletVirtualListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Gb7ddbbddf9b74b46973d8f94875d5076" id="gridGb7ddbbddf9b74b46973d8f94875d5076">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Code"/>
+    <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g9edddd145c3e4321b81634f82f0fb7c8"/>
+    <wt:combobox field="Searcher.LocationId"  item-url="/InventoryManagement/InventoryPalletVirtual/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" empty-text="@Localizer["Sys.All"]" id="g39737531dcbd4bae9377652a453ae2d3"/>
+  </wt:row>
+  @* <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.SysVersion"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+  </wt:row> *@
+  @* <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.CreateBy"/>
+    <wt:textbox field="Searcher.UpdateBy"/>
+  </wt:row> *@
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryPalletVirtual/SearchInventoryPalletVirtual"  id="Gb7ddbbddf9b74b46973d8f94875d5076" search-panel-id="gridGb7ddbbddf9b74b46973d8f94875d5076"/>
+
+

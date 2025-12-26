@@ -1,0 +1,20 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryErpDiffVMs.InventoryErpDiffVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/InventoryManagement/InventoryErpDiff/Analysis">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:combobox field="Entity.WhId" item-url="/InventoryManagement/InventoryErpDiff/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g7ce415ee68d04ca1a8343c8942bdb40d" multi-select="false" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="分析" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "WMS.Test": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:51250;http://localhost:51251"
+    }
+  }
+}

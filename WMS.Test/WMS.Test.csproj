@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <IsPackable>false</IsPackable>
+    <Nullable>disable</Nullable>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="BaseInventoryApiTest.cs" />
+    <Compile Remove="BaseSysParaControllerTest.cs" />
+    <Compile Remove="InventoryAdjustDirectApiTest.cs" />
+    <Compile Remove="InventoryFreezeApiTest.cs" />
+    <Compile Remove="InventoryPalletVirtualApiTest.cs" />
+    <Compile Remove="InventorySplitApiTest.cs" />
+    <Compile Remove="InventoryUnfreezeApiTest.cs" />
+    <Compile Remove="PurchaseReceivementApiTest.cs" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="Moq" Version="4.15.2" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.2" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.2" />
+    <ProjectReference Include="..\WMS.Util\WMS.Util.csproj" />
+    <ProjectReference Include="..\WMS\WMS.csproj" />
+ </ItemGroup>
+
+</Project>

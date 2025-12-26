@@ -1,0 +1,45 @@
+﻿
+@model WMS.ViewModel.PrintManagement.PrintSupplierVMs.PrintSupplierVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/PrintManagement/PrintSupplier/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:textbox field="Entity.DocLineNo"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.ItemId"  item-url="/PrintManagement/PrintSupplier/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5a7705878f014fd18529fcdbf8c6851c" multi-select="false"/>
+      <wt:textbox field="Entity.Qty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.ReceivedQty"/>
+      <wt:textbox field="Entity.ValidQty"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.BatchNumber"/>
+      <wt:textbox field="Entity.Seiban"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SeibanRandom"/>
+      <wt:textbox field="Entity.Weight"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.SupplierId"  item-url="/PrintManagement/PrintSupplier/GetBaseSuppliers" label-text="@Localizer["Page.供应商"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g54e5419d4d93496d8ad24af9a0711c71" multi-select="false"/>
+      <wt:textbox field="Entity.SyncSupplier"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.SyncItem"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

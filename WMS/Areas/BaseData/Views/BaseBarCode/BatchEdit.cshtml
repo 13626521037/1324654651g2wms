@@ -1,0 +1,65 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseBarCodeVMs.BaseBarCodeBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseBarCode/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocNo"/>
+    <wt:textbox field="LinkedVM.Code"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.ItemId"  item-url="/BaseData/BaseBarCode/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" id="g533152763a6a45e6a09ab662fad55496"/>
+    <wt:textbox field="LinkedVM.Qty"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CustomerCode"/>
+    <wt:textbox field="LinkedVM.CustomerName"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CustomerNameFirstLetter"/>
+    <wt:textbox field="LinkedVM.Seiban"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields1"/>
+    <wt:textarea field="LinkedVM.ExtendedFields2"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields3"/>
+    <wt:textarea field="LinkedVM.ExtendedFields4"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields5"/>
+    <wt:textarea field="LinkedVM.ExtendedFields6"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields7"/>
+    <wt:textarea field="LinkedVM.ExtendedFields8"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields9"/>
+    <wt:textarea field="LinkedVM.ExtendedFields10"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields11"/>
+    <wt:textarea field="LinkedVM.ExtendedFields12"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields13"/>
+    <wt:textarea field="LinkedVM.ExtendedFields14"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.ExtendedFields15"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

@@ -1,0 +1,33 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryPalletVirtualVMs.InventoryPalletVirtualVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/InventoryManagement/InventoryPalletVirtual/Create">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.Code" />
+            <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="ga0938c6bde32493cb5cbc8ff41c146d6" multi-select="false" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:combobox field="Entity.LocationId" item-url="/InventoryManagement/InventoryPalletVirtual/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gd06bdc9c0975433c895f9843208596ca" multi-select="false" />
+            <wt:textbox field="Entity.SysVersion" />
+        </wt:row>
+
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container id="g7247182489">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryPalletVirtualLineInventoryPalletList" label-text="@Localizer["Page.组托单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

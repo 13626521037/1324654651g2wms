@@ -1,0 +1,36 @@
+﻿@model WMS.ViewModel.PurchaseManagement.PurchaseReceivementVMs.PurchaseReceivementVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+            <wt:display field="Entity.Supplier.Name" label-text="@Localizer["Page.供应商"].Value" />
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.InspectStatus" />
+            <wt:display field="Entity.BusinessDate" />
+            <wt:display field="Entity.SubmitDate" />
+            <wt:display field="Entity.CreatePerson" />
+            @* <wt:display field="Entity.BizType" /> *@
+            @* <wt:display field="Entity.SourceSystemId" /> *@
+            @* <wt:display field="Entity.LastUpdateTime" /> *@
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+        <wt:container id="g4686554233">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="PurchaseReceivementLinePurchaseReceivementList" disabled="true" label-text="@Localizer["Page.采购收货单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,20 @@
+﻿@model WMS.ViewModel.BaseData.BaseSequenceDefineVMs.BaseSequenceDefineListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G7113c6cebbe04b1bb5a962ee391a1010" id="gridG7113c6cebbe04b1bb5a962ee391a1010">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.Code" />
+        <wt:textbox field="Searcher.Name" />
+        <wt:combobox field="Searcher.DocType" empty-text="@Localizer["Sys.All"]" id="g1d8edd56a29840d680ae0b8f8400be09" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g6f3bfffe00174d0194f0eca3021ca586" />
+        <wt:textbox field="Searcher.CreateBy" />
+        <wt:textbox field="Searcher.UpdateBy" />
+    </wt:row>
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseSequenceDefine/SearchBaseSequenceDefine" id="G7113c6cebbe04b1bb5a962ee391a1010" search-panel-id="gridG7113c6cebbe04b1bb5a962ee391a1010" />
+
+

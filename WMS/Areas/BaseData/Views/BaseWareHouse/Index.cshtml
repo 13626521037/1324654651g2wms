@@ -1,0 +1,27 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseWareHouseVMs.BaseWareHouseListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Gace5f94fa0664333b83ae70a8c67a898" id="gridGace5f94fa0664333b83ae70a8c67a898">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Code"/>
+    <wt:textbox field="Searcher.Name"/>
+    <wt:combobox field="Searcher.OrganizationId"  item-url="/BaseData/BaseWareHouse/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" empty-text="@Localizer["Sys.All"]" id="g96d372dbc0ce4338b2b6a57c58d65574"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.IsProduct" empty-text="@Localizer["Sys.All"]" id="g01b84f7ab5a8470bacbb00f8178f0a4b"/>
+    <wt:combobox field="Searcher.ShipType" empty-text="@Localizer["Sys.All"]" id="gdd280db6ed1a49a9825e82ba3cea0da3"/>
+    <wt:combobox field="Searcher.IsStacking" empty-text="@Localizer["Sys.All"]" id="gb42934621908405191dd78db6aef5c89"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g63a8e96ac5af48f6a3b516e531967416"/>
+    <wt:textbox field="Searcher.SourceSystemId"/>
+    <wt:datetime field="Searcher.LastUpdateTime" range="true"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseWareHouse/SearchBaseWareHouse"  id="Gace5f94fa0664333b83ae70a8c67a898" search-panel-id="gridGace5f94fa0664333b83ae70a8c67a898"/>
+
+

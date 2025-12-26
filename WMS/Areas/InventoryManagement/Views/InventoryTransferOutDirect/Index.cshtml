@@ -1,0 +1,23 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryTransferOutDirectVMs.InventoryTransferOutDirectListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Gf32e67689da940e5a1cf125490ecbc38" id="gridGf32e67689da940e5a1cf125490ecbc38">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        @* <wt:textbox field="Searcher.ErpID" /> *@
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:combobox field="Searcher.DocTypeId" item-url="/InventoryManagement/InventoryTransferOutDirect/GetInventoryTransferOutDirectDocTypes" label-text="@Localizer["Page.单据类型"].Value" empty-text="@Localizer["Sys.All"]" id="g4e08fcd5007440ef8c20d9e7ef49bdda" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:combobox field="Searcher.TransInOrganizationId" item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" empty-text="@Localizer["Sys.All"]" id="gcef26d83dfff4c1c879991003cec3837" />
+        <wt:combobox field="Searcher.TransInWhId" item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="g27c7b91326704f04b2660c03ba8cfe8d" />
+        <wt:combobox field="Searcher.TransOutOrganizationId" item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseOrganizations" label-text="@Localizer["Page.调出组织"].Value" empty-text="@Localizer["Sys.All"]" id="ga51830885d2f44918d44282700ee3e40" />
+        <wt:combobox field="Searcher.TransOutWhId" item-url="/InventoryManagement/InventoryTransferOutDirect/GetBaseWareHouses" label-text="@Localizer["Page.调出存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="gcbc7335a085a49f18976070ee3d31b08" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryTransferOutDirect/SearchInventoryTransferOutDirect" id="Gf32e67689da940e5a1cf125490ecbc38" search-panel-id="gridGf32e67689da940e5a1cf125490ecbc38" />
+
+

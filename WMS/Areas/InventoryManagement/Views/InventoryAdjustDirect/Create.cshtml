@@ -1,0 +1,30 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryAdjustDirectVMs.InventoryAdjustDirectVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryAdjustDirect/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocNo"/>
+      <wt:combobox field="Entity.OldInvId"  item-url="/InventoryManagement/InventoryAdjustDirect/GetBaseInventorys" label-text="@Localizer["Page.原库存信息"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g2184c61ffc81444c97c8be3cb716813a" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.NewInvId"  item-url="/InventoryManagement/InventoryAdjustDirect/GetBaseInventorys" label-text="@Localizer["Page.新库存信息"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gcc88df3158984e34b5a7de782a8c1586" multi-select="false"/>
+      <wt:textbox field="Entity.DiffQty"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

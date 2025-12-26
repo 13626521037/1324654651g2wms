@@ -1,0 +1,37 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeGrindOutVMs.KnifeGrindOutVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.DocNo" disabled="true"/>
+      <wt:display field="Entity.HandledBy.Name" disabled="true" label-text="@Localizer["Page.经办人"].Value"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Status" disabled="true"/>
+      <wt:display field="Entity.ApprovedTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateTime" disabled="true"/>
+      <wt:display field="Entity.UpdateTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateBy" disabled="true"/>
+      <wt:display field="Entity.UpdateBy" disabled="true"/>
+    </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.WareHouse.Name" disabled="true" />
+        </wt:row>
+
+    <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400"  vm="KnifeGrindOutLineKnifeGrindOutList2" disabled="true" label-text="@Localizer["Page.刀具修磨出库单"].Value" hide-label="true"/>
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

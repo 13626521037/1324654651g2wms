@@ -1,0 +1,42 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryTransferInVMs.InventoryTransferInVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryTransferIn/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.ErpID"/>
+      <wt:datetime field="Entity.BusinessDate"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.DocType"/>
+      <wt:textbox field="Entity.DocNo"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.TransInOrganizationId"  item-url="/InventoryManagement/InventoryTransferIn/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g7aab064a56864ff5936f58e9a5a59116" multi-select="false"/>
+      <wt:combobox field="Entity.TransInWhId"  item-url="/InventoryManagement/InventoryTransferIn/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g63a0e345db1444b88c65bf4cb89ea08e" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.TransferOut"/>
+      <wt:combobox field="Entity.TransferOutType" empty-text="@Localizer["Sys.PleaseSelect"]" id="g480ab86e99974612aa1ca5244152e99b" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.Status" empty-text="@Localizer["Sys.PleaseSelect"]" id="gd92428faf15a4e80b5cae8d32eef2355" multi-select="false"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

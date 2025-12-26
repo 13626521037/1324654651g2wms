@@ -1,0 +1,21 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseSysNoticeVMs.BaseSysNoticeListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G6fe360694796491793dd32c676f4c65a" id="gridG6fe360694796491793dd32c676f4c65a">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Title"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.CreateBy"/>
+    <wt:textbox field="Searcher.UpdateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseSysNotice/SearchBaseSysNotice"  id="G6fe360694796491793dd32c676f4c65a" search-panel-id="gridG6fe360694796491793dd32c676f4c65a"/>
+
+

@@ -1,0 +1,83 @@
+﻿@model WMS.ViewModel.BaseData.BaseBarCodeVMs.BaseBarCodeVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseBarCode/Create">
+        <blockquote class="layui-elem-quote">必填项</blockquote>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ItemMasterCode_Import" />
+            <wt:textbox field="Entity.Qty" />
+            <wt:textbox field="Entity.OrgCode_Import" />
+            <wt:combobox field="Entity.ItemSourceType_Import" />
+        </wt:row>
+        <blockquote class="layui-elem-quote">选填项</blockquote>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            @* <wt:combobox field="Entity.ItemId" item-url="/BaseData/BaseBarCode/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g04fbf7088fad4f46875538875c361ee1" multi-select="false" /> *@
+            @* <wt:textbox field="Entity.DocNo" /> *@
+          @*   <wt:textbox field="Entity.CustomerCode" />
+            <wt:textbox field="Entity.CustomerName" />
+            <wt:textbox field="Entity.CustomerNameFirstLetter" label-text="客户首字母" /> *@
+            <wt:textbox field="Entity.Seiban" />
+            <wt:textbox field="Entity.SeibanRandom" />
+            <wt:textbox field="Entity.BatchNumber" />
+            <wt:hidden field="Entity.Sn" default-value="77D8C548-5A46-48E6-4325-08DDF0DA5159" />  <!-- 随便放的值，没有任何意义 -->
+            <wt:hidden field="Entity.Code" default-value="77D8C548-5A46-48E6-4325-08DDF0DA5159" />  <!-- 随便放的值，没有任何意义 -->
+            <wt:hidden field="Entity.ItemId" default-value="77D8C548-5A46-48E6-4325-08DDF0DA5159" />
+        </wt:row>
+        @* <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields1" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields2" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields3" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields4" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields5" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields6" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields7" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields8" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields9" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields10" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields11" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields12" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields13" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields14" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textbox field="Entity.ExtendedFields15" />
+        </wt:row> *@
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

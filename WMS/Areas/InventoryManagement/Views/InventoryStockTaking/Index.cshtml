@@ -1,0 +1,31 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryStockTakingVMs.InventoryStockTakingListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Ge3af4494df6a4cdfb2aeef1b8fba5d42" id="gridGe3af4494df6a4cdfb2aeef1b8fba5d42">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:textbox field="Searcher.ErpDocNo" />
+        <wt:textbox field="Searcher.Wh" />
+        <wt:textbox field="Searcher.Location" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g4a2dd46582c9463f82110ca0e63c9fb3" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+        @* <wt:textbox field="Searcher.ErpID"/> *@
+        @* <wt:combobox field="Searcher.Dimension" empty-text="@Localizer["Sys.All"]" id="g18d89d99c2344f5c856e7f618385431f"/> *@
+        @* <wt:datetime field="Searcher.SubmitTime" range="true"/> *@
+        @* <wt:textbox field="Searcher.SubmitUser"/> *@
+        @* <wt:datetime field="Searcher.ApproveTime" range="true"/> *@
+        @* <wt:textbox field="Searcher.ApproveUser"/> *@
+        @* <wt:datetime field="Searcher.CloseTime" range="true"/> *@
+        @* <wt:textbox field="Searcher.CloseUser"/> *@
+        @* <wt:combobox field="Searcher.WhId"  item-url="/InventoryManagement/InventoryStockTaking/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="g65ee4314d8fd4b43992c22b998eb0b7c"/> *@
+        @* <wt:datetime field="Searcher.UpdateTime" range="true"/> *@
+        @* <wt:textbox field="Searcher.UpdateBy"/> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryStockTaking/SearchInventoryStockTaking" id="Ge3af4494df6a4cdfb2aeef1b8fba5d42" search-panel-id="gridGe3af4494df6a4cdfb2aeef1b8fba5d42" />
+
+

@@ -1,0 +1,21 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventorySplitSingleVMs.InventorySplitSingleListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G27b43397b0df4fe699c6e35def172632" id="gridG27b43397b0df4fe699c6e35def172632">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:textbox field="Searcher.OriginalInvSN" />
+        @* <wt:combobox field="Searcher.OriginalInvId" item-url="/InventoryManagement/InventorySplitSingle/GetBaseInventorys" label-text="@Localizer["Page.原库存信息"].Value" empty-text="@Localizer["Sys.All"]" id="g27c6185d7419493d9d7b542f1c27fdcb" /> *@
+        <wt:textbox field="Searcher.OriginalQty" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventorySplitSingle/SearchInventorySplitSingle" id="G27b43397b0df4fe699c6e35def172632" search-panel-id="gridG27b43397b0df4fe699c6e35def172632" />
+
+

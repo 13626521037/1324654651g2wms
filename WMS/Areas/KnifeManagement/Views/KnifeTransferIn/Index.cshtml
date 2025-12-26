@@ -1,0 +1,36 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeTransferInVMs.KnifeTransferInListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Gf9bfcec413f44f1aa20efdc3ea0c74f1" id="gridGf9bfcec413f44f1aa20efdc3ea0c74f1">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="ga600b6e0084f493589760f1a253b3133"/>
+    <wt:datetime field="Searcher.ApprovedTime" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.HandledById"  item-url="/KnifeManagement/KnifeTransferIn/GetFrameworkUsers" label-text="@Localizer["Page.经办人"].Value" empty-text="@Localizer["Sys.All"]" id="g15ccfae1a5944392828c4e6ffd4ee813"/>
+    <wt:textbox field="Searcher.Memo"/>
+    <wt:textbox field="Searcher.TransferOutDocNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.UpdateBy"/>
+        <wt:combobox field="Searcher.FromWHId" item-url="/KnifeManagement/KnifeTransferIn/GetBaseWareHouses" label-text="调出存储地点" empty-text="@Localizer["Sys.All"]" />
+        <wt:combobox field="Searcher.ToWHId" item-url="/KnifeManagement/KnifeTransferIn/GetBaseWareHouses" label-text="调入存储地点" empty-text="@Localizer["Sys.All"]"  />
+
+  </wt:row>
+
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:combobox field="Searcher.WareHouseId" item-url="/KnifeManagement/KnifeTransferIn/GetBaseWareHouses" label-text="存储地点" empty-text="@Localizer["Sys.All"]" />
+    </wt:row>
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/KnifeManagement/KnifeTransferIn/SearchKnifeTransferIn"  id="Gf9bfcec413f44f1aa20efdc3ea0c74f1" search-panel-id="gridGf9bfcec413f44f1aa20efdc3ea0c74f1"/>
+
+

@@ -1,0 +1,14 @@
+﻿@model WMS.ViewModel.BaseData.BaseSysParaVMs.BaseSysParaVM
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model">
+<wt:row items-per-row="ItemsPerRowEnum.Two">
+<wt:display field="Entity.Code" />
+<wt:display field="Entity.Name" />
+<wt:display field="Entity.Value" />
+<wt:display field="Entity.Memo" />
+</wt:row>
+    <wt:row align="AlignEnum.Right">
+        <wt:closebutton />
+    </wt:row>
+</wt:form>

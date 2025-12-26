@@ -1,0 +1,61 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseItemMasterVMs.BaseItemMasterBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseItemMaster/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.OrganizationId"  item-url="/BaseData/BaseItemMaster/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" id="gc5fba3a61384404c84c3f9dd4a632b83"/>
+    <wt:combobox field="LinkedVM.ItemCategoryId"  item-url="/BaseData/BaseItemMaster/GetBaseItemCategorys" label-text="@Localizer["Page.分类"].Value" id="g6dbfa12bf8ea4f3b83339400107b635c"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Code"/>
+    <wt:textbox field="LinkedVM.Name"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.SPECS"/>
+    <wt:textarea field="LinkedVM.MateriaModel"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textarea field="LinkedVM.Description"/>
+    <wt:combobox field="LinkedVM.StockUnitId"  item-url="/BaseData/BaseItemMaster/GetBaseUnits" label-text="@Localizer["Page.库存单位"].Value" id="g26dad2033bb648eb81dff3586825d512"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.ProductionOrgId"  item-url="/BaseData/BaseItemMaster/GetBaseOrganizations" label-text="@Localizer["Page.默认生产组织"].Value" id="g332abfdbccb245c588200c4c5dd4b372"/>
+    <wt:combobox field="LinkedVM.ProductionDeptId"  item-url="/BaseData/BaseItemMaster/GetBaseDepartments" label-text="@Localizer["Page.默认生产部门"].Value" id="ga8d766857f874889a47133fcc8b11ccb"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.WhId"  item-url="/BaseData/BaseItemMaster/GetBaseWareHouses" label-text="@Localizer["Page.默认存储地点"].Value" id="g414ad1c143894feebf27ad8e2629f6ea"/>
+    <wt:combobox field="LinkedVM.FormAttribute" id="g6019979e5eeb46ec8b1969f0313a440c"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.MateriaAttribute"/>
+    <wt:textbox field="LinkedVM.GearRatio"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Power"/>
+    <wt:textbox field="LinkedVM.SafetyStockQty"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.FixedLT"/>
+    <wt:textbox field="LinkedVM.BuildBatch"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.NotAnalysisQty"/>
+    <wt:combobox field="LinkedVM.AnalysisTypeId"  item-url="/BaseData/BaseItemMaster/GetBaseAnalysisTypes" label-text="@Localizer["Page.分析类别"].Value" id="gb150ef2da64f499eb42f614a7abe2f62"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.IsEffective" id="gdd24eb3a4144402cba05f435169abf09"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

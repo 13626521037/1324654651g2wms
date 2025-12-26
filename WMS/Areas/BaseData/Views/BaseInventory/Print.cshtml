@@ -1,0 +1,36 @@
+﻿@model WMS.ViewModel.BaseData.BaseInventoryVMs.BaseInventoryVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/BaseData/BaseInventory/DoPrint">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.ItemMaster.Code" label-text="料号" />
+            <wt:display field="Entity.Qty" />
+            <wt:display field="Entity.WhLocation.WhArea.WareHouse.Code" label-text="仓库编码" />
+            <wt:display field="Entity.WhLocation.WhArea.WareHouse.Name" label-text="仓库名称" />
+            <wt:display field="Entity.WhLocation.WhArea.Code" label-text="库区编码" />
+            <wt:display field="Entity.WhLocation.WhArea.Name" label-text="库区名称" />
+            <wt:display field="Entity.WhLocation.Code" label-text="库位编码" />
+            <wt:display field="Entity.WhLocation.Name" label-text="库位名称" />
+            <wt:display field="Entity.ItemSourceType" />
+            <wt:display field="Entity.FrozenStatus" />
+            <wt:display field="Entity.SerialNumber" />
+            <wt:display field="Entity.BatchNumber" />
+            <wt:display field="Entity.Seiban" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.ItemMaster.Description" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:combobox field="SelectedPrintModule" items="PrintModules" />
+        </wt:row>
+        <wt:hidden field="Entity.ID" />
+        <wt:container align="AlignEnum.Right" style="margin-top:50px">
+            <wt:submitbutton text="打印" />
+            @* <wt:closebutton text="@Localizer["Sys.Close"].Value" /> *@
+        </wt:container>
+    </wt:form>
+</wt:container>
+
+

@@ -1,0 +1,26 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryTransferInVMs.InventoryTransferInListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G7f197de0ed43441caab4b774bf7a8659" id="gridG7f197de0ed43441caab4b774bf7a8659">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:textbox field="Searcher.DocType" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:combobox field="Searcher.TransInOrganizationId" item-url="/InventoryManagement/InventoryTransferIn/GetBaseOrganizations" label-text="@Localizer["Page.调入组织"].Value" empty-text="@Localizer["Sys.All"]" id="g1a8ca3355d6841b394e60404aa47833b" />
+        <wt:combobox field="Searcher.TransInWhId" item-url="/InventoryManagement/InventoryTransferIn/GetBaseWareHouses" label-text="@Localizer["Page.调入存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="g9209db3d9b1141969c3b42590d9d294d" />
+        <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g3c4a25ed60dc4225b44b1de2d18669e8" />
+        @* <wt:textbox field="Searcher.ErpID" /> *@
+        @* <wt:textbox field="Searcher.TransferOut" /> *@
+        @* <wt:combobox field="Searcher.TransferOutType" empty-text="@Localizer["Sys.All"]" id="gbece21e711f844e78d8e0ff4381e21ff" /> *@
+        @* <wt:datetime field="Searcher.CreateTime" range="true" /> *@
+        @* <wt:textbox field="Searcher.CreateBy" /> *@
+        @* <wt:datetime field="Searcher.UpdateTime" range="true" /> *@
+        @* <wt:textbox field="Searcher.UpdateBy" /> *@
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryTransferIn/SearchInventoryTransferIn" id="G7f197de0ed43441caab4b774bf7a8659" search-panel-id="gridG7f197de0ed43441caab4b774bf7a8659" />
+
+

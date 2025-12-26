@@ -1,0 +1,26 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryAdjustVMs.InventoryAdjustVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/InventoryManagement/InventoryAdjust/Create" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.StockTakingId"  item-url="/InventoryManagement/InventoryAdjust/GetInventoryStockTakings" label-text="@Localizer["Page.盘点单"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="g5a8c98f876b14db4b168b824b42cf9b9" multi-select="false"/>
+      <wt:textbox field="Entity.DocNo"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

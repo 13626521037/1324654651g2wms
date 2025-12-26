@@ -1,0 +1,17 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryAdjustDirectVMs.InventoryAdjustDirectListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G9d593ae3ad144b06929bd13816d9bec0" id="gridG9d593ae3ad144b06929bd13816d9bec0">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryAdjustDirect/SearchInventoryAdjustDirect"  id="G9d593ae3ad144b06929bd13816d9bec0" search-panel-id="gridG9d593ae3ad144b06929bd13816d9bec0"/>
+
+

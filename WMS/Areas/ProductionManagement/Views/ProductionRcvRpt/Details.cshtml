@@ -1,0 +1,35 @@
+﻿@model WMS.ViewModel.ProductionManagement.ProductionRcvRptVMs.ProductionRcvRptVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+            <wt:display field="Entity.BusinessDate" />
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.Wh.Name" label-text="@Localizer["Page.存储地点"].Value" />
+            <wt:display field="Entity.OrderWh.Name" label-text="@Localizer["Page.订单存储地点"].Value" />
+            <wt:display field="Entity.CreateTime" />
+            <wt:display field="Entity.CreateBy" />
+            <wt:display field="Entity.UpdateTime" />
+            <wt:display field="Entity.UpdateBy" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.Memo" />
+        </wt:row>
+
+        <wt:container id="g4002647857">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="ProductionRcvRptLineProductionRcvRptList" disabled="true" label-text="@Localizer["Page.生产报工单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

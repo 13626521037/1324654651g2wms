@@ -1,0 +1,31 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseDocInventoryRelationVMs.BaseDocInventoryRelationVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model" url="/BaseData/BaseDocInventoryRelation/Edit" >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:combobox field="Entity.DocType" empty-text="@Localizer["Sys.PleaseSelect"]" id="gc9602eb1b06b4e048be37286ec4de7c0" multi-select="false"/>
+      <wt:combobox field="Entity.InventoryId"  item-url="/BaseData/BaseDocInventoryRelation/GetBaseInventorys" label-text="@Localizer["Page.库存信息"].Value" empty-text="@Localizer["Sys.PleaseSelect"]" id="gb61f2931575446cc99c2cc5774b2256d" multi-select="false"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:textbox field="Entity.BusinessId"/>
+      <wt:textbox field="Entity.Qty"/>
+    </wt:row>
+
+    <wt:row  items-per-row="ItemsPerRowEnum.One">
+      <wt:textarea field="Entity.Memo"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Entity.ID" />
+  </wt:form>
+
+</wt:container>
+
+

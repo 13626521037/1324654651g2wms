@@ -1,0 +1,24 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryOtherShipVMs.InventoryOtherShipListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="Gb1dd1e449518428b82ad4781c6d1e669" id="gridGb1dd1e449518428b82ad4781c6d1e669">
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        @* <wt:textbox field="Searcher.ErpID" /> *@
+        <wt:textbox field="Searcher.DocNo" />
+        <wt:combobox field="Searcher.DocTypeId" item-url="/InventoryManagement/InventoryOtherShip/GetInventoryOtherShipDocTypes" label-text="@Localizer["Page.单据类型"].Value" empty-text="@Localizer["Sys.All"]" id="g9bb06f894e71443b921c4189f2758cb7" />
+        <wt:datetime field="Searcher.BusinessDate" range="true" />
+        <wt:combobox field="Searcher.BenefitOrganizationId" item-url="/InventoryManagement/InventoryOtherShip/GetBaseOrganizations" label-text="@Localizer["Page.受益组织"].Value" empty-text="@Localizer["Sys.All"]" id="gc65f769def404d828355a5acf35ec855" />
+        <wt:combobox field="Searcher.BenefitDepartmentId" item-url="/InventoryManagement/InventoryOtherShip/GetBaseDepartments" label-text="@Localizer["Page.受益部门"].Value" empty-text="@Localizer["Sys.All"]" id="g94419d04581a414ea8d12416a7eead38" />
+        <wt:combobox field="Searcher.BenefitPersonId" item-url="/InventoryManagement/InventoryOtherShip/GetBaseOperators" label-text="@Localizer["Page.受益人"].Value" empty-text="@Localizer["Sys.All"]" id="g8900a4af52c34d65ac5c414a7c7e3d69" />
+        <wt:combobox field="Searcher.WhId" item-url="/InventoryManagement/InventoryOtherShip/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="gc918f3e5906440d4898d482b8b2341a1" />
+        <wt:combobox field="Searcher.OwnerOrganizationId" item-url="/InventoryManagement/InventoryOtherShip/GetBaseOrganizations" label-text="@Localizer["Page.货主组织"].Value" empty-text="@Localizer["Sys.All"]" id="ge2f7bd15948c4cd691aa559eb93fb105" />
+        <wt:datetime field="Searcher.CreateTime" range="true" />
+        <wt:textbox field="Searcher.CreateBy" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryOtherShip/SearchInventoryOtherShip" id="Gb1dd1e449518428b82ad4781c6d1e669" search-panel-id="gridGb1dd1e449518428b82ad4781c6d1e669" />
+
+

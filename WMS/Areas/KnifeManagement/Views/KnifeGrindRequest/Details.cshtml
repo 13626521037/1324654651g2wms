@@ -1,0 +1,54 @@
+﻿@model WMS.ViewModel.KnifeManagement.KnifeGrindRequestVMs.KnifeGrindRequestVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.DocNo" disabled="true" />
+            <wt:display field="Entity.Status" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.HandledBy.Name" disabled="true" label-text="@Localizer["Page.经办人"].Value" />
+            <wt:display field="Entity.ApprovedTime" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.CreateTime" disabled="true" />
+            <wt:display field="Entity.UpdateTime" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.CreateBy" disabled="true" />
+            <wt:display field="Entity.UpdateBy" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.WareHouse.Name" disabled="true" />
+        </wt:row>
+        <wt:container align="AlignEnum.Right">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="500" vm="KnifeGrindRequestLineKnifeGrindRequestList2" disabled="true" label-text="@Localizer["Page.刀具修磨申请单"].Value" hide-label="true" />
+            <wt:row items-per-row="ItemsPerRowEnum.One">
+                <script src="qrcode.min.js"></script>
+                <div style="text-align: center;">
+                    <canvas id="qrcode"></canvas>
+                    <br />
+                    <span id="qrcode-text">首行采购订单:@ViewBag.code</span>
+                </div>
+                <script>
+                    const text = "@ViewBag.code";  // 要编码的内容
+                    const canvas = document.getElementById('qrcode');  // 获取 canvas 元素
+
+                    QRCode.toCanvas(canvas, text, function (error) {
+                        if (error) {
+                            console.error(error);
+                        } else {
+                            console.log("QR Code successfully generated!");
+                        }
+                    });
+                </script>
+            </wt:row>
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+    
+</wt:container>
+

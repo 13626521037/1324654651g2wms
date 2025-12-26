@@ -1,0 +1,74 @@
+﻿@model WMS.ViewModel.PrintManagement.PrintSupplierVMs.PrintSupplierVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<style>
+   .costomerQtyDiv {
+        width: 400px;
+        padding: 10px;
+    }
+</style>
+<wt:container>
+    <wt:form vm="@Model" url="/PrintManagement/PrintSupplier/DoPrint">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:textbox field="Entity.DocNo" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.DocLineNo" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.Code" label-text="料号" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.Name" label-text="品名" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.SPECS" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Item.StockUnit.Name" label-text="单位" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.ValidQty" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Weight" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.BatchNumber" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Seiban" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.SeibanRandom" required="false" readonly style="border:none;" />
+            <wt:textbox field="Entity.Supplier.Name" required="false" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:textarea field="Entity.Item.Description" readonly style="border:none;" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Three" style="display:none;">
+            <wt:textbox field="Entity.CustomQty" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Three">
+            <wt:combobox field="SelectedPrintModule" items="PrintModules" />
+        </wt:row>
+        <wt:hidden field="Entity.ID" />
+        <wt:hidden field="Entity.ItemId" />
+        <wt:hidden field="Entity.SupplierId" />
+        <wt:hidden field="Entity.Qty" />
+        <wt:hidden field="Entity.ReceivedQty" />
+        <hr />
+        <div>自定义数量：（可逐项输入。也可在一个框内输入，用“/”分隔。如：10/20/30/40/50，表示打印5个标签，每个标签的数量分别为10/20/30/40/50。）</div>
+        <div class="costomerQtyDiv"><input type="text" class="costomerQtyInput layui-input" placeholder="请输入自定义数量" /></div>
+        <div class="costomerQtyDiv"><input type="text" class="costomerQtyInput layui-input" placeholder="请输入自定义数量" /></div>
+        <div class="costomerQtyDiv"><input type="text" class="costomerQtyInput layui-input" placeholder="请输入自定义数量" /></div>
+        <div class="costomerQtyDiv"><input type="text" class="costomerQtyInput layui-input" placeholder="请输入自定义数量" /></div>
+        <div class="costomerQtyDiv"><input type="text" class="costomerQtyInput layui-input" placeholder="请输入自定义数量" /></div>
+
+        <wt:container align="AlignEnum.Right" style="margin-top:50px">
+            <wt:submitbutton text="打印" submit-url="/PrintManagement/PrintSupplier/DoCustomPrint?type=1" />
+            <wt:submitbutton text="PDF自适应打印" submit-url="/PrintManagement/PrintSupplier/DoCustomPrint?type=2" />
+            @* <wt:closebutton text="@Localizer["Sys.Close"].Value" /> *@
+        </wt:container>
+    </wt:form>
+    <script>
+        $(function(){
+            $(".costomerQtyInput").on("change", function () {
+                var str = "";
+                $(".costomerQtyInput").each(function (i, item) {
+                    var value = $(item).val().trim();
+                    if (value != "") {
+                        str += value + "/";
+                    }
+                });
+                if (str != "") {
+                    str = str.substring(0, str.length - 1);
+                    $("input[name='Entity.CustomQty']").val(str);
+                }
+            });
+        });
+    </script>
+</wt:container>
+
+

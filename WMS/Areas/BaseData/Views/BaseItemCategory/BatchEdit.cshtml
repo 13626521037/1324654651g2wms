@@ -1,0 +1,25 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseItemCategoryVMs.BaseItemCategoryBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseItemCategory/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Name"/>
+    <wt:combobox field="LinkedVM.AnalysisTypeId"  item-url="/BaseData/BaseItemCategory/GetBaseAnalysisTypes" label-text="@Localizer["Page.分析类别"].Value" id="g6cc8386d8d034700b49f9faf6d2132f2"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.DepartmentId"  item-url="/BaseData/BaseItemCategory/GetBaseDepartments" label-text="@Localizer["Page.生产部门"].Value" id="g5378c01c4e5d47d0a414253a922415e4"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

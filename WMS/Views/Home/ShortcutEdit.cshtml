@@ -1,0 +1,75 @@
+﻿@* <script>layui.use('index')</script> *@
+<style>
+    .layui-transfer{
+        text-align:center;
+        margin-top:20px;
+    }
+
+    .BtnDiv{
+        text-align: right;
+        margin: 10px 20px 0 20px;
+    }
+</style>
+<div id="ID-transfer-demo"></div>
+<div class="BtnDiv">
+    <button class="layui-btn" id="ID-transfer-btn" lay-on="reload">确定</button>
+</div>
+<script>
+    var transfer;
+    $(function(){
+        load_shortcuts();
+    });
+    // 加载快捷菜单数据
+    function load_shortcuts() {
+        $.post("/Home/GetAllShortcuts", function (res) {
+            // console.log(res);
+            if (!!res && res.Success == true) {
+                layui.use(function(){
+                    transfer = layui.transfer;
+                    var data = res.Entity.AllMenus;
+                    // 渲染
+                    transfer.render({
+                        elem: '#ID-transfer-demo',
+                        data: data,
+                        id: 'demo-inst',
+                        title: ['全部', '已选'],
+                        value: res.Entity.Shortcuts,
+                        width: 300,
+                        showSearch: true,
+                    });
+                    var searchs = $(".layui-transfer-search");
+                    searchs[1].style.display = "none";
+
+                    $("#ID-transfer-btn").on("click", function () {
+                        var index = layer.load(0);
+                        
+                        var getData = transfer.getData('demo-inst'); // 获取右侧数据
+                        console.log(getData);
+                        if(getData.length == 0){
+                            parent.layer.msg("请先选择快捷菜单", { icon: 2 });
+                            layer.close(index);
+                            return;
+                        }
+                        $.post("/Home/SaveShortcuts", { Data: getData }, function (res) {
+                            if (!!res && res.Success == true) {
+                                parent.load_shortcuts();
+                                parent.layer.close(parent.index);
+                                parent.layer.msg("保存成功", { icon: 1 });
+                            }
+                            else {
+                                parent.layer.msg(res.Msg, { icon: 2 });
+                                layer.close(index);
+                            }
+                        });
+                    });
+                });
+            }
+            else {
+                parent.layer.msg(res.Msg, { icon: 2 });
+                parent.layer.close(parent.index);
+            }
+        });
+    }
+
+    
+</script>

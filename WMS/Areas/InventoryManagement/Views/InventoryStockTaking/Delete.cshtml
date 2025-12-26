@@ -1,0 +1,55 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryStockTakingVMs.InventoryStockTakingVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model">
+    <wt:row items-per-row="ItemsPerRowEnum.Four">
+        <wt:display field="Entity.DocNo" />
+        <wt:display field="Entity.Wh.Code" label-text="@Localizer["Page.存储地点"].Value" />
+        <wt:display field="Entity.Status" />
+        <wt:display field="Entity.ErpDocNo" />
+        <wt:display field="Entity.CreateTime" />
+        <wt:display field="Entity.CreateBy" />
+        <wt:display field="Entity.SubmitTime" />
+        <wt:display field="Entity.SubmitUser" />
+        <wt:display field="Entity.ApproveTime" />
+        <wt:display field="Entity.ApproveUser" />
+        <wt:display field="Entity.CloseTime" />
+        <wt:display field="Entity.CloseUser" />
+        <wt:display field="Entity.Memo" />
+    </wt:row>
+
+    <wt:container id="g2588339986">
+        <wt:tab id="g5505468031">
+            <wt:tabheaders>
+                <wt:tabheader title="@Localizer["Page.盘点库位列表"].Value" id="g5148956248" />
+                <wt:tabheader title="@Localizer["Page.盘点明细"].Value" id="g7937225197" />
+            </wt:tabheaders>
+            <wt:tabcontents>
+                <wt:tabcontent>
+                    <wt:container id="g9915150194">
+                        @* <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryStockTakingLocationsStockTakingList" disabled="true" label-text="@Localizer["Page.库存盘点单"].Value" hide-label="true" /> *@
+                        <wt:grid vm="InventoryStockTakingLocationsStockTakingList" url="/InventoryManagement/InventoryStockTaking/SearchInventoryStockTakingLocations" id="InventoryStockTakingLocationsGrid" search-panel-id="InventoryStockTakingLocationsSearchPanel" limits="new int[] { 20, 100, 200, 500, 1000 }" hidden-checkbox="true" height="-400" />
+                    </wt:container>
+
+
+                </wt:tabcontent>
+                <wt:tabcontent>
+                    <wt:container id="g5883503673">
+                        @* <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryStockTakingLineStockTakingList" disabled="true" label-text="@Localizer["Page.库存盘点单"].Value" hide-label="true" /> *@
+                        <wt:grid vm="InventoryStockTakingLineStockTakingList" url="/InventoryManagement/InventoryStockTaking/SearchInventoryStockTakingLine" id="InventoryStockTakingLineGrid" search-panel-id="InventoryStockTakingLineSearchPanel" limits="new int[] { 20, 100, 200, 500, 1000 }" hidden-checkbox="true" height="-400" />
+                    </wt:container>
+
+
+                </wt:tabcontent>
+            </wt:tabcontents>
+        </wt:tab>
+
+    </wt:container>
+    <wt:hidden field="Entity.ID" />
+    <wt:row align="AlignEnum.Right">
+        <wt:submitbutton theme=" ButtonThemeEnum.Warm" text="@Localizer["Sys.Delete"]" />
+        <wt:closebutton />
+    </wt:row>
+
+</wt:form>

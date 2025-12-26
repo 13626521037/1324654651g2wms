@@ -1,0 +1,22 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryOtherReceivementVMs.InventoryOtherReceivementListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="Ga6b38f340e7a4b469753e030e9f201c5" id="gridGa6b38f340e7a4b469753e030e9f201c5">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.ErpID"/>
+    <wt:datetime field="Searcher.BusinessDate" range="true"/>
+    <wt:textbox field="Searcher.DocNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.IsScrap" empty-text="@Localizer["Sys.All"]" id="g2a7230c8f4b0417ea7e9576eb7b8b9f6"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryOtherReceivement/SearchInventoryOtherReceivement"  id="Ga6b38f340e7a4b469753e030e9f201c5" search-panel-id="gridGa6b38f340e7a4b469753e030e9f201c5"/>
+
+

@@ -1,0 +1,38 @@
+﻿
+@model WMS.ViewModel.PurchaseManagement.PurchaseReceivementVMs.PurchaseReceivementBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/PurchaseManagement/PurchaseReceivement/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.CreatePerson"/>
+    <wt:combobox field="LinkedVM.OrganizationId"  item-url="/PurchaseManagement/PurchaseReceivement/GetBaseOrganizations" label-text="@Localizer["Page.组织"].Value" id="gf16df297d2ce4006a6fc3a5af8ec3b34"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:datetime field="LinkedVM.BusinessDate"/>
+    <wt:datetime field="LinkedVM.SubmitDate"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.DocType"/>
+    <wt:combobox field="LinkedVM.SupplierId"  item-url="/PurchaseManagement/PurchaseReceivement/GetBaseSuppliers" label-text="@Localizer["Page.供应商"].Value" id="g966846e5b6574240b5dc33bdc2429951"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.BizType" id="g035abefe2ddd4c0ea4cd0d2fe2681465"/>
+    <wt:combobox field="LinkedVM.InspectStatus" id="g18b08d2021e44f55a71b3dc9a107bf57"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.Status" id="g157c7171e1a6478f92730a8353a75133"/>
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

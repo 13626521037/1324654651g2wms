@@ -1,0 +1,42 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeVMs.KnifeVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model" url="/KnifeManagement/Knife/EditInStockStatus">
+     <wt:row  items-per-row="ItemsPerRowEnum.Two">
+            <wt:datetime field="Entity.CreatedDate" type="DateTime" disabled="true" />
+            <wt:textbox field="Entity.SerialNumber" disabled="true" />
+            <wt:combobox field="Entity.Status" disabled="true"  />
+            <wt:combobox field="Entity.CurrentCheckOutById" disabled="true" item-url="/KnifeManagement/Knife/GetBaseOperators" label-text="@Localizer["Page.当前领用人"].Value" />
+            <wt:combobox field="Entity.HandledById" disabled="true" item-url="/KnifeManagement/Knife/GetFrameworkUsers" label-text="@Localizer["Page.经办人"].Value" />
+            <wt:datetime field="Entity.LastOperationDate" type="DateTime" disabled="true" />
+            <wt:combobox field="Entity.WhLocationId" disabled="true" item-url="/KnifeManagement/Knife/GetBaseWhLocations" itemid="Entity.WhLocationId"  />
+            <wt:textbox field="Entity.GrindCount" disabled="true" />
+            <wt:textbox field="Entity.InitialLife" disabled="true" />
+            <wt:textbox field="Entity.CurrentLife" disabled="true" />
+            <wt:textbox field="Entity.TotalUsedDays" disabled="true" />
+            <wt:textbox field="Entity.RemainingUsedDays" disabled="true" />
+            <wt:textbox field="Entity.ItemMaster.Code" disabled="true" label-text="料号" />
+            <wt:textbox field="Entity.MiscShipLineID" disabled="true" />
+            <wt:datetime field="Entity.CreateTime" type="DateTime" disabled="true" />
+            <wt:datetime field="Entity.UpdateTime" type="DateTime" disabled="true" />
+            <wt:textbox field="Entity.CreateBy" disabled="true" />
+            <wt:textbox field="Entity.UpdateBy" disabled="true" />
+            <wt:combobox field="Entity.InStockStatus" multi-select="false" />
+            <wt:textbox field="Entity.ActualItemCode" disabled="false" />
+            <wt:textbox field="Entity.GrindKnifeNO" disabled="false" />
+    </wt:row>
+
+    <wt:hidden field="Entity.ID" />
+    <wt:container align="AlignEnum.Right">
+            <wt:submitbutton text="@Localizer["Sys.Submit"].Value" />
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

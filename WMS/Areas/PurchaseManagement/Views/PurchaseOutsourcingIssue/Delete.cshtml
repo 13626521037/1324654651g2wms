@@ -1,0 +1,26 @@
+﻿@model WMS.ViewModel.PurchaseManagement.PurchaseOutsourcingIssueVMs.PurchaseOutsourcingIssueVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model">
+    <wt:quote>@Localizer["Sys.DeleteConfirm"]</wt:quote>
+    <wt:row items-per-row="ItemsPerRowEnum.Three">
+        <wt:display field="Entity.DocNo" />
+        <wt:display field="Entity.DocType" />
+        <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+        <wt:display field="Entity.Supplier.Name" label-text="@Localizer["Page.供应商"].Value" />
+        <wt:display field="Entity.Status" />
+        <wt:display field="Entity.BusinessDate" />
+    </wt:row>
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:display field="Entity.Memo" />
+    </wt:row>
+    <wt:container id="g6306642526">
+        <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="PurchaseOutsourcingIssueLineOutsourcingIssueList" disabled="true" label-text="@Localizer["Page.委外发料单"].Value" hide-label="true" />
+    </wt:container>
+    <wt:hidden field="Entity.ID" />
+    <wt:row align="AlignEnum.Right">
+        <wt:submitbutton theme=" ButtonThemeEnum.Warm" text="@Localizer["Sys.Delete"]" />
+        <wt:closebutton />
+    </wt:row>
+</wt:form>

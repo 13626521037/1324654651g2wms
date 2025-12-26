@@ -1,0 +1,21 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseWhAreaVMs.BaseWhAreaListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G6af4c1f20113493a988765c866d1e521" id="gridG6af4c1f20113493a988765c866d1e521">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.Code"/>
+    <wt:textbox field="Searcher.Name"/>
+    <wt:combobox field="Searcher.WareHouseId"  item-url="/BaseData/BaseWhArea/GetBaseWareHouses" label-text="@Localizer["Page.存储地点"].Value" empty-text="@Localizer["Sys.All"]" id="gfad1f23f2976441488d72542ccbf9675"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.AreaType" empty-text="@Localizer["Sys.All"]" id="g8ce355a69b054686a7516f0e37cae127"/>
+    <wt:combobox field="Searcher.IsEffective" empty-text="@Localizer["Sys.All"]" id="g993446cf7f924e07afe91ce33f525698"/>
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseWhArea/SearchBaseWhArea"  id="G6af4c1f20113493a988765c866d1e521" search-panel-id="gridG6af4c1f20113493a988765c866d1e521"/>
+
+

@@ -1,0 +1,27 @@
+﻿@model WMS.ViewModel.BaseData.BaseInventoryVMs.BaseInventoryListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher" grid-id="G3ed70912f54f4de68c28411888a8342a" id="gridG3ed70912f54f4de68c28411888a8342a">
+    <wt:row items-per-row="ItemsPerRowEnum.Six">
+        @* <wt:combobox field="Searcher.ItemMasterId" item-url="/BaseData/BaseInventory/GetBaseItemMasters" label-text="@Localizer["Page.料品"].Value" empty-text="@Localizer["Sys.All"]" id="g73955f223ea24a408eb1834afc8d04a8" />
+        @* <wt:combobox field="Searcher.WhLocationId" item-url="/BaseData/BaseInventory/GetBaseWhLocations" label-text="@Localizer["Page.库位"].Value" empty-text="@Localizer["Sys.All"]" id="g1ff58b93773f432895ecb63364fb5815" /> *@
+        <wt:textbox field="Searcher.ItemCode" />
+        <wt:textbox field="Searcher.SerialNumber" />
+        <wt:textbox field="Searcher.BatchNumber" />
+        <wt:textbox field="Searcher.Seiban" />
+        <wt:textbox field="Searcher.SeibanRandom" />
+        <wt:textbox field="Searcher.Wh" empty-text="编码" />
+        <wt:textbox field="Searcher.Area" empty-text="编码" />
+        <wt:textbox field="Searcher.Location" empty-text="编码" />
+        <wt:combobox field="Searcher.IsAbandoned" default-value="false" empty-text="@Localizer["Sys.All"]" id="g9b237df1335c49fab8b8632abb92bfbf" />
+        <wt:combobox field="Searcher.ItemSourceType" empty-text="@Localizer["Sys.All"]" />
+        <wt:combobox field="Searcher.FrozenStatus" empty-text="@Localizer["Sys.All"]" id="g0edddd598da3406f9fea0a90fbef39bb" />
+        <wt:combobox field="Searcher.HideZero" default-value="true" empty-text="@Localizer["Sys.All"]" />
+    </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/BaseData/BaseInventory/SearchBaseInventory" id="G3ed70912f54f4de68c28411888a8342a" search-panel-id="gridG3ed70912f54f4de68c28411888a8342a" />
+
+

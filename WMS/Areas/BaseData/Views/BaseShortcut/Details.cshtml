@@ -1,0 +1,29 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseShortcutVMs.BaseShortcutVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+  <wt:form vm="@Model"  >
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.Menu.PageName" disabled="true" label-text="@Localizer["Sys.Menu"].Value"/>
+      <wt:display field="Entity.User.Name" disabled="true" label-text="@Localizer["_Admin.User"].Value"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateTime" disabled="true"/>
+      <wt:display field="Entity.UpdateTime" disabled="true"/>
+    </wt:row>
+    <wt:row  items-per-row="ItemsPerRowEnum.Two">
+      <wt:display field="Entity.CreateBy" disabled="true"/>
+      <wt:display field="Entity.UpdateBy" disabled="true"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+      <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+  </wt:form>
+
+</wt:container>
+
+

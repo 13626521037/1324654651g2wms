@@ -1,0 +1,41 @@
+﻿@model WMS.ViewModel.InventoryManagement.InventoryTransferOutManualVMs.InventoryTransferOutManualVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Four">
+            <wt:display field="Entity.DocNo" />
+            <wt:display field="Entity.DocType" />
+            <wt:display field="Entity.Organization.Name" label-text="@Localizer["Page.组织"].Value" />
+            <wt:display field="Entity.BusinessDate" />
+            @* <wt:display field="Entity.SubmitDate" /> *@
+            <wt:display field="Entity.TransOutOrganization.Name" label-text="@Localizer["Page.调出组织"].Value" />
+            <wt:display field="Entity.TransOutWh.Name" label-text="@Localizer["Page.调出存储地点"].Value" />
+            <wt:display field="Entity.TransInOrganization.Name" label-text="@Localizer["Page.调入组织"].Value" />
+            <wt:display field="Entity.TransInWh.Name" label-text="@Localizer["Page.调入存储地点"].Value" />
+            <wt:display field="Entity.Status" />
+            <wt:display field="Entity.LastUpdateTime" label-text="ERP提交时间" />
+            <wt:display field="Entity.CreatePerson" label-text="ERP提交人" />
+            <wt:display field="Entity.Memo" />
+            @* <wt:display field="Entity.SourceSystemId" /> *@
+            @* <wt:display field="Entity.CreateTime" /> *@
+            @* <wt:display field="Entity.UpdateTime" /> *@
+            @* <wt:display field="Entity.CreateBy" /> *@
+            @* <wt:display field="Entity.UpdateBy" /> *@
+        </wt:row>
+
+        <wt:container id="g4040944294">
+            <wt:grid use-local-data="true" hidden-panel="true" hidden-checkbox="true" height="-400" vm="InventoryTransferOutManualLineInventoryTransferOutManualList" label-text="@Localizer["Page.手动调出单"].Value" hide-label="true" />
+        </wt:container>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:submitbutton theme=" ButtonThemeEnum.Warm" text="@Localizer["Sys.Delete"]" />
+            <wt:closebutton />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

@@ -1,0 +1,30 @@
+﻿
+@model WMS.ViewModel.BaseData.BaseInventoryLogVMs.BaseInventoryLogBatchVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/BaseData/BaseInventoryLog/DoBatchEdit?1=1">
+  <div style="margin-bottom:10px;"> "@Localizer["Sys.BatchEditConfirm"].Value"</div>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.OperationType" id="gb9040e1a3a064bf796952818d3e7dbfd"/>
+    <wt:textbox field="LinkedVM.DocNo"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:combobox field="LinkedVM.SourceInventoryId"  item-url="/BaseData/BaseInventoryLog/GetBaseInventorys" label-text="@Localizer["Page.来源库存信息"].Value" id="g4e54847681724bc0b3afa6853d52fa96"/>
+    <wt:combobox field="LinkedVM.TargetInventoryId"  item-url="/BaseData/BaseInventoryLog/GetBaseInventorys" label-text="@Localizer["Page.目标库存信息"].Value" id="g8db05a3c355c416ebb86ec5d997bf09f"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Two">
+    <wt:textbox field="LinkedVM.Qty"/>
+    <wt:textarea field="LinkedVM.Memo"/>
+  </wt:row>
+
+  <wt:container align="AlignEnum.Right">
+    <wt:submitbutton  text="@Localizer["Sys.Submit"].Value"/>
+    <wt:closebutton  text="@Localizer["Sys.Close"].Value"/>
+  </wt:container>
+
+  <wt:hidden field="Ids" />
+  <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" />
+</wt:form>
+
+

@@ -1,0 +1,17 @@
+﻿
+@model WMS.ViewModel.InventoryManagement.InventoryUnfreezeVMs.InventoryUnfreezeListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G861845f3fa9b4f4c97f0d7e48fb8294a" id="gridG861845f3fa9b4f4c97f0d7e48fb8294a">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+        <wt:textbox field="Searcher.CreateBy" />
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/InventoryManagement/InventoryUnfreeze/SearchInventoryUnfreeze"  id="G861845f3fa9b4f4c97f0d7e48fb8294a" search-panel-id="gridG861845f3fa9b4f4c97f0d7e48fb8294a"/>
+
+

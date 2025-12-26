@@ -1,0 +1,51 @@
+﻿@model WMS.ViewModel._Admin.FrameworkUserVMs.FrameworkUserVM
+@using WMS.ViewModel
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.Email" disabled="true" />
+            <wt:display field="Entity.Gender" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.CellPhone" disabled="true" />
+            <wt:display field="Entity.HomePhone" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.Address" disabled="true" />
+            <wt:display field="Entity.ZipCode" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.ITCode" disabled="true" />
+            <wt:display field="Entity.Name" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.IsValid" disabled="true" />
+            <wt:upload field="Entity.PhotoId" disabled="true" style="width:300px;" upload-type="ImageFile" thumb-width="128" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.CreateTime" disabled="true" />
+            <wt:display field="Entity.UpdateTime" disabled="true" />
+        </wt:row>
+        <wt:row items-per-row="ItemsPerRowEnum.Two">
+            <wt:display field="Entity.CreateBy" disabled="true" />
+            <wt:display field="Entity.UpdateBy" disabled="true" />
+        </wt:row>
+        <div style="margin: 20px;">可登录存储地点：</div>
+        <wt:row items-per-row="ItemsPerRowEnum.Two" style="margin-left:30px;">
+            @foreach(var item in Model.Entity.BaseUserWhRelation_User)
+            {
+                <div class="layui-col-md6" style="margin-bottom: 10px;">@item.Wh.Code.CodeCombinName(item.Wh.Name)</div>
+            }
+        </wt:row>
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

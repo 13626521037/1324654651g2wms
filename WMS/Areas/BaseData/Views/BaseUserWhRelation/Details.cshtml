@@ -1,0 +1,25 @@
+﻿@model WMS.ViewModel.BaseData.BaseUserWhRelationVMs.BaseUserWhRelationVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:container>
+    <wt:form vm="@Model">
+        <wt:row items-per-row="ItemsPerRowEnum.One">
+            <wt:display field="Entity.User.Name" disabled="true" label-text="@Localizer["_Admin.User"].Value" />
+            <wt:display field="Entity.Wh.Code" disabled="true" label-text="@Localizer["Page.存储地点"].Value" />
+            <wt:display field="Entity.Memo" disabled="true" />
+            <wt:display field="Entity.CreateTime" disabled="true" />
+            <wt:display field="Entity.CreateBy" disabled="true" />
+            <wt:display field="Entity.UpdateTime" disabled="true" />
+            <wt:display field="Entity.UpdateBy" disabled="true" />
+        </wt:row>
+
+        <wt:container align="AlignEnum.Right">
+            <wt:closebutton text="@Localizer["Sys.Close"].Value" />
+        </wt:container>
+
+    </wt:form>
+
+</wt:container>
+
+

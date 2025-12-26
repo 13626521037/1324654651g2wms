@@ -1,0 +1,32 @@
+﻿
+@model WMS.ViewModel.KnifeManagement.KnifeCheckOutVMs.KnifeCheckOutListVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:searchpanel vm="@Model" reset-btn="true" chart-prefix="Searcher"  grid-id="G3b1ab1c036dd4009a9b94faf675d98ba" id="gridG3b1ab1c036dd4009a9b94faf675d98ba">
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.DocType" empty-text="@Localizer["Sys.All"]" id="g458c4d313ba14bd6a0c1f8ef17661c80"/>
+    <wt:textbox field="Searcher.DocNo"/>
+    <wt:combobox field="Searcher.CheckOutById"  item-url="/KnifeManagement/KnifeCheckOut/GetBaseOperators" label-text="@Localizer["Page.领用人"].Value" empty-text="@Localizer["Sys.All"]" id="gadf712cfd5a745a080eb88dd66df13f7"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:combobox field="Searcher.HandledById"  item-url="/KnifeManagement/KnifeCheckOut/GetFrameworkUsers" label-text="@Localizer["Page.经办人"].Value" empty-text="@Localizer["Sys.All"]" id="g855c5d8fc6034486b74fa77708f054dc"/>
+    <wt:combobox field="Searcher.Status" empty-text="@Localizer["Sys.All"]" id="g5e29d6a0b33f4a46a3f195580183128f"/>
+    <wt:datetime field="Searcher.ApprovedTime" range="true"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:datetime field="Searcher.CreateTime" range="true"/>
+    <wt:datetime field="Searcher.UpdateTime" range="true"/>
+    <wt:textbox field="Searcher.CreateBy"/>
+  </wt:row>
+  <wt:row  items-per-row="ItemsPerRowEnum.Three">
+    <wt:textbox field="Searcher.UpdateBy"/>
+        <wt:combobox field="Searcher.WareHouseId" item-url="/KnifeManagement/KnifeCheckOut/GetBaseWareHouses" label-text="存储地点" empty-text="@Localizer["Sys.All"]" />
+
+  </wt:row>
+
+</wt:searchpanel>
+
+<wt:grid vm="@Model" url="/KnifeManagement/KnifeCheckOut/SearchKnifeCheckOut"  id="G3b1ab1c036dd4009a9b94faf675d98ba" search-panel-id="gridG3b1ab1c036dd4009a9b94faf675d98ba"/>
+
+
