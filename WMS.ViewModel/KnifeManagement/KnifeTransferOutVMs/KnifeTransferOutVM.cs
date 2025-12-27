@@ -420,8 +420,7 @@ namespace WMS.ViewModel.KnifeManagement.KnifeTransferOutVMs
                     // 获取推荐库位（传入刀具ID以查找原库位）
                     // 使用实际料号查找推荐库位，将itemMasterId设为null以强制使用料号编码匹配
                     var recommendLocations = GetRecommendLocationsByItem(
-                        null,  // 不传入ItemMasterId，使用实际料号进行匹配
-                        actualItemCode,
+                        actualItemCode,  // 使用实际料号进行匹配
                         whid,
                         line.KnifeId);  // 传入刀具ID
 
@@ -444,23 +443,27 @@ namespace WMS.ViewModel.KnifeManagement.KnifeTransferOutVMs
             }
         }
         /// <summary>
-        /// 获取推荐库位（根据料号查找相同料号刀具所在库位）
+        /// 获取推荐库位（根据实际料号查找相同料号刀具所在库位）
         /// 推荐逻辑：
         /// 1. 优先推荐该刀具调出前的原库位（从调出单记录中获取最近一次调出操作的库位）
-        /// 2. 如果没有找到原库位，查找相同料号刀具的最近出库库位
-        /// 3. 查找有相同料号在库刀具的库位（按数量升序）
-        /// 4. 如果没有相同料号在库，根据刀具分类查找相似刀具所在库位
+        /// 2. 如果没有找到原库位，查找相同实际料号刀具的最近出库库位
+        /// 3. 查找有相同实际料号在库刀具的库位（按数量升序）
+        /// 4. 如果没有相同实际料号在库，根据刀具分类查找相似刀具所在库位
         /// 5. 如果没有相似分类，则推荐空库位
         /// </summary>
-        /// <param name="itemMasterId">料号ID</param>
-        /// <param name="itemMasterCode">料号编码</param>
+        /// <param name="actualItemCode">实际料号编码</param>
         /// <param name="whid">仓库ID</param>
         /// <param name="knifeId">刀具ID（可选，用于查找该刀具的原库位）</param>
         /// <returns>推荐库位列表</returns>
-        private List<RecommendLocationReturn> GetRecommendLocationsByItem(Guid? itemMasterId, string itemMasterCode, Guid whid, Guid? knifeId = null)
+        private List<RecommendLocationReturn> GetRecommendLocationsByItem(string actualItemCode, Guid whid, Guid? knifeId = null)
         {
             try
             {
+                // 实际料号为空时直接返回空列表
+                if (string.IsNullOrEmpty(actualItemCode))
+                {
+                    return new List<RecommendLocationReturn>();
+                }
                 // 第一步：如果提供了刀具ID，优先查找该刀具调出前的原库位
                 if (knifeId.HasValue)
                 {
@@ -511,15 +514,8 @@ namespace WMS.ViewModel.KnifeManagement.KnifeTransferOutVMs
                             .Where(x => x.ItemMaster.Organization.Code == "0410")  // 限定组织0410
                             .AsQueryable();
 
-                        // 根据料号筛选
-                        if (itemMasterId.HasValue)
-                        {
-                            sameItemQueryStep1 = sameItemQueryStep1.Where(x => x.ItemMasterId == itemMasterId.Value);
-                        }
-                        else if (!string.IsNullOrEmpty(itemMasterCode))
-                        {
-                            sameItemQueryStep1 = sameItemQueryStep1.Where(x => x.ItemMaster.Code == itemMasterCode || x.ActualItemCode == itemMasterCode);
-                        }
+                        // 按实际料号筛选
+                        sameItemQueryStep1 = sameItemQueryStep1.Where(x => x.ActualItemCode == actualItemCode);
 
                         var additionalSameItemLocation = sameItemQueryStep1
                             .GroupBy(x => new
@@ -601,15 +597,8 @@ namespace WMS.ViewModel.KnifeManagement.KnifeTransferOutVMs
                     .Where(x => x.Knife.ItemMaster.Organization.Code == "0410")  // 限定组织0410
                     .AsQueryable();
 
-                // 根据料号筛选
-                if (itemMasterId.HasValue)
-                {
-                    recentCheckOutOperation = recentCheckOutOperation.Where(x => x.Knife.ItemMasterId == itemMasterId.Value);
-                }
-                else if (!string.IsNullOrEmpty(itemMasterCode))
-                {
-                    recentCheckOutOperation = recentCheckOutOperation.Where(x => x.Knife.ItemMaster.Code == itemMasterCode || x.Knife.ActualItemCode == itemMasterCode);
-                }
+                // 按实际料号筛选
+                recentCheckOutOperation = recentCheckOutOperation.Where(x => x.Knife.ActualItemCode == actualItemCode);
 
                 var recentLocation = recentCheckOutOperation
                     .OrderByDescending(x => x.OperationTime)
@@ -652,14 +641,8 @@ namespace WMS.ViewModel.KnifeManagement.KnifeTransferOutVMs
                         .Where(x => x.ItemMaster.Organization.Code == "0410")  // 限定组织0410
                         .AsQueryable();
 
-                    if (itemMasterId.HasValue)
-                    {
-                        sameItemQueryStep2 = sameItemQueryStep2.Where(x => x.ItemMasterId == itemMasterId.Value);
-                    }
-                    else if (!string.IsNullOrEmpty(itemMasterCode))
-                    {
-                        sameItemQueryStep2 = sameItemQueryStep2.Where(x => x.ItemMaster.Code == itemMasterCode || x.ActualItemCode == itemMasterCode);
-                    }
+                    // 按实际料号筛选
+                    sameItemQueryStep2 = sameItemQueryStep2.Where(x => x.ActualItemCode == actualItemCode);
 
                     var additionalSameItemLocation = sameItemQueryStep2
                         .GroupBy(x => new
@@ -722,27 +705,11 @@ namespace WMS.ViewModel.KnifeManagement.KnifeTransferOutVMs
                     return new List<RecommendLocationReturn> { recentLocationReturn };
                 }
 
-                // 获取当前料号的分类ID（用于后续步骤）
-                Guid? itemCategoryId = null;
-
-                // 如果料号ID有值，从数据库查询该料号的分类ID
-                if (itemMasterId.HasValue)
-                {
-                    // 查询指定料号ID的分类ID
-                    itemCategoryId = DC.Set<BaseItemMaster>()
-                        .Where(x => x.ID == itemMasterId.Value)
-                        .Select(x => x.ItemCategoryId)
-                        .FirstOrDefault();
-                }
-                // 如果料号ID为空但料号编码不为空，通过料号编码查询分类ID
-                else if (!string.IsNullOrEmpty(itemMasterCode))
-                {
-                    // 通过料号编码查询对应的分类ID
-                    itemCategoryId = DC.Set<BaseItemMaster>()
-                        .Where(x => x.Code == itemMasterCode)
-                        .Select(x => x.ItemCategoryId)
-                        .FirstOrDefault();
-                }
+                // 通过实际料号查询料品分类ID（用于后续步骤）
+                Guid? itemCategoryId = DC.Set<Knife>()
+                    .Where(x => x.ActualItemCode == actualItemCode)
+                    .Select(x => x.ItemMaster.ItemCategoryId)
+                    .FirstOrDefault();
 
                 // 第三步：查找有相同料号在库刀具的库位
                 // 创建一个查询，查找刀具信息，包含库位、库区、仓库和料号信息
@@ -761,23 +728,8 @@ namespace WMS.ViewModel.KnifeManagement.KnifeTransferOutVMs
                     .Where(x => x.ItemMaster.Organization.Code == "0410")  // 限定组织0410
                     .AsQueryable(); // 将查询转换为可查询对象
 
-                // 如果料号ID有值，添加料号ID匹配的筛选条件
-                if (itemMasterId.HasValue)
-                {
-                    // 筛选条件：刀具料号ID等于传入的料号ID
-                    sameItemQuery = sameItemQuery.Where(x => x.ItemMasterId == itemMasterId.Value);
-                }
-                // 如果料号ID为空但料号编码不为空，添加料号编码匹配的筛选条件
-                else if (!string.IsNullOrEmpty(itemMasterCode))
-                {
-                    // 筛选条件：刀具料号编码等于传入的料号编码或实际料号编码等于传入的料号编码
-                    sameItemQuery = sameItemQuery.Where(x => x.ItemMaster.Code == itemMasterCode || x.ActualItemCode == itemMasterCode);
-                }
-                // 如果料号ID和料号编码都为空，返回空的推荐库位列表
-                else
-                {
-                    return new List<RecommendLocationReturn>();
-                }
+                // 按实际料号筛选
+                sameItemQuery = sameItemQuery.Where(x => x.ActualItemCode == actualItemCode);
 
                 // 按库位分组统计相同料号刀具数量，并按数量升序排列
                 // 将查询结果按库位信息分组，计算每个库位的刀具数量

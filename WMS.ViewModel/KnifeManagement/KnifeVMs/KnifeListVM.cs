@@ -17,7 +17,7 @@ namespace WMS.ViewModel.KnifeManagement.KnifeVMs
 
         protected override List<GridAction> InitGridAction()
         {
-            return new List<GridAction>
+            var actions = new List<GridAction>
             {
                 this.MakeAction("Knife","Details",@Localizer["Page.详情"].Value,@Localizer["Page.详情"].Value,GridActionParameterTypesEnum.SingleIdWithNull,"KnifeManagement",800).SetShowInRow(true).SetHideOnToolBar(true).SetIconCls("fa fa-info-circle").SetButtonClass("layui-btn-normal"),
                 //this.MakeAction("Knife","Import",@Localizer["Sys.Import"].Value,@Localizer["Sys.Import"].Value,GridActionParameterTypesEnum.SingleIdWithNull,"KnifeManagement",800).SetShowInRow(false).SetHideOnToolBar(false).SetIconCls("fa fa-tasks"),
@@ -26,6 +26,16 @@ namespace WMS.ViewModel.KnifeManagement.KnifeVMs
                 this.MakeAction("Knife","EditInStockStatus", "修改", "修改", GridActionParameterTypesEnum.SingleId, "KnifeManagement", dialogHeight: 800, dialogWidth: 1000).SetShowInRow(true).SetHideOnToolBar(true),
                 this.MakeAction("Knife","EditKnifeStatus", "修改刀具状态", "修改刀具状态", GridActionParameterTypesEnum.SingleId, "KnifeManagement", dialogHeight: 800, dialogWidth: 1000).SetShowInRow(true).SetHideOnToolBar(true),
             };
+
+            // 批量报废、批量修磨申请按钮权限控制：只有超级管理员、刀具仓管员、仓库主管可以查看
+            if (LoginUserInfo != null && LoginUserInfo.Roles != null && 
+                LoginUserInfo.Roles.Any(x => x.RoleName == "超级管理员" || x.RoleName == "刀具仓管员" || x.RoleName == "仓库主管"))
+            {
+                actions.Insert(3, this.MakeAction("Knife","BatchScrap", "批量报废", "批量报废", GridActionParameterTypesEnum.MultiIds, "KnifeManagement", dialogHeight: 600, dialogWidth: 1000).SetShowInRow(false).SetHideOnToolBar(false).SetIconCls("fa fa-trash").SetButtonClass("layui-btn-danger"));
+                actions.Insert(4, this.MakeAction("Knife","BatchGrindRequest", "批量修磨申请", "批量修磨申请", GridActionParameterTypesEnum.MultiIds, "KnifeManagement", dialogHeight: 600, dialogWidth: 1000).SetShowInRow(false).SetHideOnToolBar(false).SetIconCls("fa fa-wrench").SetButtonClass("layui-btn-warm"));
+            }
+
+            return actions;
         }
 
 
@@ -152,6 +162,9 @@ namespace WMS.ViewModel.KnifeManagement.KnifeVMs
         public string Knife_UpdateBy { get; set; }
 
         public KnifeInStockStatusEnum Knife_InStockStatus { get; set; }
+        
+        [Display(Name = "意外报废")]
+        public bool Knife_IsAccident { get; set; }
     }
 
 }

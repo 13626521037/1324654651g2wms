@@ -1,0 +1,22 @@
+@model WMS.ViewModel.KnifeManagement.KnifeVMs.KnifeBatchGrindRequestVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/KnifeManagement/Knife/DoBatchGrindRequest">
+    <div style="margin-bottom:15px; padding:10px; background-color:#d1ecf1; border:1px solid #bee5eb; border-radius:4px;">
+        <i class="fa fa-info-circle" style="color:#0c5460;"></i>
+        <span style="color:#0c5460;">您选择了 <strong>@Model.Ids.Length</strong> 把刀具进行批量修磨申请操作，请确认后提交。</span>
+    </div>
+
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="LinkedVM.Memo" />
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+        <wt:submitbutton text="确定申请"/>
+        <wt:closebutton text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Ids" />
+    <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" hidden-grid-error="true" />
+</wt:form>

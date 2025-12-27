@@ -139,6 +139,62 @@ namespace WMS.KnifeManagement.Controllers
                 </script>";
             return Content(str, "text/html");
         }
+
+        #region 批量报废
+        [ActionDescription("批量报废")]
+        [HttpPost]
+        public ActionResult BatchScrap(string[] IDs)
+        {
+            var vm = Wtm.CreateVM<KnifeBatchScrapVM>(Ids: IDs);
+            return PartialView(vm);
+        }
+
+        [ActionDescription("执行批量报废")]
+        [HttpPost]
+        public ActionResult DoBatchScrap(KnifeBatchScrapVM vm, IFormCollection nouse)
+        {
+            if (!ModelState.IsValid)
+            {
+                return FFResult().Alert("请选择报废类型");
+            }
+            
+            var errorMsg = vm.DoBatchScrap();
+            if (!string.IsNullOrEmpty(errorMsg))
+            {
+                return FFResult().Alert(errorMsg);
+            }
+            
+            return FFResult().CloseDialog().RefreshGrid().Alert("批量报废成功，报废单已创建");
+        }
+        #endregion
+
+        #region 批量修磨申请
+        [ActionDescription("批量修磨申请")]
+        [HttpPost]
+        public ActionResult BatchGrindRequest(string[] IDs)
+        {
+            var vm = Wtm.CreateVM<KnifeBatchGrindRequestVM>(Ids: IDs);
+            return PartialView(vm);
+        }
+
+        [ActionDescription("执行批量修磨申请")]
+        [HttpPost]
+        public ActionResult DoBatchGrindRequest(KnifeBatchGrindRequestVM vm, IFormCollection nouse)
+        {
+            if (!ModelState.IsValid)
+            {
+                return FFResult().Alert("参数验证失败");
+            }
+            
+            var errorMsg = vm.DoBatchGrindRequest();
+            if (!string.IsNullOrEmpty(errorMsg))
+            {
+                return FFResult().Alert(errorMsg);
+            }
+            
+            return FFResult().CloseDialog().RefreshGrid().Alert("批量修磨申请成功");
+        }
+        #endregion
     }
 }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -125,12 +125,13 @@ namespace WMS.ViewModel.KnifeManagement.KnifeScrapVMs
                 
                 //校验阶段
                 //1.获取并校验 当前登录人信息和登录存储地点  当前时间
+                Guid whid;
+                // PDA从登录属性获取
                 if (!Wtm.LoginUserInfo.Attributes.HasKey("WarehouseId") || Wtm.LoginUserInfo.Attributes["WarehouseId"] == null)
                 {
                     MSD.AddModelError("", "登录信息已过期，请重新登录");
                     return;
                 }
-                Guid whid;//当前pda持有者(仓管员)的存储地点
                 Guid.TryParse(Wtm.LoginUserInfo.Attributes["WarehouseId"].ToString(), out whid);
                 var handledBy = DC.Set<FrameworkUser>().FirstOrDefault(x => x.ITCode == LoginUserInfo.ITCode);//经办人 可以在此校验是否与存储地点有联系 但没必要 暂时不加
                 if(handledBy is null)
@@ -234,12 +235,13 @@ namespace WMS.ViewModel.KnifeManagement.KnifeScrapVMs
         {
             try
             {
+                Guid whid;
+                // PDA从登录属性获取
                 if (!Wtm.LoginUserInfo.Attributes.HasKey("WarehouseId") || Wtm.LoginUserInfo.Attributes["WarehouseId"] == null)
                 {
                     MSD.AddModelError("", "登录信息已过期，请重新登录");
                     return;
                 }
-                Guid whid;//当前pda持有者(仓管员)的存储地点
                 Guid.TryParse(Wtm.LoginUserInfo.Attributes["WarehouseId"].ToString(), out whid);
                 //重载entity
                 Entity = DC.Set<KnifeScrap>()

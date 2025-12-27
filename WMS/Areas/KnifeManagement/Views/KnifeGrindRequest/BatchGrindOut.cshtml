@@ -1,0 +1,22 @@
+@model WMS.ViewModel.KnifeManagement.KnifeGrindRequestVMs.KnifeGrindRequestBatchGrindOutVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@inject IStringLocalizer<Program> Localizer;
+
+<wt:form vm="@Model" url="/KnifeManagement/KnifeGrindRequest/DoBatchGrindOut">
+    <div style="margin-bottom:15px; padding:10px; background-color:#f8d7da; border:1px solid #f5c6cb; border-radius:4px;">
+        <i class="fa fa-exclamation-triangle" style="color:#721c24;"></i>
+        <span style="color:#721c24;">您选择了 <strong>@Model.Ids.Length</strong> 个修磨申请单进行批量出库操作，只能选择有U9采购单号的申请单。</span>
+    </div>
+
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:textbox field="LinkedVM.Memo" />
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+        <wt:submitbutton text="确定出库"/>
+        <wt:closebutton text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Ids" />
+    <wt:grid vm="ListVM" use-local-data="true" height="300" hidden-checkbox="true" hidden-panel="true" hidden-grid-error="true" />
+</wt:form>

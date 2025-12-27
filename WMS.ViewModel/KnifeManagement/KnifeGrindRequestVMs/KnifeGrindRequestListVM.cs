@@ -16,7 +16,7 @@ namespace WMS.ViewModel.KnifeManagement.KnifeGrindRequestVMs
         
         protected override List<GridAction> InitGridAction()
         {
-            return new List<GridAction>
+            var actions = new List<GridAction>
             {
                 //this.MakeAction("KnifeGrindRequest","Create",@Localizer["Sys.Create"].Value,@Localizer["Sys.Create"].Value,GridActionParameterTypesEnum.SingleIdWithNull,"KnifeManagement",800).SetShowInRow(false).SetHideOnToolBar(false).SetIconCls("fa fa-plus"),
                 //this.MakeAction("KnifeGrindRequest","Edit",@Localizer["Sys.Edit"].Value,@Localizer["Sys.Edit"].Value,GridActionParameterTypesEnum.SingleIdWithNull,"KnifeManagement",800).SetShowInRow(true).SetHideOnToolBar(true).SetIconCls("fa fa-pencil-square").SetButtonClass("layui-btn-warm"),
@@ -27,6 +27,15 @@ namespace WMS.ViewModel.KnifeManagement.KnifeGrindRequestVMs
                 //this.MakeAction("KnifeGrindRequest","Import",@Localizer["Sys.Import"].Value,@Localizer["Sys.Import"].Value,GridActionParameterTypesEnum.SingleIdWithNull,"KnifeManagement",800).SetShowInRow(false).SetHideOnToolBar(false).SetIconCls("fa fa-tasks"),
                 this.MakeAction("KnifeGrindRequest","KnifeGrindRequestExportExcel",@Localizer["Sys.Export"].Value,@Localizer["Sys.Export"].Value,GridActionParameterTypesEnum.MultiIdWithNull,"KnifeManagement").SetShowInRow(false).SetShowDialog(false).SetHideOnToolBar(false).SetIsExport(true).SetIconCls("fa fa-arrow-circle-down"),
             };
+
+            // 批量修磨出库按钮权限控制：只有超级管理员、刀具仓管员、仓库主管可以查看
+            if (LoginUserInfo != null && LoginUserInfo.Roles != null && 
+                LoginUserInfo.Roles.Any(x => x.RoleName == "超级管理员" || x.RoleName == "刀具仓管员" || x.RoleName == "仓库主管"))
+            {
+                actions.Insert(1, this.MakeAction("KnifeGrindRequest","BatchGrindOut", "批量修磨出库", "批量修磨出库", GridActionParameterTypesEnum.MultiIds, "KnifeManagement", dialogHeight: 600, dialogWidth: 1000).SetShowInRow(false).SetHideOnToolBar(false).SetIconCls("fa fa-sign-out").SetButtonClass("layui-btn-danger"));
+            }
+
+            return actions;
         }
  
 

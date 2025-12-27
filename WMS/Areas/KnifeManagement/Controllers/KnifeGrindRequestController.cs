@@ -105,6 +105,34 @@ namespace WMS.KnifeManagement.Controllers
         {
             return vm.GetExportData();
         }
+
+        #region 批量修磨出库
+        [ActionDescription("批量修磨出库")]
+        [HttpPost]
+        public ActionResult BatchGrindOut(string[] IDs)
+        {
+            var vm = Wtm.CreateVM<KnifeGrindRequestBatchGrindOutVM>(Ids: IDs);
+            return PartialView(vm);
+        }
+
+        [ActionDescription("执行批量修磨出库")]
+        [HttpPost]
+        public ActionResult DoBatchGrindOut(KnifeGrindRequestBatchGrindOutVM vm, IFormCollection nouse)
+        {
+            if (!ModelState.IsValid)
+            {
+                return FFResult().Alert("参数验证失败");
+            }
+            
+            var errorMsg = vm.DoBatchGrindOut();
+            if (!string.IsNullOrEmpty(errorMsg))
+            {
+                return FFResult().Alert(errorMsg);
+            }
+            
+            return FFResult().CloseDialog().RefreshGrid().Alert("批量修磨出库成功");
+        }
+        #endregion
         
     }
 }

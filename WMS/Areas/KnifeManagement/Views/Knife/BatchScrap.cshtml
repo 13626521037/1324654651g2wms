@@ -1,0 +1,66 @@
+@model WMS.ViewModel.KnifeManagement.KnifeVMs.KnifeBatchScrapVM
+@using WalkingTec.Mvvm.Core.Extensions;
+@using WMS.ViewModel.KnifeManagement.KnifeVMs;
+@inject IStringLocalizer<Program> Localizer;
+
+@{
+    var listVM = Model.ListVM as KnifeBatchScrapListVM;
+}
+
+<wt:form vm="@Model" url="/KnifeManagement/Knife/DoBatchScrap">
+    <div style="margin-bottom:15px; padding:10px; background-color:#fff3cd; border:1px solid #ffc107; border-radius:4px;">
+        <i class="fa fa-exclamation-triangle" style="color:#856404;"></i>
+        <span style="color:#856404;">您选择了 <strong>@Model.Ids.Length</strong> 把刀具进行批量报废操作，请确认报废类型后提交。</span>
+    </div>
+
+    <wt:row items-per-row="ItemsPerRowEnum.One">
+        <wt:combobox field="LinkedVM.DocType" empty-text="@Localizer["Sys.PleaseSelect"]" id="docTypeCombo" multi-select="false"/>
+    </wt:row>
+
+    <wt:container align="AlignEnum.Right">
+        <wt:submitbutton text="确定报废"/>
+        <wt:closebutton text="@Localizer["Sys.Close"].Value"/>
+    </wt:container>
+
+    <wt:hidden field="Ids" />
+    
+    <div style="margin-top:10px;">
+        <table class="layui-table" lay-skin="line" lay-size="sm">
+            <thead>
+                <tr>
+                    <th style="width:120px;">序列号</th>
+                    <th style="width:80px;">状态</th>
+                    <th style="width:100px;">料品</th>
+                    <th style="width:120px;">存储地点</th>
+                    <th style="width:80px;">库位</th>
+                    <th style="width:60px;">当前寿命</th>
+                    <th style="width:100px;">剩余使用天数</th>
+                    <th style="width:80px;">意外报废</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.KnifeAccidentList.Count; i++)
+                {
+                    var knifeId = Model.KnifeAccidentList[i].KnifeId;
+                    var knife = listVM?.EntityList?.FirstOrDefault(x => x.ID.ToString() == knifeId);
+                    if (knife != null)
+                    {
+                        <tr>
+                            <td>@knife.Knife_SerialNumber</td>
+                            <td>@knife.Knife_Status</td>
+                            <td>@knife.Knife_ItemMaster</td>
+                            <td>@knife.Knife_WareHouse</td>
+                            <td>@knife.Knife_WhLocation</td>
+                            <td>@knife.Knife_CurrentLife</td>
+                            <td>@knife.Knife_RemainingUsedDays</td>
+                            <td>
+                                <input type="hidden" name="KnifeAccidentList[@i].KnifeId" value="@knifeId" />
+                                <input type="checkbox" name="KnifeAccidentList[@i].IsAccident" value="true" lay-skin="switch" lay-text="是|否" />
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</wt:form>
